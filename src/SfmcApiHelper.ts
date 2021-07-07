@@ -16,19 +16,20 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    public getOAuthAccessToken(clientId: string, clientSecret: string) : Promise<any>
+    public getOAuthAccessToken(client_id: string, client_secret: string) : Promise<any>
     {
         let self = this;
         Utils.logInfo("getOAuthAccessToken called.");
         Utils.logInfo("Using specified ClientID and ClientSecret to get OAuth token...");
 
         let headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
         };
 
         let postBody = {
-            'clientId': clientId,
-            'clientSecret': clientSecret
+              "grant_type": "client_credentials",
+            "client_id": "di1y81v0ita8ja5qume0em4l",
+            "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
         };
 
         return self.getOAuthTokenHelper(headers, postBody);
@@ -47,7 +48,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Getting OAuth Access Token with refreshToken: " + refreshToken);
         
         let headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
         };
 
         let postBody = {
@@ -68,7 +69,7 @@ export default class SfmcApiHelper
         return new Promise<any>((resolve, reject) =>
         {
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
-            let sfmcAuthServiceApiUrl = "https://auth.exacttargetapis.com/v1/requestToken";
+            let sfmcAuthServiceApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})
             .then((response: any) => {
                 // success
