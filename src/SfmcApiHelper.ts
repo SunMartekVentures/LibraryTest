@@ -27,7 +27,11 @@ export default class SfmcApiHelper
         };
 
         let postBody = {
+<<<<<<< Updated upstream
               "grant_type": "client_credentials",
+=======
+            "grant_type": "client_credentials",
+>>>>>>> Stashed changes
             "client_id": "di1y81v0ita8ja5qume0em4l",
             "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
         };
@@ -41,7 +45,7 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    public getOAuthAccessTokenFromRefreshToken(clientId: string, clientSecret: string, refreshToken: string) : Promise<any>
+    public getOAuthAccessTokenFromRefreshToken(client_id: string, clientSecret: string, refreshToken: string) : Promise<any>
     {
         let self = this;
         Utils.logInfo("getOAuthAccessTokenFromRefreshToken called.");
@@ -52,9 +56,9 @@ export default class SfmcApiHelper
         };
 
         let postBody = {
-            'clientId': clientId,
-            'clientSecret': clientSecret,
-            'refreshToken': refreshToken
+            "grant_type": "client_credentials",
+            "client_id": "di1y81v0ita8ja5qume0em4l",
+            "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
         };
 
         return self.getOAuthTokenHelper(headers, postBody);
