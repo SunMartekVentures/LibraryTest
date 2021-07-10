@@ -27,11 +27,8 @@ export default class SfmcApiHelper
         };
 
         let postBody = {
-<<<<<<< Updated upstream
-              "grant_type": "client_credentials",
-=======
+
             "grant_type": "client_credentials",
->>>>>>> Stashed changes
             "client_id": "di1y81v0ita8ja5qume0em4l",
             "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
         };
