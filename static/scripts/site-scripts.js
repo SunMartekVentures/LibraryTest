@@ -1,8 +1,10 @@
 
 // make REST API 'GET' call to the specified end-point and dump response in specified <div>
 function doRestGet(endPoint, idStatusArea) {
+    console.log("EndPoint:",endPoint);
     $('#' + idStatusArea).text('Waiting for response from Marketing Cloud...');
     $.ajax({
+
         type: "GET",
         url: endPoint,
         dataType: 'text',
