@@ -11,7 +11,9 @@
     <p>Name: <input type='text'></p>
     <p>Emai-Id: <input type='text'></p>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="doRestGet('/apidemooauthtoken','textOauthPostResponse')">Save Record</button>
+    onclick="enableButton2(doRestGet('/apidemooauthtoken','textOauthPostResponse'))">Enter</button>
+    <input type="button" id="button2" value="button 2" disabled/>
+
     
 
 </body>
