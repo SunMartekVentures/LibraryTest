@@ -76,6 +76,7 @@ export default class SfmcApiHelper
                 // success
                 let accessToken = response.data.access_token;
                 let tokenExpiry = new Date();
+                let jsonData = 
                 tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expiresIn);
                 Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
                 console.log("token:",accessToken);
@@ -86,6 +87,7 @@ export default class SfmcApiHelper
                 {
                     oauthAccessToken: accessToken,
                     oauthAccessTokenExpiry: tokenExpiry,
+                  
                     status: response.status,
                     statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
                 });
@@ -112,6 +114,7 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
+
         console.log("Request Session:",req.session)
         if (req.session.oauthAccessToken)
         {
@@ -145,6 +148,7 @@ export default class SfmcApiHelper
         Utils.logInfo("loadDataHelper called.");
         Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+        Utils.logInfo("JSON :"+ jsonData);
 
         return new Promise<any>((resolve, reject) =>
         {
