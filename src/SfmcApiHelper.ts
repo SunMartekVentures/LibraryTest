@@ -82,7 +82,7 @@ export default class SfmcApiHelper
                 console.log("token:",accessToken);
                 console.log("expiry:",tokenExpiry);
                 console.log("response:",response.data);
-                console.log("SJsonData:",jsonData)
+                
 
                 resolve(
                 {
