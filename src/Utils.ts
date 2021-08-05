@@ -75,8 +75,8 @@ export default class Utils
                         id: shortid.generate()
                     },
                     values: {
-                        name: 'Hari - ',
-                        email: 'hari-'+ '@gmail.com',
+                        name: 'Sanjay - ' + shortid.generate(),
+                        email: 'sanjay-' + shortid.generate() + '@sanjay.com',
                     }
                 },
                 {
@@ -84,8 +84,8 @@ export default class Utils
                         id: shortid.generate()
                     },
                     values: {
-                        name: 'Mani - ',
-                        email: 'mani-' + '@gmail.com'
+                        name: 'Savita - ' + shortid.generate(),
+                        email: 'savita-' + shortid.generate() + '@savita.com'
                     }
                 }             
             ];

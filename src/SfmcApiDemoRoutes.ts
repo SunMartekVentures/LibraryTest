@@ -21,8 +21,8 @@ export default class SfmcApiDemoRoutes
     {
         let self = this;
         let sessionId = req.session.id;
-        let clientId = "w55iwhkfshiygt7x8ejoidl7";
-        let clientSecret = "pBqUqZSdZmmpLMdo12tJLfIN" ;
+        let clientId = process.env.DF18DEMO_CLIENTID;
+        let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
 
         req.session.oauthAccessToken = "";
         req.session.oauthAccessTokenExpiry = "";
