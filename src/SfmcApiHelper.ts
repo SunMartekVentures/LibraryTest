@@ -333,101 +333,38 @@ export default class SfmcApiHelper
               "</Name>" +
               "                <Fields>" +
               "                    <Field>" +
-              "                        <CustomerKey>Domain ID</CustomerKey>" +
-              "                        <Name>Domain ID</Name>" +
+              "                        <CustomerKey>Name</CustomerKey>" +
+              "                        <Name>Name</Name>" +
               "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>50</MaxLength>" +
+              "                        <MaxLength>100</MaxLength>" +
               "                        <IsRequired>true</IsRequired>" +
               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
               "                    </Field>" +
               "                    <Field>" +
-              "                        <CustomerKey>Domain Name</CustomerKey>" +
-              "                        <Name>Domain Name</Name>" +
+              "                        <CustomerKey>Phone Number</CustomerKey>" +
+              "                        <Name>Phone Number</Name>" +
               "                        <FieldType>Text</FieldType>" +
               "                        <MaxLength>100</MaxLength>" +
               "                        <IsRequired>true</IsRequired>" +
               "                        <IsPrimaryKey>true</IsPrimaryKey>" +
               "                    </Field>" +
               "                    <Field>" +
-              "                        <CustomerKey>Inbox Threshold</CustomerKey>" +
-              "                        <Name>Inbox Threshold</Name>" +
+              "                        <CustomerKey>Position</CustomerKey>" +
+              "                        <Name>Position</Name>" +
               "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
+              "                        <MaxLength>50</MaxLength>" +
               "                        <IsRequired>false</IsRequired>" +
               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
               "                    </Field>" +
               "                    <Field>" +
-              "                        <CustomerKey>Engagement Threshold</CustomerKey>" +
-              "                        <Name>Engagement Threshold</Name>" +
+              "                        <CustomerKey>Years of Experience</CustomerKey>" +
+              "                        <Name>Years of Experience</Name>" +
               "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
+              "                        <MaxLength>10</MaxLength>" +
               "                        <IsRequired>false</IsRequired>" +
               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
               "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>SPF Threshold</CustomerKey>" +
-              "                        <Name>SPF Threshold</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>DKIM Threshold</CustomerKey>" +
-              "                        <Name>DKIM Threshold</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Campaign Min</CustomerKey>" +
-              "                        <Name>Campaign Min</Name>" +
-              "                        <FieldType>Decimal</FieldType>" +
-              "                        <Precision>18</Precision>" +
-              "                          <Scale>0</Scale>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Intelliseed Lists</CustomerKey>" +
-              "                        <Name>Intelliseed Lists</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>250</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Threshold Recipe</CustomerKey>" +
-              "                        <Name>Threshold Recipe</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>250</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Rules Recipe</CustomerKey>" +
-              "                        <Name>Rules Recipe</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>250</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Created or Modified by</CustomerKey>" +
-              "                        <Name>Created or Modified by</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Created or Modified date</CustomerKey>" +
-              "                        <Name>Created or Modified date</Name>" +
-              "                        <FieldType>Date</FieldType>" +
-              "						  <DefaultValue>getdate()</DefaultValue>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
+              "                    
               "                </Fields>" +
               "            </Objects>" +
               "        </CreateRequest>" +
