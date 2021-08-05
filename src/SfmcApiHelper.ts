@@ -99,8 +99,8 @@ export default class SfmcApiHelper
         console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
         let postBody1 = {
           grant_type: "refresh_token",
-          client_id: process.env.DF18DEMO_CLIENTID,
-          client_secret: process.env.DF18DEMO_CLIENTSECRET,
+          client_id: process.env.CLIENTID,
+          client_secret: process.env.CLIENTSECRET,
           refresh_token: refreshToken,
         };
         axios
