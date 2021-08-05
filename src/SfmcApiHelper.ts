@@ -29,8 +29,8 @@ export default class SfmcApiHelper
         let postBody = {
 
             "grant_type": "client_credentials",
-            "client_id": "di1y81v0ita8ja5qume0em4l",
-            "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
+            "client_id": "w55iwhkfshiygt7x8ejoidl7",
+            "client_secret": "pBqUqZSdZmmpLMdo12tJLfIN"
         };
 
         return self.getOAuthTokenHelper(headers, postBody);
@@ -54,8 +54,8 @@ export default class SfmcApiHelper
 
         let postBody = {
             "grant_type": "client_credentials",
-            "client_id": "di1y81v0ita8ja5qume0em4l",
-            "client_secret": "e9NdAPGQZUuVnt6qkCdNHQF3"
+            "client_id": "w55iwhkfshiygt7x8ejoidl7",
+            "client_secret": "pBqUqZSdZmmpLMdo12tJLfIN"
         };
 
         return self.getOAuthTokenHelper(headers, postBody);
