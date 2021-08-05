@@ -5,7 +5,7 @@ import * as shortid from "shortid";
 
 // Configure logging
 winston.configure({
-    level: process.env.LOG_LEVEL || "debug",
+    // level: process.env.LOG_LEVEL || "debug",
     transports: [ new winston.transports.Console({
         format: winston.format.combine(
             winston.format.colorize(),
