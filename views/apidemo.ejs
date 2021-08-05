@@ -2,24 +2,16 @@
 <html>
 <head>
     <title>OutPut Page </title>
-    <script src="/scripts/site-scripts.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <h1>Enter Data</h1>
     <p>Data for Data Extension</p>
     <p>Name: <input type='text'></p>
     <p>Emai-Id: <input type='text'></p>
-    <p>Please <kbd>Save</kbd> and <kbd>Enter</kbd> to Store the data. </p>
-    <input type="button" value="SAVE" id="one" onclick="show()" />
-    <input type="button" value="ENTER" id="two" />
-
-    <script>
-        function show()
-        {
-            doRestGet('/apidemooauthtoken','textOauthPostResponse');
-        }
-    </script>
+    <button type="button" id="btnGetOauthToken" class="btn btn-primary"
+    onclick="doRestGet('/apidemooauthtoken','textOauthPostResponse')">Save Record</button>
     
+
 </body>
 </html>
+
