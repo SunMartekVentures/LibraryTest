@@ -59,10 +59,10 @@ export default class SfmcApiDemoRoutes
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
      * 
      */
-    public loadData(req: express.Request, res: express.Response)
-    {
-        let self = this;
-        Utils.logInfo("loadData route entered.");
-        self._apiHelper.loadData(req, res);
-    }
+    //public loadData(req: express.Request, res: express.Response)
+    // {
+    //     let self = this;
+    //     Utils.logInfo("loadData route entered.");
+    //     self._apiHelper.loadData(req, res);
+    // }
 }
