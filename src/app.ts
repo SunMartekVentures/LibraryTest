@@ -68,6 +68,10 @@ app.get('/loaddata', function(req, res) {
 app.get('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
+  app.post("/appuserinfo", function (req, res) {
+    appDemoRoutes.appUserInfo(req, res);
+  });
+
 // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
 app.post('/login', function(req, res) {
   appDemoRoutes.login(req, res); });
