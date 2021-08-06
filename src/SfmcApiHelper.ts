@@ -1,5 +1,5 @@
 'use strict';
-
+import path = require("path");
 import axios from 'axios';
 import express = require("express");
 import Utils from './Utils';
@@ -99,8 +99,8 @@ export default class SfmcApiHelper
         console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
         let postBody1 = {
           grant_type: "refresh_token",
-          client_id: "w55iwhkfshiygt7x8ejoidl7",
-          client_secret: "pBqUqZSdZmmpLMdo12tJLfIN",
+          client_id: process.env.DF18DEMO_CLIENTID,
+          client_secret: process.env.DF18DEMO_CLIENTSECRET,
           refresh_token: refreshToken,
         };
         axios
@@ -199,256 +199,183 @@ export default class SfmcApiHelper
         });
     }
     
-    /**
-     * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
-     * 
-     */
-    // public loadData(req: express.Request, res: express.Response)
-    // {
-    //     let self = this;
-    //     let sessionId = req.session.id;
-    //     Utils.logInfo("loadData entered. SessionId = " + sessionId);
-
-    //     if (req.session.oauthAccessToken)
-    //     {
-    //         Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-    //         self.loadDataHelper(req.session.oauthAccessToken, req.session.sampleJsonData)
-    //         .then((result) => {
-    //             res.status(result.status).send(result.statusText);
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).send(err);
-    //         });
-    //     }
-    //     else
-    //     {
-    //         // error
-    //         let errorMsg = "OAuth Access Token *not* found in session.\nPlease complete previous demo step\nto get an OAuth Access Token."; 
-    //         Utils.logError(errorMsg);
-    //         res.status(500).send(errorMsg);
-    //     }
-    // }
+  }
+//     public creatingDomainConfigurationDE(
+//         req: express.Request,
+//         res: express.Response,
+//         member_id: string,
+//         soap_instance_url: string,
+//         refreshToken: string,
+//         FolderID: string,
+//         tssd: string
+//       ) {
+//         //this.getRefreshTokenHelper(this._accessToken, res);
+//         console.log("creatingDomainConfigurationDE:" + member_id);
+//         console.log("creatingDomainConfigurationDE:" + soap_instance_url);
+//         console.log("creatingDomainConfigurationDE:" + refreshToken);
+//         Utils.logInfo("creatingDomainConfigurationDE:" + FolderID);
+//         console.log("creatingDomainConfigurationDE:" + tssd);
     
-    // /**
-    //  * loadDataHelper: uses the given OAuthAccessToklen to load JSON data into the Data Extension with external key "DF18Demo"
-    //  * 
-    //  * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
-    //  * 
-    //  */
-    // private loadDataHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
-    // {
-    //     let self = this;
-    //     Utils.logInfo("loadDataHelper called.");
-    //     Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
-    //     Utils.logInfo("Using OAuth token: " + oauthAccessToken);
-
-    //     return new Promise<any>((resolve, reject) =>
-    //     {
-    //         let headers = {
-    //             'Content-Type': 'application/json;charset=UTF-8',
-    //             'Authorization': 'Bearer ' + oauthAccessToken
-    //         };
-
-    //         // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-    //         axios.post(self._sfmcDataExtensionApiUrl, jsonData, {"headers" : headers})
-    //         .then((response: any) => {
-    //             // success
-    //             Utils.logInfo("Successfully loaded sample data into Data Extension!");
-
-    //             resolve(
-    //             {
-    //                 status: response.status,
-    //                 statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-    //             });
-    //         })
-    //         .catch((error: any) => {
-    //             // error
-    //             let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-    //             errorMsg += "\nMessage: " + error.message;
-    //             errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-    //             errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-    //             Utils.logError(errorMsg);
-
-    //             reject(errorMsg);
-    //         });
-    //     });
-    // }
-    public creatingDomainConfigurationDE(
-        req: express.Request,
-        res: express.Response,
-        member_id: string,
-        soap_instance_url: string,
-        refreshToken: string,
-        FolderID: string,
-        tssd: string
-      ) {
-        //this.getRefreshTokenHelper(this._accessToken, res);
-        console.log("creatingDomainConfigurationDE:" + member_id);
-        console.log("creatingDomainConfigurationDE:" + soap_instance_url);
-        console.log("creatingDomainConfigurationDE:" + refreshToken);
-        Utils.logInfo("creatingDomainConfigurationDE:" + FolderID);
-        console.log("creatingDomainConfigurationDE:" + tssd);
+//         //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
     
-        //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
+//         let refreshTokenbody = "";
+//         this.getRefreshTokenHelper(refreshToken, tssd, false, res)
+//           .then((response) => {
+//             Utils.logInfo(
+//               "creatingDomainConfigurationDE:" +
+//               JSON.stringify(response.refreshToken)
+//             );
+//             Utils.logInfo(
+//               "creatingDomainConfigurationDE:" + JSON.stringify(response.oauthToken)
+//             );
+//             refreshTokenbody = response.refreshToken;
+//             Utils.logInfo(
+//               "creatingDomainConfigurationDE1:" + JSON.stringify(refreshTokenbody)
+//             );
     
-        let refreshTokenbody = "";
-        this.getRefreshTokenHelper(refreshToken, tssd, false, res)
-          .then((response) => {
-            Utils.logInfo(
-              "creatingDomainConfigurationDE:" +
-              JSON.stringify(response.refreshToken)
-            );
-            Utils.logInfo(
-              "creatingDomainConfigurationDE:" + JSON.stringify(response.oauthToken)
-            );
-            refreshTokenbody = response.refreshToken;
-            Utils.logInfo(
-              "creatingDomainConfigurationDE1:" + JSON.stringify(refreshTokenbody)
-            );
+//             let DCmsg =
+//               '<?xml version="1.0" encoding="UTF-8"?>' +
+//               '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+//               "    <s:Header>" +
+//               '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
+//               '        <a:To s:mustUnderstand="1">' +
+//               soap_instance_url +
+//               "Service.asmx" +
+//               "</a:To>" +
+//               '        <fueloauth xmlns="http://exacttarget.com">' +
+//               response.oauthToken +
+//               "</fueloauth>" +
+//               "    </s:Header>" +
+//               '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+//               '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+//               '            <Objects xsi:type="DataExtension">' +
+//               "                <CategoryID>" +
+//               FolderID +
+//               "</CategoryID>" +
+//               "                <CustomerKey>Domain Configuration-" +
+//               member_id +
+//               "</CustomerKey>" +
+//               "                <Name>Domain Configuration-" +
+//               member_id +
+//               "</Name>" +
+//               "                <Fields>" +
+//               "                    <Field>" +
+//               "                        <CustomerKey>Name</CustomerKey>" +
+//               "                        <Name>Name</Name>" +
+//               "                        <FieldType>Text</FieldType>" +
+//               "                        <MaxLength>100</MaxLength>" +
+//               "                        <IsRequired>true</IsRequired>" +
+//               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+//               "                    </Field>" +
+//               "                    <Field>" +
+//               "                        <CustomerKey>Phone Number</CustomerKey>" +
+//               "                        <Name>Phone Number</Name>" +
+//               "                        <FieldType>Text</FieldType>" +
+//               "                        <MaxLength>100</MaxLength>" +
+//               "                        <IsRequired>true</IsRequired>" +
+//               "                        <IsPrimaryKey>true</IsPrimaryKey>" +
+//               "                    </Field>" +
+//               "                    <Field>" +
+//               "                        <CustomerKey>Position</CustomerKey>" +
+//               "                        <Name>Position</Name>" +
+//               "                        <FieldType>Text</FieldType>" +
+//               "                        <MaxLength>50</MaxLength>" +
+//               "                        <IsRequired>false</IsRequired>" +
+//               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+//               "                    </Field>" +
+//               "                    <Field>" +
+//               "                        <CustomerKey>Years of Experience</CustomerKey>" +
+//               "                        <Name>Years of Experience</Name>" +
+//               "                        <FieldType>Text</FieldType>" +
+//               "                        <MaxLength>10</MaxLength>" +
+//               "                        <IsRequired>false</IsRequired>" +
+//               "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+//               "                    </Field>" +
+//               "                    
+//               "                </Fields>" +
+//               "            </Objects>" +
+//               "        </CreateRequest>" +
+//               "    </s:Body>" +
+//               "</s:Envelope>";
     
-            let DCmsg =
-              '<?xml version="1.0" encoding="UTF-8"?>' +
-              '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
-              "    <s:Header>" +
-              '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
-              '        <a:To s:mustUnderstand="1">' +
-              soap_instance_url +
-              "Service.asmx" +
-              "</a:To>" +
-              '        <fueloauth xmlns="http://exacttarget.com">' +
-              response.oauthToken +
-              "</fueloauth>" +
-              "    </s:Header>" +
-              '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-              '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-              '            <Objects xsi:type="DataExtension">' +
-              "                <CategoryID>" +
-              FolderID +
-              "</CategoryID>" +
-              "                <CustomerKey>Domain Configuration-" +
-              member_id +
-              "</CustomerKey>" +
-              "                <Name>Domain Configuration-" +
-              member_id +
-              "</Name>" +
-              "                <Fields>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Name</CustomerKey>" +
-              "                        <Name>Name</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Phone Number</CustomerKey>" +
-              "                        <Name>Phone Number</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>true</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Position</CustomerKey>" +
-              "                        <Name>Position</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>50</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Years of Experience</CustomerKey>" +
-              "                        <Name>Years of Experience</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>10</MaxLength>" +
-              "                        <IsRequired>false</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    
-              "                </Fields>" +
-              "            </Objects>" +
-              "        </CreateRequest>" +
-              "    </s:Body>" +
-              "</s:Envelope>";
+//             return new Promise<any>((resolve, reject) => {
+//               let headers = {
+//                 "Content-Type": "text/xml",
+//               };
     
-            return new Promise<any>((resolve, reject) => {
-              let headers = {
-                "Content-Type": "text/xml",
-              };
+//               axios({
+//                 method: "post",
+//                 url: "" + soap_instance_url + "Service.asmx" + "",
+//                 data: DCmsg,
+//                 headers: headers,
+//               })
+//                 .then((response: any) => {
+//                   var parser = new xml2js.Parser();
+//                   parser.parseString(
+//                     response.data,
+//                     (
+//                       err: any,
+//                       result: {
+//                         [x: string]: {
+//                           [x: string]: { [x: string]: { [x: string]: any }[] }[];
+//                         };
+//                       }
+//                     ) => {
+//                       let DomainConfiguration =
+//                         result["soap:Envelope"]["soap:Body"][0][
+//                         "CreateResponse"
+//                         ][0]["Results"];
     
-              axios({
-                method: "post",
-                url: "" + soap_instance_url + "Service.asmx" + "",
-                data: DCmsg,
-                headers: headers,
-              })
-                .then((response: any) => {
-                  var parser = new xml2js.Parser();
-                  parser.parseString(
-                    response.data,
-                    (
-                      err: any,
-                      result: {
-                        [x: string]: {
-                          [x: string]: { [x: string]: { [x: string]: any }[] }[];
-                        };
-                      }
-                    ) => {
-                      let DomainConfiguration =
-                        result["soap:Envelope"]["soap:Body"][0][
-                        "CreateResponse"
-                        ][0]["Results"];
+//                       if (DomainConfiguration != undefined) {
+//                         let DEexternalKeyDomainConfiguration =
+//                           DomainConfiguration[0]["Object"][0]["CustomerKey"];
     
-                      if (DomainConfiguration != undefined) {
-                        let DEexternalKeyDomainConfiguration =
-                          DomainConfiguration[0]["Object"][0]["CustomerKey"];
+//                         //this.DEexternalKeyDomainConfiguration =
+//                         // DomainConfiguration[0]["Object"][0]["CustomerKey"];
+//                         let sendresponse = {};
+//                         sendresponse = {
+//                           refreshToken: refreshTokenbody,
+//                           statusText:
+//                             "Domain Configuration Data extension has been created Successfully",
+//                           soap_instance_url: soap_instance_url,
+//                           member_id: member_id,
+//                           DEexternalKeyDomainConfiguration:
+//                             DEexternalKeyDomainConfiguration,
+//                         };
+//                         res.status(200).send(sendresponse);
     
-                        //this.DEexternalKeyDomainConfiguration =
-                        // DomainConfiguration[0]["Object"][0]["CustomerKey"];
-                        let sendresponse = {};
-                        sendresponse = {
-                          refreshToken: refreshTokenbody,
-                          statusText:
-                            "Domain Configuration Data extension has been created Successfully",
-                          soap_instance_url: soap_instance_url,
-                          member_id: member_id,
-                          DEexternalKeyDomainConfiguration:
-                            DEexternalKeyDomainConfiguration,
-                        };
-                        res.status(200).send(sendresponse);
+//                         /*  res
+//                       .status(200)
+//                       .send(
+//                         "Domain Configuration Data extension has been created Successfully"
+//                       );*/
+//                       }
+//                     }
+//                   );
+//                 })
+//                 .catch((error: any) => {
+//                   // error
+//                   let errorMsg =
+//                     "Error creating the Domain Configuration Data extension......";
+//                   errorMsg += "\nMessage: " + error.message;
+//                   errorMsg +=
+//                     "\nStatus: " + error.response
+//                       ? error.response.status
+//                       : "<None>";
+//                   errorMsg +=
+//                     "\nResponse data: " + error.response.data
+//                       ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+//                       : "<None>";
+//                   Utils.logError(errorMsg);
     
-                        /*  res
-                      .status(200)
-                      .send(
-                        "Domain Configuration Data extension has been created Successfully"
-                      );*/
-                      }
-                    }
-                  );
-                })
-                .catch((error: any) => {
-                  // error
-                  let errorMsg =
-                    "Error creating the Domain Configuration Data extension......";
-                  errorMsg += "\nMessage: " + error.message;
-                  errorMsg +=
-                    "\nStatus: " + error.response
-                      ? error.response.status
-                      : "<None>";
-                  errorMsg +=
-                    "\nResponse data: " + error.response.data
-                      ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
-                      : "<None>";
-                  Utils.logError(errorMsg);
-    
-                  reject(errorMsg);
-                });
-            });
-          })
-          .catch((error: any) => {
-            res
-              .status(500)
-              .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-          });
-      }
-}
+//                   reject(errorMsg);
+//                 });
+//             });
+//           })
+//           .catch((error: any) => {
+//             res
+//               .status(500)
+//               .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+//           });
+//       }
+// }
