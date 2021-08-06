@@ -89,7 +89,8 @@ export default class SfmcApiHelper
         code: req.body.authorization_code,
         redirect_uri: process.env.REDIRECT_URL,
       };
-  
+        console.log("TSSD:",tssd);
+        
       return self.getOAuthTokenHelper(headers, postBody, res, tssd);
     }
   
