@@ -4,7 +4,7 @@ import path = require('path');
 import express = require("express");
 import SfmcApiHelper from './SfmcApiHelper';
 import Utils from './Utils';
-console.log("hello world");
+
 export default class SfmcApiDemoRoutes
 {
     // Instance variables
