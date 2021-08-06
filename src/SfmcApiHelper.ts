@@ -68,6 +68,7 @@ export default class SfmcApiHelper
           });
       });
     }
+    
      public getOAuthAccessToken(
       clientId: string,
       clientSecret: string,
@@ -76,7 +77,7 @@ export default class SfmcApiHelper
     ): Promise<any> {
       let self = this;
       var tssd = "";
-      console.log("TSSD:",tssd);
+      
       tssd = req.body.tssd ? req.body.tssd : process.env.BASE_URL;
       console.log("authorizetssd:" + tssd);
       let headers = {
@@ -91,7 +92,7 @@ export default class SfmcApiHelper
         redirect_uri: process.env.REDIRECT_URL,
       };
        
-        
+      console.log("response:",res);
       return self.getOAuthTokenHelper(headers, postBody, res, tssd);
     }
   
