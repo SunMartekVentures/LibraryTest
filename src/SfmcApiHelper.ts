@@ -76,6 +76,7 @@ export default class SfmcApiHelper
     ): Promise<any> {
       let self = this;
       var tssd = "";
+      console.log("TSSD:",tssd);
       tssd = req.body.tssd ? req.body.tssd : process.env.BASE_URL;
       console.log("authorizetssd:" + tssd);
       let headers = {
@@ -89,7 +90,7 @@ export default class SfmcApiHelper
         code: req.body.authorization_code,
         redirect_uri: process.env.REDIRECT_URL,
       };
-        console.log("TSSD:",tssd);
+       
         
       return self.getOAuthTokenHelper(headers, postBody, res, tssd);
     }
