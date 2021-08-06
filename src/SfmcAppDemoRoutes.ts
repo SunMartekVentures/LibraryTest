@@ -36,8 +36,8 @@ export default class SfmcAppDemoRoutes
      public getOAuthAccessToken(req: express.Request, res: express.Response) {
         let self = this;
         let sessionId = req.session.id;
-        let clientId = process.env.DF18DEMO_CLIENTID;
-        let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+        let clientId = process.env.CLIENTID;
+        let clientSecret = process.env.CLIENTSECRET;
         let session = req.session;
     
         req.session.oauthAccessToken = "";
@@ -69,8 +69,8 @@ export default class SfmcAppDemoRoutes
       public getAuthorizationCode(req: express.Request, res: express.Response) {
         let self = this;
         let sessionId = req.session.id;
-        let clientId = process.env.DF18DEMO_CLIENTID;
-        let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+        let clientId = process.env.CLIENTID;
+        let clientSecret = process.env.CLIENTSECRET;
         let redirectURL = process.env.REDIRECT_URL;
     
         if (clientId && redirectURL) {
