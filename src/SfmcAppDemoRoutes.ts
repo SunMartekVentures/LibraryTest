@@ -65,7 +65,9 @@ export default class SfmcAppDemoRoutes
           res.status(500).send(errorMsg);
         }
       }
-    
+      
+     
+      
       //to get authorization code for web app
       public getAuthorizationCode(req: express.Request, res: express.Response) {
         let self = this;
@@ -73,7 +75,7 @@ export default class SfmcAppDemoRoutes
         let clientId = process.env.CLIENTID;
         let clientSecret = process.env.CLIENTSECRET;
         let redirectURL = process.env.REDIRECT_URL;
-        console.log("Client ID:",clientId);
+        
         if (clientId && redirectURL) {
           self._apiHelper
             .getAuthorizationCode(clientId, clientSecret, redirectURL)
@@ -90,6 +92,7 @@ export default class SfmcAppDemoRoutes
           Utils.logError(errorMsg);
           res.status(500).send(errorMsg);
         }
+        console.log("Response:",res);
       }
    
     public appUserInfo(req: express.Request, res: express.Response) {
