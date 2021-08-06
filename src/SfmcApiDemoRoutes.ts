@@ -4,7 +4,7 @@ import path = require('path');
 import express = require("express");
 import SfmcApiHelper from './SfmcApiHelper';
 import Utils from './Utils';
-
+console.log("hello world");
 export default class SfmcApiDemoRoutes
 {
     // Instance variables
@@ -33,7 +33,8 @@ export default class SfmcApiDemoRoutes
         {
             Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
 
-            self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
+            self._apiHelper
+            .getOAuthAccessToken(clientId, clientSecret,req,res)
             .then((result) => {
                 req.session.oauthAccessToken = result.oauthAccessToken;
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
@@ -51,6 +52,8 @@ export default class SfmcApiDemoRoutes
             res.status(500).send(errorMsg);
         }
     }
+   
+    
     
     /**
      * GET handler for /apidemoloaddata
