@@ -51,9 +51,9 @@ app.use(express.static(path.join(__dirname, "../static")));
 app.use(favicon(path.join(__dirname,'../static','images','favicons', 'favicon.ico')));
 
 // Routes: pages
-app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
+// app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
 
-app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
+// app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
 
 
 const appDemoRoutes = new SfmcAppDemoRoutes();
@@ -61,16 +61,14 @@ const appDemoRoutes = new SfmcAppDemoRoutes();
 // Routes: used by this demo app that internally call Marketing Cloud REST APIs
 
 
-app.get('/loaddata', function(req, res) {
-  apiDemoRoutes.loadData(req, res); });
-    
+
 // Routes: called when this demo app runs as a Marketing Cloud app in an IFRAME in the Marketing Cloud web UI
 app.get('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
-  app.post("/appuserinfo", function (req, res) {
-    appDemoRoutes.appUserInfo(req, res);
-  });
+  // app.post("/appuserinfo", function (req, res) {
+  //   appDemoRoutes.appUserInfo(req, res);
+  // });
 
 
 module.exports = app;
