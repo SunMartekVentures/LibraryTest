@@ -4,7 +4,7 @@ import express = require("express");
 import jwt = require('jwt-simple');
 import SfmcApiHelper from './SfmcApiHelper';
 import Utils from './Utils';
-console.log("hello world");
+
 
 // <!-- Integrate an externally hosted app via iframe. -->
 export default class SfmcAppDemoRoutes
@@ -33,6 +33,7 @@ export default class SfmcAppDemoRoutes
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
+    
      public getOAuthAccessToken(req: express.Request, res: express.Response) {
         let self = this;
         let sessionId = req.session.id;
@@ -72,7 +73,7 @@ export default class SfmcAppDemoRoutes
         let clientId = process.env.CLIENTID;
         let clientSecret = process.env.CLIENTSECRET;
         let redirectURL = process.env.REDIRECT_URL;
-    
+        console.log("Client ID:",clientId);
         if (clientId && redirectURL) {
           self._apiHelper
             .getAuthorizationCode(clientId, clientSecret, redirectURL)
