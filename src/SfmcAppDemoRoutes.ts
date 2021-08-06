@@ -4,7 +4,7 @@ import express = require("express");
 import jwt = require('jwt-simple');
 import SfmcApiHelper from './SfmcApiHelper';
 import Utils from './Utils';
-
+console.log("hello world");
 
 // <!-- Integrate an externally hosted app via iframe. -->
 export default class SfmcAppDemoRoutes
@@ -90,50 +90,7 @@ export default class SfmcAppDemoRoutes
           res.status(500).send(errorMsg);
         }
       }
-    // public getOAuthAccessToken(req: express.Request, res: express.Response)
-    // {
-    //     let self = this;
-    //     let sessionId = req.session.id;
-    //     let clientId = "w55iwhkfshiygt7x8ejoidl7";
-    //     let clientSecret ="pBqUqZSdZmmpLMdo12tJLfIN";
-
-    //     req.session.oauthAccessToken = "";
-    //     req.session.oauthAccessTokenExpiry = "";
-
-    //     Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
-
-    //     if (clientId && clientSecret)
-    //     {
-    //         if (req.session.refreshTokenFromJWT)
-    //         {
-    //             Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
-    
-    //             self._apiHelper.getOAuthAccessTokenFromRefreshToken(clientId, clientSecret, req.session.refreshTokenFromJWT)
-    //             .then((result) => {
-    //                 req.session.oauthAccessToken = result.oauthAccessToken;
-    //                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-    //                 res.status(result.status).send(result.statusText);
-    //             })
-    //             .catch((err) => {
-    //                 res.status(500).send(err);
-    //             });
-    //         }
-    //         else
-    //         {
-    //             // error
-    //             let errorMsg = "refreshToken *not* found in session.\nCheck the '/login' URL specified in your\nMarketing Cloud App configuration."; 
-    //             Utils.logError(errorMsg);
-    //             res.status(500).send(errorMsg);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         // error
-    //         let errorMsg = "ClientID or ClientSecret *not* found in environment variables."; 
-    //         Utils.logError(errorMsg);
-    //         res.status(500).send(errorMsg);
-    //     }
-    // }
+   
     public appUserInfo(req: express.Request, res: express.Response) {
         let self = this;
         self._apiHelper.appUserInfo(req, res);
