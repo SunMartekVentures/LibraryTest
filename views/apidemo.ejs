@@ -9,7 +9,7 @@
 <script>
     
     //('/apidemooauthtoken','textOauthPostResponse')
-     
+    
     function accessTokenGeneration(thisdata) {
     axios({
       method: "POST",
@@ -17,8 +17,10 @@
       data: {
         authorization_code: thisdata.state.authorization_code,
         tssd: thisdata.state.tssd,
-      },
-    })
+      }
+      
+    }
+    )
       .then(function (response) {
         console.log(
           "accesstokengeneration:" +
@@ -64,7 +66,8 @@
   //     .catch(function (error) {
   //       console.log(error);
   //     });
-  //}
+  console.log(thisdata);
+//}
 </script>    
 </body>
 </html>
