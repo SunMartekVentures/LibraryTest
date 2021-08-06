@@ -5,7 +5,9 @@ import express = require("express");
 import Utils from './Utils';
 
 export default class SfmcApiHelper
+
 {
+  private isAccessToken = false;
     // Instance variables
     private _deExternalKey = "DF18Demo";
     private _sfmcDataExtensionApiUrl = "https://www.exacttargetapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
