@@ -7,7 +7,7 @@ import * as http from 'http';
 import fs = require('fs');
 import { AddressInfo } from "net";
 
-require('dotenv').config();
+// require('dotenv').config();
 const app = require("./app");
 
 app.use(errorHandler());
