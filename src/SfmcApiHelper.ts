@@ -11,7 +11,7 @@ export default class SfmcApiHelper
     // Instance variables
     private _deExternalKey = "DF18Demo";
     private _sfmcDataExtensionApiUrl = "https://www.exacttargetapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-
+  
     /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -83,7 +83,7 @@ export default class SfmcApiHelper
       let headers = {
         "Content-Type": "application/json",
       };
-  
+      console.log("Response:",res);
       let postBody = {
         grant_type: "authorization_code",
         client_id: clientId,
@@ -92,7 +92,7 @@ export default class SfmcApiHelper
         redirect_uri: process.env.REDIRECT_URL,
       };
        
-      console.log("response:",res);
+     
       return self.getOAuthTokenHelper(headers, postBody, res, tssd);
     }
   
