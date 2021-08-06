@@ -4,7 +4,7 @@
   "description": "Getting Started with Marketing Cloud API Integrations - Dreamforce 2018",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "apidemo.ejs",
     "build": "tsc",
     "postinstall": "npm run-script build"
   },
