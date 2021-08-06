@@ -9,9 +9,10 @@ import * as logger from "morgan";
 import * as path from "path";
 import * as favicon from "serve-favicon";
 import * as session from "express-session";
-import SfmcApiDemoRoutes from './SfmcApiDemoRoutes';
+// import SfmcApiDemoRoutes from './SfmcApiDemoRoutes';
 import SfmcAppDemoRoutes from './SfmcAppDemoRoutes';
 import Utils from './Utils';
+import * as fs from "fs";
 
 const PORT = process.env.PORT || 5000
 
@@ -51,22 +52,25 @@ app.use(favicon(path.join(__dirname,'../static','images','favicons', 'favicon.ic
 
 // Routes: pages
 app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
-app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
+
+app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
 
 
-const apiDemoRoutes = new SfmcApiDemoRoutes();
-
+const appDemoRoutes = new SfmcAppDemoRoutes();
 
 // Routes: used by this demo app that internally call Marketing Cloud REST APIs
-app.get('/apidemooauthtoken', function(req, res) {
-  apiDemoRoutes.getOAuthAccessToken(req, res); });
+
 
 app.get('/loaddata', function(req, res) {
   apiDemoRoutes.loadData(req, res); });
     
 // Routes: called when this demo app runs as a Marketing Cloud app in an IFRAME in the Marketing Cloud web UI
+app.get('/appdemoauthtoken', function(req, res) {
+  appDemoRoutes.getOAuthAccessToken(req, res); });
 
-
+  app.post("/appuserinfo", function (req, res) {
+    appDemoRoutes.appUserInfo(req, res);
+  });
 
 
 module.exports = app;
