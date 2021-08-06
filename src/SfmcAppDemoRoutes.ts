@@ -45,7 +45,7 @@ export default class SfmcAppDemoRoutes
     
         if (clientId && clientSecret) {
           // set the desired timeout in options
-    
+          console.log(clientId);
           self._apiHelper
             .getOAuthAccessToken(clientId, clientSecret, req, res)
             .then((result) => {
