@@ -161,6 +161,7 @@ export default class SfmcApiHelper
         axios
           .post(sfmcAuthServiceApiUrl, postBody1, { headers: headers })
           .then((response: any) => {
+            console.log("respose:",response);
             let bearer = response.data.token_type;
             let tokenExpiry = response.data.expires_in;
             // this._accessToken = response.data.refresh_token;
