@@ -92,7 +92,7 @@ export default class SfmcAppDemoRoutes
           Utils.logError(errorMsg);
           res.status(500).send(errorMsg);
         }
-        console.log("Response:",res);
+     
       }
    
     public appUserInfo(req: express.Request, res: express.Response) {
