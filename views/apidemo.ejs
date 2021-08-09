@@ -3,11 +3,33 @@
 <head>
   
     <title>OutPut Page </title>
-    <script src="/src/SfmcApiHelper.ts"></script>
+    <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
+    <button type="button" id="btnGetOauthToken" class="btn btn-primary"
+    onclick="getOAuthAccessToken('/appdemooauthtoken','textOauthPostResponse')">ACCESS TOKEN</button>
 </head>
 <body>
-  <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-  onclick="getOAuthAccessToken('/apidemooauthtoken','textOauthPostResponse')">ACCESS TOKEN</button>
+  <script>
+    function getOAuthAccessToken() {
+    axios({
+      method: "POST",
+      url: "/appdemoauthtoken",
+            
+    }
+    )
+      .then(function (response) {
+        console.log(
+          "accesstokengeneration:" +
+            JSON.stringify(response.data.refreshToken)
+        );
+        // thisdata.setState({ refreshtoken: response.data.refreshToken });
+        //AppUserInfo(thisdata, response.data.refreshToken);
+      })
+         .catch(function (error) {
+        console.log(error);
+      });
+  }
+  </script>
+
 
    
     <!-- //('/apidemooauthtoken','textOauthPostResponse')
