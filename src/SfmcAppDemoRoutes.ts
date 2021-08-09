@@ -42,7 +42,7 @@ export default class SfmcAppDemoRoutes
         {
             // Decode JWT
             let encodedJWT = JSON.stringify(req.body.jwt);
-            let jwtSecret = process.env.DF18DEMO_JWTSECRET;
+            let jwtSecret = process.env.JWTSECRET;
             Utils.logInfo("Decoding JWT with secret from DF18DEMO_JWTSECRET = " + jwtSecret);
             req.session.decodedJWT = jwt.decode(encodedJWT, jwtSecret, true); // pass 'noVerify = true' for this demo
             
@@ -97,8 +97,8 @@ export default class SfmcAppDemoRoutes
     {
         let self = this;
         let sessionId = req.session.id;
-        let clientId = process.env.DF18DEMO_CLIENTID;
-        let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+        let clientId = process.env.CLIENTID;
+        let clientSecret = process.env.CLIENTSECRET;
 
         req.session.oauthAccessToken = "";
         req.session.oauthAccessTokenExpiry = "";
