@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script> src="https://unpkg.com/axios/dist/axios.min.js"</script>
     <title>OutPut Page </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="accessTokenGeneration('/appdemooauthtoken','textOauthPostResponse')">DATA EXTENSION</button>
@@ -8,7 +9,7 @@
 <body>
 <script>
     
-    src="https://unpkg.com/axios/dist/axios.min.js";
+   
     //('/apidemooauthtoken','textOauthPostResponse')
     var thisdata=this;
     function accessTokenGeneration(thisdata) {
