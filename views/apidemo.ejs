@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
-      integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
-      crossorigin="anonymous"
-    ></script>
+  
     <title>OutPut Page </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="accessTokenGeneration('/appdemooauthtoken','textOauthPostResponse')">DATA EXTENSION</button>
@@ -15,31 +11,7 @@
     
    
     //('/apidemooauthtoken','textOauthPostResponse')
-    var thisdata=this;
-    function accessTokenGeneration(thisdata) {
-    axios({
-      method: "POST",
-      url: "/appdemoauthtoken",
-      data: {
-        authorization_code: thisdata.state.authorization_code,
-        tssd: thisdata.state.tssd,
-      }
-      
-    }
-    )
-      .then(function (response) {
-        console.log(
-          "accesstokengeneration:" +
-            JSON.stringify(response.data.refreshToken)
-        );
-        thisdata.setState({ refreshtoken: response.data.refreshToken });
-        //AppUserInfo(thisdata, response.data.refreshToken);
-      })
-         .catch(function (error) {
-        console.log(error);
-      });
-  }
-  
+   
 
   //Used to fetch the user information
   // function AppUserInfo(thisdata, refreshToken) {
