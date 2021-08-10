@@ -118,6 +118,32 @@ export default class SfmcAppDemoRoutes
       }
     
       //to get authorization code for web app
+      public getAuthorizationCode(req: express.Request, res: express.Response) {
+        let self = this;
+        let sessionId = req.session.id;
+        let clientId = process.env.DF18DEMO_CLIENTID;
+        let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+        let redirectURL = process.env.REDIRECT_URL;
+    
+        if (clientId && redirectURL) {
+          self._apiHelper
+            .getAuthorizationCode(clientId, clientSecret, redirectURL)
+            .then((result) => {
+              res.send(result.statusText);
+              req.setTimeout(0, () => {});
+            })
+            .catch((err) => {
+              res.status(500).send(err);
+            });
+        } else {
+          let errorMsg =
+            "ClientID or ClientSecret *not* found in environment variables.";
+          Utils.logError(errorMsg);
+          res.status(500).send(errorMsg);
+        }
+      }
+    
+      //to get authorization code for web app
     //   public getAuthorizationCode(req: express.Request, res: express.Response) {
     //     let self = this;
     //     let sessionId = req.session.id;
