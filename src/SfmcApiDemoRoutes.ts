@@ -51,6 +51,7 @@ export default class SfmcApiDemoRoutes
             res.status(500).send(errorMsg);
         }
     }
+}
     
     /**
      * GET handler for /apidemoloaddata
@@ -65,4 +66,3 @@ export default class SfmcApiDemoRoutes
     //     Utils.logInfo("loadData route entered.");
     //     self._apiHelper.loadData(req, res);
     // }
-}
