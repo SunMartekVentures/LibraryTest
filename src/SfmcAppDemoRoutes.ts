@@ -106,10 +106,9 @@ export default class SfmcAppDemoRoutes
         Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
 
         if (clientId && clientSecret)
-        {
-            if (req.session.refreshTokenFromJWT)
+        
             {
-                Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
+                // Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
     
                 self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
                 .then((result) => {
@@ -121,14 +120,14 @@ export default class SfmcAppDemoRoutes
                     res.status(500).send(err);
                 });
             }
-            else
-            {
-                // error
-                let errorMsg = "refreshToken *not* found in session.\nCheck the '/login' URL specified in your\nMarketing Cloud App configuration."; 
-                Utils.logError(errorMsg);
-                res.status(500).send(errorMsg);
-            }
-        }
+            // else
+            // {
+            //     // error
+            //     let errorMsg = "refreshToken *not* found in session.\nCheck the '/login' URL specified in your\nMarketing Cloud App configuration."; 
+            //     Utils.logError(errorMsg);
+            //     res.status(500).send(errorMsg);
+            // }
+        
         else
         {
             // error
