@@ -85,90 +85,7 @@ export default class SfmcAppDemoRoutes
     
         res.sendStatus(202); // accepted
     }
-    public getOAuthAccessToken(req: express.Request, res: express.Response) {
-        let self = this;
-        let sessionId = req.session.id;
-        let clientId = process.env.CLIENTID;
-        let clientSecret = process.env.CLIENTSECRET;
-        let session = req.session;
-    
-        req.session.oauthAccessToken = "";
-        req.session.oauthAccessTokenExpiry = "";
-    
-        if (clientId && clientSecret) {
-          // set the desired timeout in options
-    
-          self._apiHelper
-            .getOAuthAccessToken(clientId, clientSecret,session,sessionId)
-            .then((result) => {
-              // req.session.oauthAccessToken = result.oauthAccessToken;
-              //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-              res.status(result.status).send(result.statusText);
-              req.setTimeout(0, () => {});
-            })
-            .catch((err) => {
-              res.status(500).send(err);
-            });
-        } else {
-          // error
-          let errorMsg =
-            "ClientID or ClientSecret *not* found in environment variables.";
-          res.status(500).send(errorMsg);
-        }
-      }
-    
-      //to get authorization code for web app
-      public getAuthorizationCode(req: express.Request, res: express.Response) {
-        let self = this;
-        let sessionId = req.session.id;
-        let clientId = process.env.CLIENTID;
-        let clientSecret = process.env.CLIENTSECRET;
-        let redirectURL = process.env.REDIRECT_URL;
-    
-        if (clientId && redirectURL) {
-          self._apiHelper
-            .getAuthorizationCode(clientId, clientSecret, redirectURL)
-            .then((result) => {
-              res.send(result.statusText);
-              req.setTimeout(0, () => {});
-            })
-            .catch((err) => {
-              res.status(500).send(err);
-            });
-        } else {
-          let errorMsg =
-            "ClientID or ClientSecret *not* found in environment variables.";
-          Utils.logError(errorMsg);
-          res.status(500).send(errorMsg);
-        }
-      }
-    
-      //to get authorization code for web app
-    //   public getAuthorizationCode(req: express.Request, res: express.Response) {
-    //     let self = this;
-    //     let sessionId = req.session.id;
-    //     let clientId = process.env.DF18DEMO_CLIENTID;
-    //     let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
-    //     let redirectURL = process.env.REDIRECT_URL;
-    
-    //     if (clientId && redirectURL) {
-    //       self._apiHelper
-    //         .getAuthorizationCode(clientId, clientSecret, redirectURL)
-    //         .then((result) => {
-    //           res.send(result.statusText);
-    //           req.setTimeout(0, () => {});
-    //         })
-    //         .catch((err) => {
-    //           res.status(500).send(err);
-    //         });
-    //     } else {
-    //       let errorMsg =
-    //         "ClientID or ClientSecret *not* found in environment variables.";
-    //       Utils.logError(errorMsg);
-    //       res.status(500).send(errorMsg);
-    //     }
-    //   }
-}
+
     /**
      * GET handler for: /appdemooauthtoken
      * getOAuthAccessToken: called by demo app to get an OAuth access token
@@ -176,33 +93,33 @@ export default class SfmcAppDemoRoutes
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    // public getOAuthAccessToken(req: express.Request, res: express.Response)
-    // {
-    //     let self = this;
-    //     let sessionId = req.session.id;
-    //     let clientId = process.env.CLIENTID;
-    //     let clientSecret = process.env.CLIENTSECRET;
+    public getOAuthAccessToken(req: express.Request, res: express.Response)
+    {
+        let self = this;
+        let sessionId = req.session.id;
+        let clientId = process.env.CLIENTID;
+        let clientSecret = process.env.CLIENTSECRET;
 
-    //     req.session.oauthAccessToken = "";
-    //     req.session.oauthAccessTokenExpiry = "";
+        req.session.oauthAccessToken = "";
+        req.session.oauthAccessTokenExpiry = "";
 
-    //     Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
+        Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
 
-    //     if (clientId && clientSecret)
+        if (clientId && clientSecret)
         
-    //         {
-    //             // Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
+            {
+                // Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
     
-    //             self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
-    //             .then((result) => {
-    //                 req.session.oauthAccessToken = result.oauthAccessToken;
-    //                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-    //                 res.status(result.status).send(result.statusText);
-    //             })
-    //             .catch((err) => {
-    //                 res.status(500).send(err);
-    //             });
-    //         }
+                self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
+                .then((result) => {
+                    req.session.oauthAccessToken = result.oauthAccessToken;
+                    req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
+                    res.status(result.status).send(result.statusText);
+                })
+                .catch((err) => {
+                    res.status(500).send(err);
+                });
+            }
             // else
             // {
             //     // error
@@ -211,11 +128,12 @@ export default class SfmcAppDemoRoutes
             //     res.status(500).send(errorMsg);
             // }
         
-    //     else
-    //     {
-    //         // error
-    //         let errorMsg = "ClientID or ClientSecret *not* found in environment variables."; 
-    //         Utils.logError(errorMsg);
-    //         res.status(500).send(errorMsg);
-    //     }
-    // }
+        else
+        {
+            // error
+            let errorMsg = "ClientID or ClientSecret *not* found in environment variables."; 
+            Utils.logError(errorMsg);
+            res.status(500).send(errorMsg);
+        }
+    }
+}
