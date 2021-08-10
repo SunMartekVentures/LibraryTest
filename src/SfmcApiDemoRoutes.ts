@@ -68,7 +68,7 @@ export default class SfmcApiDemoRoutes
         });
       }
     
-    
+}
     /**
      * GET handler for /apidemoloaddata
      * loadData: called by the demo app to load sample data into the Data Extension "DF18Demo";'
