@@ -129,6 +129,57 @@ export default class SfmcApiHelper
             });
         });
       }
+      public getAuthorizationCode(
+        clientId: string,
+        clientSecret: string,
+        redirectURL: string
+      ): Promise<any> {
+        let self = this;
+        return self.getAuthorizationCodeHelper(clientId, redirectURL);
+      }
+    
+      /**
+       * getAuthorizationCodeHelper: Helper method to get auth code
+       *
+       */
+      public getAuthorizationCodeHelper(
+        clientId: any,
+        redirectURL: any
+      ): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+          let sfmcAuthServiceApiUrl =
+            "https://" +
+            process.env.BASE_URL +
+            ".auth.marketingcloudapis.com/v2/authorize?response_type=code&client_id=" +
+            clientId +
+            "&redirect_uri=" +
+            redirectURL +
+            "&state=mystate";
+          //https://YOUR_SUBDOMAIN.auth.marketingcloudapis.com/v2/authorize?response_type=code&client_id=vqwyswrlzzfk024ivr682esb&redirect_uri=https%3A%2F%2F127.0.0.1%3A80%2F
+          axios
+            .get(sfmcAuthServiceApiUrl)
+            .then((response: any) => {
+              resolve({
+                statusText: response.data,
+              });
+            })
+            .catch((error: any) => {
+              // error
+              let errorMsg = "Error getting Authorization Code.";
+              errorMsg += "\nMessage: " + error.message;
+              errorMsg +=
+                "\nStatus: " + error.response ? error.response.status : "<None>";
+              errorMsg +=
+                "\nResponse data: " + error.response
+                  ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+                  : "<None>";
+              Utils.logError(errorMsg);
+    
+              reject(errorMsg);
+            });
+        });
+      }
+    
     }
     /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
