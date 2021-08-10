@@ -54,12 +54,12 @@ app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'a
 app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
  app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
 
-//const apiDemoRoutes = new SfmcApiDemoRoutes();
+const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
 
 // Routes: used by this demo app that internally call Marketing Cloud REST APIs
-// app.get('/apidemooauthtoken', function(req, res) {
-//   apiDemoRoutes.getOAuthAccessToken(req, res); });
+app.get('/apidemooauthtoken', function(req, res) {
+  apiDemoRoutes.getOAuthAccessToken(req, res); });
 
 // app.get('/loaddata', function(req, res) {
 //   apiDemoRoutes.loadData(req, res); });
