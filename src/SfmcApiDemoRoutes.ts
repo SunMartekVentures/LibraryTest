@@ -33,7 +33,7 @@ export default class SfmcApiDemoRoutes
         {
             Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
 
-            self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
+            self._apiHelper.getOAuthAccessToken(clientId, clientSecret,req,res)
             .then((result) => {
                 req.session.oauthAccessToken = result.oauthAccessToken;
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
