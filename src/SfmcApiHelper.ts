@@ -42,24 +42,24 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    public getOAuthAccessTokenFromRefreshToken(client_id: string, clientSecret: string, refreshToken: string) : Promise<any>
-    {
-        let self = this;
-        Utils.logInfo("getOAuthAccessTokenFromRefreshToken called.");
-        Utils.logInfo("Getting OAuth Access Token with refreshToken: " + refreshToken);
+    // public getOAuthAccessTokenFromRefreshToken(client_id: string, clientSecret: string, refreshToken: string) : Promise<any>
+    // {
+    //     let self = this;
+    //     Utils.logInfo("getOAuthAccessTokenFromRefreshToken called.");
+    //     Utils.logInfo("Getting OAuth Access Token with refreshToken: " + refreshToken);
         
-        let headers = {
-            'Content-Type': 'application/json',
-        };
+    //     let headers = {
+    //         'Content-Type': 'application/json',
+    //     };
 
-        let postBody = {
-          "grant_type": "client_credentials",
-          "client_id": process.env.CLIENTID,
-          "client_secret": process.env.CLIENTSECRET
-        };
+    //     let postBody = {
+    //       "grant_type": "client_credentials",
+    //       "client_id": process.env.CLIENTID,
+    //       "client_secret": process.env.CLIENTSECRET
+    //     };
 
-        return self.getOAuthTokenHelper(headers, postBody);
-    }
+    //     return self.getOAuthTokenHelper(headers, postBody);
+    // }
 
     /**
      * getOAuthTokenHelper: Helper method to POST the given header & body to the SFMC Auth endpoint
