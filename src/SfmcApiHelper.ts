@@ -6,7 +6,7 @@ import Utils from './Utils';
 
 export default class SfmcApiHelper
 {
-    private isAccessToken = false;
+    
 
     // Instance variables
     private _deExternalKey = "DF18Demo";
@@ -51,7 +51,7 @@ export default class SfmcApiHelper
           console.log("author" + JSON.stringify(tssd));
           let sfmcAuthServiceApiUrl =
             "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
-          this.isAccessToken = true;
+         // this.isAccessToken = true;
           console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
           axios
             .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
