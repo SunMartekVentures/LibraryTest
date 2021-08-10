@@ -99,7 +99,7 @@ export default class SfmcAppDemoRoutes
           // set the desired timeout in options
     
           self._apiHelper
-            .getOAuthAccessToken(clientId, clientSecret, req, res)
+            .getOAuthAccessToken(clientId, clientSecret,session,sessionId)
             .then((result) => {
               // req.session.oauthAccessToken = result.oauthAccessToken;
               //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
