@@ -16,25 +16,25 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    // public getOAuthAccessToken(client_id: string, client_secret: string) : Promise<any>
-    // {
-    //     let self = this;
-    //     Utils.logInfo("getOAuthAccessToken called.");
-    //     Utils.logInfo("Using specified ClientID and ClientSecret to get OAuth token...");
+    public getOAuthAccessToken(client_id: string, client_secret: string) : Promise<any>
+    {
+        let self = this;
+        Utils.logInfo("getOAuthAccessToken called.");
+        Utils.logInfo("Using specified ClientID and ClientSecret to get OAuth token...");
 
-    //     let headers = {
-    //         'Content-Type': 'application/json',
-    //     };
+        let headers = {
+            'Content-Type': 'application/json',
+        };
 
-    //     let postBody = {
+        let postBody = {
 
-    //         "grant_type": "client_credentials",
-    //         "client_id": process.env.CLIENTID,
-    //         "client_secret": process.env.CLIENTSECRET
-    //     };
+            "grant_type": "client_credentials",
+            "client_id": process.env.CLIENTID,
+            "client_secret": process.env.CLIENTSECRET
+        };
 
-    //     return self.getOAuthTokenHelper(headers, postBody);
-    // }
+        return self.getOAuthTokenHelper(headers, postBody);
+    }
 
     /**
      * getOAuthAccessTokenFromRefreshToken: POSTs to SFMC Auth URL to get an OAuth access token with the given refreshToken
