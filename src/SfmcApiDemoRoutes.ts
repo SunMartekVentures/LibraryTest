@@ -17,41 +17,57 @@ export default class SfmcApiDemoRoutes
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    public getOAuthAccessToken(req: express.Request, res: express.Response)
-    {
+     public getAuthorizationCode(
+        clientId: string,
+        clientSecret: string,
+        redirectURL: string
+      ): Promise<any> {
         let self = this;
-        let sessionId = req.session.id;
-        let clientId = process.env.CLIENTID;
-        let clientSecret = process.env.CLIENTSECRET;
-
-        req.session.oauthAccessToken = "";
-        req.session.oauthAccessTokenExpiry = "";
-
-        Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
-
-        if (clientId && clientSecret)
-        {
-            Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
-
-            self._apiHelper.getOAuthAccessToken(clientId, clientSecret,req,res)
-            .then((result) => {
-                req.session.oauthAccessToken = result.oauthAccessToken;
-                req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-                res.status(result.status).send(result.statusText);
+        return self.getAuthorizationCodeHelper(clientId, redirectURL);
+      }
+    
+      /**
+       * getAuthorizationCodeHelper: Helper method to get auth code
+       *
+       */
+      public getAuthorizationCodeHelper(
+        clientId: any,
+        redirectURL: any
+      ): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+          let sfmcAuthServiceApiUrl =
+            "https://" +
+            process.env.BASE_URL +
+            ".auth.marketingcloudapis.com/v2/authorize?response_type=code&client_id=" +
+            clientId +
+            "&redirect_uri=" +
+            redirectURL +
+            "&state=mystate";
+          //https://YOUR_SUBDOMAIN.auth.marketingcloudapis.com/v2/authorize?response_type=code&client_id=vqwyswrlzzfk024ivr682esb&redirect_uri=https%3A%2F%2F127.0.0.1%3A80%2F
+          axios
+            .get(sfmcAuthServiceApiUrl)
+            .then((response: any) => {
+              resolve({
+                statusText: response.data,
+              });
             })
-            .catch((err) => {
-                res.status(500).send(err);
+            .catch((error: any) => {
+              // error
+              let errorMsg = "Error getting Authorization Code.";
+              errorMsg += "\nMessage: " + error.message;
+              errorMsg +=
+                "\nStatus: " + error.response ? error.response.status : "<None>";
+              errorMsg +=
+                "\nResponse data: " + error.response
+                  ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+                  : "<None>";
+              Utils.logError(errorMsg);
+    
+              reject(errorMsg);
             });
-        }
-        else
-        {
-            // error
-            let errorMsg = "ClientID or ClientSecret *not* found in environment variables."; 
-            Utils.logError(errorMsg);
-            res.status(500).send(errorMsg);
-        }
-    }
-}
+        });
+      }
+    
     
     /**
      * GET handler for /apidemoloaddata
