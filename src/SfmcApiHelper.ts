@@ -218,9 +218,9 @@ export default class SfmcApiHelper
           "                    </Field>" +
           "                    <Field>" +
           "                        <CustomerKey>Phone NUmber</CustomerKey>" +
-          "                        <Name>Phone Number</Name>" +
+          "                        <Name>Phone Number</Name>" +          
+          "                         <DataType>Number</DataType>"+
           "                        <FieldType>Number</FieldType>" +
-          "                        <MaxLength>10</MaxLength>" +
           "                        <IsRequired>true</IsRequired>" +
           "                        <IsPrimaryKey>true</IsPrimaryKey>" +
           "                    </Field>" +
@@ -235,8 +235,8 @@ export default class SfmcApiHelper
           "                    <Field>" +
           "                        <CustomerKey>Years of Experience</CustomerKey>" +
           "                        <Name>Years of Experience</Name>" +
+          "                         <DataType>Number</DataType>"+
           "                        <FieldType>Number</FieldType>" +
-          "                        <MaxLength>5</MaxLength>" +
           "                        <IsRequired>true</IsRequired>" +
           "                        <IsPrimaryKey>false</IsPrimaryKey>" +
           "                    </Field>" +       
