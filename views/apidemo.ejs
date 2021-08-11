@@ -15,7 +15,7 @@
 </head>
 <body>
   <script>
-    function getOAuthAccessToken(thisdata) {
+    function getOAuthAccessToken() {
     axios({
       method: "GET",
       url: "/appdemoauthtoken",        
@@ -26,7 +26,7 @@
           "accesstokengeneration:" +
             JSON.stringify(response.data.accessToken)
         );
-        thisdata.setState({ accessToken: response.data.accessToken});
+        //thisdata.setState({ accessToken: response.data.accessToken});
         creatingDomainConfigurationDE(thisdata,response.data.soap_instance_url)
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
@@ -36,32 +36,20 @@
       });
   }
   function creatingDomainConfigurationDE(
-        thisdata,
+        // thisdata,
         soap_instance_url,  
       ) {
         axios({
-          method: "GET",
+          method: "POST",
           url: "/creatingDomainConfigurationDE",
           data: {
-            
             soap_instance_url: soap_instance_url,
-            
-          },
+            },
         })
           .then(function (response) {
             console.log(
               "creatingDomainConfigurationDE:" + JSON.stringify(response)
             );
-            if (response.data) {
-            
-              thisdata.setState({
-                DEexternalKeyDomainConfiguration:
-                  response.data.DEexternalKeyDomainConfiguration,
-              });
-             
-            } else {
-              console.log("Error creating data extension folder");
-            }
           })
           .catch(function (error) {
             console.log(error);
