@@ -10,12 +10,12 @@
     <title>OutPut Page </title>
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
-    <button type="button" id="createDE" onclick="creatingDomainConfigurationDE()"> CREATE DE</button>
+    onclick="getOAuthAccessToken()">DATAEXTENSION</button>
+    <!-- <button type="button" id="createDE" onclick="creatingDomainConfigurationDE()"> CREATE DE</button> -->
 </head>
 <body>
   <script>
-    function getOAuthAccessToken() {
+    function getOAuthAccessToken(thisdata) {
     axios({
       method: "GET",
       url: "/appdemoauthtoken",
@@ -25,10 +25,10 @@
       .then(function (response) {
         console.log(
           "accesstokengeneration:" +
-            JSON.stringify(response.data.refreshToken)
+            JSON.stringify(response.data.oauthAccessToken)
         );
-        // thisdata.setState({ refreshtoken: response.data.refreshToken });
-        //AppUserInfo(thisdata, response.data.refreshToken);
+        thisdata.setState({oauthAccessToken: response.data.oauthAccessToken})   
+        creatingDomainConfigurationDE(thisdata,oauthAccessToken)
       })
          .catch(function (error) {
         console.log(error);
@@ -37,8 +37,7 @@
   function creatingDomainConfigurationDE(
         thisdata,
         soap_instance_url,
-        
-        
+               
       ) {
         axios({
           method: "POST",
