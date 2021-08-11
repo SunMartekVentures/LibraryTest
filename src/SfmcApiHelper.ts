@@ -90,91 +90,92 @@ export default class SfmcApiHelper
     }
 
 
-    public domainConfigurationDECheck(
-      req: express.Request,
-      res: express.Response,
+    // public domainConfigurationDECheck(
+    //   req: express.Request,
+    //   res: express.Response,
       
-    ) {
-      //this.getRefreshTokenHelper(this._accessToken, res);
-      console.log("domainConfigurationDECheck:" + this.member_id);
-      console.log("domainConfigurationDECheck:" + this.soap_instance_url );
-     // Utils.logInfo("domainConfigurationDECheck1:" + req.body.FolderID);
-     //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
-     //this.getRefreshTokenHelper(this._accessToken, res);
-      // this.getOAuthAccessToken(this.client_id, this.client_secret )
-      //   .then((response)=>{
-      //     Utils.logInfo(
-      //       "domainConfigurationDECheck:" + JSON.stringify(response.oauthAccessToken)
-      //     )
-      //   }
-      // );
+    // ) {
+    //   //this.getRefreshTokenHelper(this._accessToken, res);
+    //   console.log("domainConfigurationDECheck:" + this.member_id);
+    //   console.log("domainConfigurationDECheck:" + this.soap_instance_url );
+    //  // Utils.logInfo("domainConfigurationDECheck1:" + req.body.FolderID);
+    //  //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
+    //  //this.getRefreshTokenHelper(this._accessToken, res);
+    //   // this.getOAuthAccessToken(this.client_id, this.client_secret )
+    //   //   .then((response)=>{
+    //   //     Utils.logInfo(
+    //   //       "domainConfigurationDECheck:" + JSON.stringify(response.oauthAccessToken)
+    //   //     )
+    //   //   }
+    //   // );
          
-          let soapMessage =
-            '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
-            "    <s:Header>" +
-            '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
-            '        <a:To s:mustUnderstand="1">' +
-            this.soap_instance_url +
-            "Service.asmx" +
-            "</a:To>" +
-            '        <fueloauth xmlns="http://exacttarget.com">' +
-            this.oauthAccessToken +
-            "</fueloauth>" +
-            "    </s:Header>" +
-            '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-            '        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-            "            <RetrieveRequest>" +
-            "                <ObjectType>DataExtension</ObjectType>" +
-            "                <Properties>ObjectID</Properties>" +
-            "                <Properties>CustomerKey</Properties>" +
-            "                <Properties>Name</Properties>" +
-            '                <Filter xsi:type="SimpleFilterPart">' +
-            "                    <Property>Name</Property>" +
-            "                    <SimpleOperator>equals</SimpleOperator>" +
-            "                    <Value>Domain Configuration-" +
-            this.member_id +
-            "</Value>" +
-            "                </Filter>" +
-            "            </RetrieveRequest>" +
-            "        </RetrieveRequestMsg>" +
-            "    </s:Body>" +
-            "</s:Envelope>";
+    //       let soapMessage =
+    //         '<?xml version="1.0" encoding="UTF-8"?>' +
+    //         '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+    //         "    <s:Header>" +
+    //         '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
+    //         '        <a:To s:mustUnderstand="1">' +
+    //         this.soap_instance_url +
+    //         "Service.asmx" +
+    //         "</a:To>" +
+    //         '        <fueloauth xmlns="http://exacttarget.com">' +
+    //         this.oauthAccessToken +
+    //         "</fueloauth>" +
+    //         "    </s:Header>" +
+    //         '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+    //         '        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+    //         "            <RetrieveRequest>" +
+    //         "                <ObjectType>DataExtension</ObjectType>" +
+    //         "                <Properties>ObjectID</Properties>" +
+    //         "                <Properties>CustomerKey</Properties>" +
+    //         "                <Properties>Name</Properties>" +
+    //         '                <Filter xsi:type="SimpleFilterPart">' +
+    //         "                    <Property>Name</Property>" +
+    //         "                    <SimpleOperator>equals</SimpleOperator>" +
+    //         "                    <Value>Domain Configuration-" +
+    //         this.member_id +
+    //         "</Value>" +
+    //         "                </Filter>" +
+    //         "            </RetrieveRequest>" +
+    //         "        </RetrieveRequestMsg>" +
+    //         "    </s:Body>" +
+    //         "</s:Envelope>";
   
-          return new Promise<any>((resolve, reject) => {
-            let headers = {
-              "Content-Type": "text/xml",
-              SOAPAction: "Retrieve",
-            };
+    //       return new Promise<any>((resolve, reject) => {
+    //         let headers = {
+    //           "Content-Type": "text/xml",
+    //           SOAPAction: "Retrieve",
+    //         };
   
-            axios({
-              method: "post",
-              url: "" + req.body.soapInstance + "Service.asmx" + "",
-              data: soapMessage,
-              headers: { "Content-Type": "text/xml" },
-            })
-              .then((response: any) => {
-                  console.log(response);
-              },
-              )},
-           ) }
+    //         axios({
+    //           method: "post",
+    //           url: "" + req.body.soapInstance + "Service.asmx" + "",
+    //           data: soapMessage,
+    //           headers: { "Content-Type": "text/xml" },
+    //         })
+    //           .then((response: any) => {
+    //               response.data
+                  
+
+    //           },
+    //           )},
+    //        ) }
                
         
-        // .catch((error: any,res:any) => {
-        //   res
-        //     .status(500)
-        //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-        // });
+    //     // .catch((error: any,res:any) => {
+    //     //   res
+    //     //     .status(500)
+    //     //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+    //     // });
      
     public creatingDomainConfigurationDE(
     req: express.Request,
     res: express.Response,
-    member_id: string,
-    soap_instance_url: string,
+  
     ) {
     //this.getRefreshTokenHelper(this._accessToken, res);
-    console.log("creatingDomainConfigurationDE:" + member_id);
-    console.log("creatingDomainConfigurationDE:" + soap_instance_url);
+    console.log("creatingDomainConfigurationDE:" + this.member_id);
+    console.log("creatingDomainConfigurationDE:" + this.soap_instance_url);
        //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
    
        this.getOAuthAccessToken(this.client_id, this.client_secret)
@@ -189,7 +190,7 @@ export default class SfmcApiHelper
           "    <s:Header>" +
           '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
           '        <a:To s:mustUnderstand="1">' +
-          soap_instance_url +
+          this.soap_instance_url +
           "Service.asmx" +
           "</a:To>" +
           '        <fueloauth xmlns="http://exacttarget.com">' +
@@ -201,10 +202,10 @@ export default class SfmcApiHelper
           '            <Objects xsi:type="DataExtension">' +
           
           "                <CustomerKey>Pashtek Developer-" +
-          member_id +
+          this.member_id +
           "</CustomerKey>" +
           "                <Name>Pashtek Developer-" +
-          member_id +
+          this.member_id +
           "</Name>" +
           "                <Fields>" +
           "                    <Field>" +
@@ -252,7 +253,7 @@ export default class SfmcApiHelper
 
           axios({
             method: "post",
-            url: "" + soap_instance_url + "Service.asmx" + "",
+            url: "" + this.soap_instance_url + "Service.asmx" + "",
             data: DCmsg,
             headers: headers,
           })
