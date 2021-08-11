@@ -144,3 +144,6 @@ export default class SfmcAppDemoRoutes
         self._apiHelper.domainConfigurationDECheck(req, res);
       }
 }
+
+
+
