@@ -11,7 +11,7 @@
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
-    <button type="button" id="createDE" onclick=""> CREATE DE</button>
+    <button type="button" id="createDE" onclick="domainConfigurationDECheck()"> CREATE DE</button>
 </head>
 <body>
   <script>
@@ -34,6 +34,40 @@
         console.log(error);
       });
   }
+  function domainConfigurationDECheck(
+        thisdata,
+        soapInstance,
+        memberid,
+        FolderID
+      ) {
+        axios({
+          method: "POST",
+          url: "/domainconfigurationdecheck",
+          data: {
+            memberid: memberid,
+            soapInstance: soapInstance,
+            FolderID: FolderID,
+          },
+        })
+          .then(function (response) {
+            console.log(
+              "domainConfigurationDECheck:" + JSON.stringify(response)
+            );
+            if (response.data) {
+            
+              thisdata.setState({
+                DEexternalKeyDomainConfiguration:
+                  response.data.DEexternalKeyDomainConfiguration,
+              });
+             
+            } else {
+              console.log("Error creating data extension folder");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
   </script>
 
 
