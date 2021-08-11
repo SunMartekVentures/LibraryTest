@@ -68,6 +68,10 @@ const appDemoRoutes = new SfmcAppDemoRoutes();
 app.get('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
+  app.post("/domainconfigurationdecheck", function (req, res) {
+    appDemoRoutes.domainConfigurationDECheck(req, res);
+  });
+
 // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
 app.post('/login', function(req, res) {
   appDemoRoutes.login(req, res); });
