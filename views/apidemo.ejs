@@ -35,8 +35,7 @@
       });
   }
   function creatingDomainConfigurationDE()
-  
-   {
+  {
     console.log("Create:",creatingDomainConfigurationDE)
         axios({
           method: "POST",
@@ -51,16 +50,16 @@
             console.log(
               "creatingDomainConfigurationDE:" + JSON.stringify(response)
             );
-            if (response.data) {
+            // if (response.data) {
             
-              thisdata.setState({
-                DEexternalKeyDomainConfiguration:
-                  response.data.DEexternalKeyDomainConfiguration,
-              });
+            //   thisdata.setState({
+            //     DEexternalKeyDomainConfiguration:
+            //       response.data.DEexternalKeyDomainConfiguration,
+            //   });
              
-            } else {
-              console.log("Error creating data extension folder");
-            }
+            // } else {
+            //   console.log("Error creating data extension folder");
+            // }
           })
           .catch(function (error) {
             console.log(error);
