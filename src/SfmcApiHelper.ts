@@ -2,17 +2,19 @@
 
 import axios from 'axios';
 import express = require("express");
+import { request } from 'http';
 import Utils from './Utils';
+// import xml2js = require("xml2js");
 
 export default class SfmcApiHelper
 {
     // Instance variables
   private client_id="";
   private client_secret="";
-  private _accessToken = "";
+  // private _accessToken = "";
+  private oauthAccessToken=""; 
   private member_id = "514018007";
   private soap_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/";
-  private FolderID = "";
   private _deExternalKey = "DF18Demo";
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
 
@@ -42,8 +44,6 @@ export default class SfmcApiHelper
         return self.getOAuthTokenHelper(headers, postBody);
     }
 
-    
-    
 
     /**
      * getOAuthTokenHelper: Helper method to POST the given header & body to the SFMC Auth endpoint
@@ -64,7 +64,6 @@ export default class SfmcApiHelper
                 tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expiresIn);
                 Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
                 //console.log("token:",accessToken);
-                
                 console.log("response:",response.data);
                 
 
@@ -89,36 +88,38 @@ export default class SfmcApiHelper
             });
         });
     }
+
+
     public domainConfigurationDECheck(
       req: express.Request,
-      res: express.Response
+      res: express.Response,
+      
     ) {
       //this.getRefreshTokenHelper(this._accessToken, res);
-      console.log("domainConfigurationDECheck:" + req.body.memberid);
-      console.log("domainConfigurationDECheck:" + req.body.soapInstance);
-      console.log("domainConfigurationDECheck:" + req.body.refreshToken);
-      Utils.logInfo("domainConfigurationDECheck1:" + req.body.FolderID);
-      //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
-  
-      //this.getRefreshTokenHelper(this._accessToken, res);
-      this.getOAuthAccessToken(this.client_id, this.client_secret )
-        
-          Utils.logInfo(
-            "domainConfigurationDECheck:" + JSON.stringify(response.oauthAccessToken)
-          );
-        
-  
+      console.log("domainConfigurationDECheck:" + this.member_id);
+      console.log("domainConfigurationDECheck:" + this.soap_instance_url );
+     // Utils.logInfo("domainConfigurationDECheck1:" + req.body.FolderID);
+     //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
+     //this.getRefreshTokenHelper(this._accessToken, res);
+      // this.getOAuthAccessToken(this.client_id, this.client_secret )
+      //   .then((response)=>{
+      //     Utils.logInfo(
+      //       "domainConfigurationDECheck:" + JSON.stringify(response.oauthAccessToken)
+      //     )
+      //   }
+      // );
+         
           let soapMessage =
             '<?xml version="1.0" encoding="UTF-8"?>' +
             '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
             "    <s:Header>" +
             '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
             '        <a:To s:mustUnderstand="1">' +
-            req.body.soapInstance +
+            this.soap_instance_url +
             "Service.asmx" +
             "</a:To>" +
             '        <fueloauth xmlns="http://exacttarget.com">' +
-            response.oauthAccessToken +
+            this.oauthAccessToken +
             "</fueloauth>" +
             "    </s:Header>" +
             '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
@@ -132,7 +133,7 @@ export default class SfmcApiHelper
             "                    <Property>Name</Property>" +
             "                    <SimpleOperator>equals</SimpleOperator>" +
             "                    <Value>Domain Configuration-" +
-            req.body.memberid +
+            this.member_id +
             "</Value>" +
             "                </Filter>" +
             "            </RetrieveRequest>" +
@@ -153,96 +154,30 @@ export default class SfmcApiHelper
               headers: { "Content-Type": "text/xml" },
             })
               .then((response: any) => {
-                var extractedData = "";
-                let sendresponse = {};
-                var parser = new xml2js.Parser();
-                parser.parseString(
-                  response.data,
-                  (
-                    err: any,
-                    result: {
-                      [x: string]: {
-                        [x: string]: { [x: string]: { [x: string]: any }[] }[];
-                      };
-                    }
-                  ) => {
-                    let DomainConfiguration =
-                      result["soap:Envelope"]["soap:Body"][0][
-                      "RetrieveResponseMsg"
-                      ][0]["Results"];
-  
-                    if (DomainConfiguration != undefined) {
-                      let DEexternalKeyDomainConfiguration =
-                        DomainConfiguration[0]["CustomerKey"];
-                      //    this.DEexternalKeyDomainConfiguration =;
-                      //    DomainConfiguration[0]["CustomerKey"];
-                      sendresponse = {
-                       statusText:
-                       "Domain Configuration Data Extension already created",
-                        soap_instance_url: req.body.soapInstance,
-                        member_id: req.body.memberid,
-                        DEexternalKeyDomainConfiguration:
-                          DEexternalKeyDomainConfiguration,
-                      };
-                      res.status(200).send(sendresponse);
-                    } else {
-                      this.creatingDomainConfigurationDE(
-                        req,
-                        res,
-                        req.body.memberid,
-                        req.body.soapInstance,
-                        req.body.FolderID,
-                        
-                      );
-                    }
-                  }
-                );
-              })
-              .catch((error: any) => {
-                // error
-                let errorMsg =
-                  "Error getting the 'Domain Configuration' Data extension properties......";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg +=
-                  "\nStatus: " + error.response
-                    ? error.response.status
-                    : "<None>";
-                errorMsg +=
-                  "\nResponse data: " + error.response.data
-                    ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
-                    : "<None>";
-                Utils.logError(errorMsg);
-  
-                reject(errorMsg);
-              });
-          });
-        }
-        .catch((error: any,res:any) => {
-          res
-            .status(500)
-            .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-        });
-      }
-    
-    
+                  console.log(response);
+              },
+              )},
+           ) }
+               
+        
+        // .catch((error: any,res:any) => {
+        //   res
+        //     .status(500)
+        //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+        // });
+     
     public creatingDomainConfigurationDE(
     req: express.Request,
     res: express.Response,
     member_id: string,
     soap_instance_url: string,
-    FolderID: string,
-   
-  ) {
+    ) {
     //this.getRefreshTokenHelper(this._accessToken, res);
     console.log("creatingDomainConfigurationDE:" + member_id);
     console.log("creatingDomainConfigurationDE:" + soap_instance_url);
-    Utils.logInfo("creatingDomainConfigurationDE:" + FolderID);
-    
-
-    //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
-
-    let refreshTokenbody = "";
-    this.getOAuthAccessToken(this.client_id, this.client_secret)
+       //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
+   
+       this.getOAuthAccessToken(this.client_id, this.client_secret)
       .then((response) => {       
         Utils.logInfo(
           "creatingDomainConfigurationDE:" + JSON.stringify(response.oauthAccessToken)
@@ -264,9 +199,7 @@ export default class SfmcApiHelper
           '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
           '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
           '            <Objects xsi:type="DataExtension">' +
-          "                <CategoryID>" +
-          FolderID +
-          "</CategoryID>" +
+          
           "                <CustomerKey>Pashtek Developer-" +
           member_id +
           "</CustomerKey>" +
@@ -325,45 +258,8 @@ export default class SfmcApiHelper
           })
             .then((response: any) => {
              
-                response.data,
-                (
-                  err: any,
-                  result: {
-                    [x: string]: {
-                      [x: string]: { [x: string]: { [x: string]: any }[] }[];
-                    };
-                  }
-                ) => {
-                  let DomainConfiguration =
-                    result["soap:Envelope"]["soap:Body"][0][
-                    "CreateResponse"
-                    ][0]["Results"];
-
-                  if (DomainConfiguration != undefined) {
-                    let DEexternalKeyDomainConfiguration =
-                      DomainConfiguration[0]["Object"][0]["CustomerKey"];
-
-                    //this.DEexternalKeyDomainConfiguration =
-                    // DomainConfiguration[0]["Object"][0]["CustomerKey"];
-                    let sendresponse = {};
-                    sendresponse = {
-                      refreshToken: refreshTokenbody,
-                      statusText:
-                        "Domain Configuration Data extension has been created Successfully",
-                      soap_instance_url: soap_instance_url,
-                      member_id: member_id,
-                      DEexternalKeyDomainConfiguration:
-                        DEexternalKeyDomainConfiguration,
-                    };
-                    res.status(200).send(sendresponse);
-
-                    /*  res
-                  .status(200)
-                  .send(
-                    "Domain Configuration Data extension has been created Successfully"
-                  );*/
-                  }
-                }
+               console.log(response);
+               
               
             })
             .catch((error: any) => {
@@ -392,9 +288,48 @@ export default class SfmcApiHelper
       });
   }
 
-    }
+}    
 
 // function oauthAccessToken(oauthAccessToken: any, res: express.Response) {
 //   throw new Error('Function not implemented.');
 // }
 
+// response.data,
+// (
+//   err: any,
+//   result: {
+//     [x: string]: {
+//       [x: string]: { [x: string]: { [x: string]: any }[] }[];
+//     };
+//   }
+// ) => {
+//   let DomainConfiguration =
+//     result["soap:Envelope"]["soap:Body"][0][
+//     "CreateResponse"
+//     ][0]["Results"];
+
+//   if (DomainConfiguration != undefined) {
+//     let DEexternalKeyDomainConfiguration =
+//       DomainConfiguration[0]["Object"][0]["CustomerKey"];
+
+//     //this.DEexternalKeyDomainConfiguration =
+//     // DomainConfiguration[0]["Object"][0]["CustomerKey"];
+//     let sendresponse = {};
+//     sendresponse = {
+//       refreshToken: refreshTokenbody,
+//       statusText:
+//         "Domain Configuration Data extension has been created Successfully",
+//       soap_instance_url: soap_instance_url,
+//       member_id: member_id,
+//       DEexternalKeyDomainConfiguration:
+//         DEexternalKeyDomainConfiguration,
+//     };
+//     res.status(200).send(sendresponse);
+
+//     /*  res
+//   .status(200)
+//   .send(
+//     "Domain Configuration Data extension has been created Successfully"
+//   );*/
+//   }
+// }
