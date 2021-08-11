@@ -26,7 +26,6 @@
           "accesstokengeneration:" +
             JSON.stringify(response.data.accessToken)
         );
-        
         creatingDomainConfigurationDE(thisdata,response.data.soap_instance_url)
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
@@ -36,8 +35,9 @@
       });
   }
   function creatingDomainConfigurationDE()
+  console.log("Create:",creatingDomainConfigurationDE)
    {
-     console.log("Create:",creatingDomainConfigurationDE)
+
         axios({
           method: "POST",
           url: "/creatingDomainConfigurationDE",
