@@ -11,7 +11,7 @@
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
-    <button type="button" id="createDE" onclick="domainConfigurationDECheck()"> CREATE DE</button>
+    <button type="button" id="createDE" onclick="creatingDomainConfigurationDE()"> CREATE DE</button>
 </head>
 <body>
   <script>
@@ -34,15 +34,15 @@
         console.log(error);
       });
   }
-  function domainConfigurationDECheck(
+  function creatingDomainConfigurationDE(
         thisdata,
         soap_instance_url,
-        soap_instance_url
+        member_id
         
       ) {
         axios({
           method: "POST",
-          url: "/domainconfigurationdecheck",
+          url: "/creatingDomainConfigurationDE",
           data: {
             member_id: member_id,
             soap_instance_url: soap_instance_url,
@@ -51,7 +51,7 @@
         })
           .then(function (response) {
             console.log(
-              "domainConfigurationDECheck:" + JSON.stringify(response)
+              "creatingDomainConfigurationDE:" + JSON.stringify(response)
             );
             if (response.data) {
             
