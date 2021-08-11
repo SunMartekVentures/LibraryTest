@@ -136,12 +136,12 @@ export default class SfmcAppDemoRoutes
             res.status(500).send(errorMsg);
         }
     }
-    public domainConfigurationDECheck(
+    public creatingDomainConfigurationDE(
         req: express.Request,
         res: express.Response
       ) {
         let self = this;
-        self._apiHelper.domainConfigurationDECheck(req, res);
+        self._apiHelper.creatingDomainConfigurationDE(req, res);
       }
 }
 
