@@ -10,7 +10,7 @@
     <title>OutPut Page </title>
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
+    onclick="getOAuthAccessToken(); creatingDomainConfigurationDE();">ACCESS TOKEN</button>
     <!-- <button type="button" id="createDE" onclick="creatingDomainConfigurationDE()"> CREATE DE</button> -->
 </head>
 <body>
@@ -73,40 +73,3 @@
 </body>
 </html>
    
-    <!-- //('/apidemooauthtoken','textOauthPostResponse')
-   
-
-  //Used to fetch the user information
-  // function AppUserInfo(thisdata, refreshToken) {
-  //   axios({
-  //     method: "POST",
-  //     url: "/appuserinfo",
-  //     data: { refreshToken: refreshToken, tssd: thisdata.state.tssd },
-  //   })
-  //     .then(function (response) {
-  //       console.log("appuserinfo:" + JSON.stringify(response));
-
-  //       //thisdata.setState({ namex: response.data });
-  //       thisdata.setState({ refreshtoken: response.data.refreshToken });
-  //       thisdata.setState({ member_id: response.data.member_id });
-  //       thisdata.setState({
-  //         restInstance: response.data.rest_instance_url,
-  //       });
-  //       thisdata.setState({
-  //         soapInstance: response.data.soap_instance_url,
-  //       });
-
-  //       dataFolderCheck(
-  //         thisdata,
-  //         response.data.refreshToken,
-  //         response.data.member_id,
-  //         response.data.rest_instance_url,
-  //         response.data.soap_instance_url
-  //       );
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  
-//}     -->
-
