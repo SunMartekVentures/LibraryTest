@@ -65,7 +65,6 @@ export default class SfmcApiHelper
                 Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
                 console.log("response:",response.data);
                 
-
                 resolve(
                 {
                     oauthAccessToken: accessToken,
