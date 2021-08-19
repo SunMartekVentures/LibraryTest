@@ -22,10 +22,7 @@
     }
     )
       .then(function (response) {
-        console.log(
-          "accesstokengeneration:" +
-            JSON.stringify(response.data.accessToken)
-        );
+        console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
         creatingDomainConfigurationDE()
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
