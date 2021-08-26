@@ -37,8 +37,8 @@ export default class SfmcApiHelper
         let postBody = {
 
             "grant_type": "client_credentials",
-            "client_id": process.env.CLIENTID,
-            "client_secret": process.env.CLIENTSECRET
+            "client_id": process.env.clientid,
+            "client_secret": process.env.clientsecret
         };
 
         return self.getOAuthTokenHelper(headers, postBody);
