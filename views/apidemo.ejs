@@ -24,6 +24,7 @@
     }
     )
       .then(function (response) {
+        alert("acces token generated");
         console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
