@@ -11,6 +11,8 @@
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
+    <button type="button" id="createDE" class="btn btn-primary"
+    onclick="creatingDomainConfigurationDE()">createDE</button>
     <!-- <button type="button" id="createDE" onclick="creatingDomainConfigurationDE()"> CREATE DE</button> -->
 </head>
 <body>
@@ -23,7 +25,7 @@
     )
       .then(function (response) {
         console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
-        creatingDomainConfigurationDE()
+        
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
       })
