@@ -11,6 +11,11 @@
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
+    <body>
+      <h3>Enter some values in the text to enable the button!</h3>
+      <input type="text" id="txt" onkeyup="manage(this)" />
+      <input type="submit" id="btSubmit" disabled />
+  </body>
     <br><br>
     
 </head>
@@ -24,6 +29,14 @@
     )
       .then(function (response) {
         alert("acces token generated");
+        
+        var bt = document.getElementById('btSubmit');
+        
+            bt.disabled = false;
+        
+    }    
+
+
         console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
