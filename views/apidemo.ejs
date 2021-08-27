@@ -12,7 +12,7 @@
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
     <body>
-      <h3>Enter some values in the text to enable the button!</h3>
+      <h3>Enter Dataextension Name</h3>
       <input type="text" id="txt" onclick="creatingDomainConfigurationDE()" />
       <input type="submit" id="btSubmit" disabled />
   </body>
@@ -46,6 +46,8 @@
   function creatingDomainConfigurationDE()
  
  {
+   var dataextensionname = document.getElementById("txt").value;
+   alert(" generated");
    console.log("methodcalled");
        axios({
          method: "POST",
