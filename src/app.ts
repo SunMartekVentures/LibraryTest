@@ -70,6 +70,10 @@ const appDemoRoutes = new SfmcAppDemoRoutes();
 app.get('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
+  app.post("/createsparkpostintegrationfolder", function (req, res) {
+    appDemoRoutes.createSparkpostIntegrationFolder(req, res);
+  });
+
   app.post("/creatingDomainConfigurationDE", function (req, res) {
     appDemoRoutes.creatingDomainConfigurationDE(req, res);
   });
