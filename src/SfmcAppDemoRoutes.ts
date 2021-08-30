@@ -137,12 +137,21 @@ export default class SfmcAppDemoRoutes
             res.status(500).send(errorMsg);
         }
     }
+    public createSparkpostIntegrationFolder(
+        req: express.Request,
+        res: express.Response
+      ) {
+        let self = this;
+        self._apiHelper.createSparkpostIntegrationFolder(req, res);
+      }
+    
+     
     public creatingDomainConfigurationDE(
         req: express.Request,
         res: express.Response,
         
       ) {
-        console.log('dename'+req.body.dataextensionname);
+        
         let self = this;
        self._apiHelper.creatingDomainConfigurationDE(req, res);
       }
