@@ -143,8 +143,8 @@ export default class SfmcAppDemoRoutes
         
       ) {
         console.log('dename'+req.body.dataextensionname);
-        
-       // self._apiHelper.creatingDomainConfigurationDE(req, res);
+        let self = this;
+       self._apiHelper.creatingDomainConfigurationDE(req, res);
       }
 }
 
