@@ -11,7 +11,8 @@
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
-    <p id="demo"></p>
+    <p id="demo" style="color:green;"></p>
+    <p id="demo1" style="color:red;"></p>
     <body>
       <h3>Enter Dataextension Name</h3>
       <input type="text" id="txt" onclick="creatingDomainConfigurationDE()" />
@@ -41,7 +42,7 @@
         //AppUserInfo(thisdata, response.data.refreshToken);
       })
          .catch(function (error) {
-          document.getElementById("demo").innerHTML = "token not generated";
+          document.getElementById("demo1").innerHTML = "token not generated";
         console.log(error);
       });
   }
