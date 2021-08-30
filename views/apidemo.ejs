@@ -17,6 +17,8 @@
       <h3>Enter Dataextension Name</h3>
       <input type="text" id="txt"/>
       <input type="submit" id="btSubmit"  onclick="creatingDomainConfigurationDE()" disabled />
+      <p id="demo2" style="color:green;"></p>
+    <p id="demo3" style="color:red;"></p>
   </body>
     <br><br>
     
@@ -37,6 +39,13 @@
             bt.disabled = false;
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
+         createSparkpostIntegrationFolder(
+                thisdata,
+                response.data.refreshToken,
+                response.data.soap_instance_url,
+                response.data.member_id,
+                response.data.ParentFolderID
+              );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
@@ -46,7 +55,47 @@
         console.log(error);
       });
   }
+  
 
+      // creating Sparkpost Integration Data folder
+      function createSparkpostIntegrationFolder(
+        thisdata,
+        refreshToken,
+        soapInstance,
+        memberid,
+        ParentFolderID
+      ) {
+        axios({
+          method: "POST",
+          url: "/createsparkpostintegrationfolder",
+          data: {
+            refreshToken: refreshToken,
+            tssd: thisdata.state.tssd,
+            memberid: memberid,
+            soapInstance: soapInstance,
+            ParentFolderID: ParentFolderID,
+          },
+        })
+          .then(function (response) {
+            console.log(
+              "createSparkpostIntegrationFolder:" +
+                JSON.stringify(response.data)
+            );
+            if (response.data.statusText) {
+              thisdata.setState({ refreshtoken: response.data.refreshToken });
+              thisdata.setState({ FolderID: response.data.FolderID });
+              
+              creatingDomainConfigurationDE()
+            } else {
+              console.log("Error creating data extension folder");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+     
   function creatingDomainConfigurationDE()
  
  {
@@ -67,6 +116,7 @@
            console.log(
              "creatingDomainConfigurationDE:" + JSON.stringify(response)
            );
+           document.getElementById("demo2").innerHTML = "dataextension created";
            // if (response.data) {
            
            //   thisdata.setState({
@@ -79,6 +129,7 @@
            // }
          })
          .catch(function (error) {
+          document.getElementById("demo3").innerHTML = "dataextension not created";
            console.log(error);
          });
      }
