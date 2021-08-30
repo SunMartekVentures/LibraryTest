@@ -15,8 +15,8 @@
     <p id="demo1" style="color:red;"></p>
     <body>
       <h3>Enter Dataextension Name</h3>
-      <input type="text" id="txt" onclick="creatingDomainConfigurationDE()" disabled />
-      <!-- <input type="submit" id="btSubmit" disabled /> -->
+      <input type="text" id="txt" onclick="creatingDomainConfigurationDE()" />
+      <input type="submit" id="btSubmit" disabled />
   </body>
     <br><br>
     
@@ -50,7 +50,7 @@
   function creatingDomainConfigurationDE()
  
  {
-   var dataextensionname = document.getElementById("txt").value;
+   var dataextensionname = document.getElementById("btSubmit").value;
    console.log("dataextensionname=",dataextensionname);
   //  console.log("methodcalled");
        axios({
