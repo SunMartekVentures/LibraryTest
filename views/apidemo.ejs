@@ -15,7 +15,7 @@
     <p id="demo1" style="color:red;"></p>
     <body>
       <h3>Enter Dataextension Name</h3>
-      <input type="text" id="txt" onclick="creatingDomainConfigurationDE()" />
+      <input type="text" id="txt" onclick="creatingDomainConfigurationDE()"  />
       <input type="submit" id="btSubmit" disabled />
   </body>
     <br><br>
@@ -33,7 +33,7 @@
         document.getElementById("demo").innerHTML = "token generated";
         
         var bt = document.getElementById('btSubmit');
-        console.log("bt=",bt);
+
             bt.disabled = false;
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
