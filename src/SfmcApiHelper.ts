@@ -171,6 +171,7 @@ export default class SfmcApiHelper
     res: express.Response,
   
     ) {
+      console.log('dename'+req.body.dataextensionname);
     //this.getRefreshTokenHelper(this._accessToken, res);
     console.log("creatingDomainConfigurationDE:" + this.member_id);
     console.log("creatingDomainConfigurationDE:" + this.soap_instance_url);
