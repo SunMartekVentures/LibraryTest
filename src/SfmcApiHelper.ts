@@ -37,7 +37,7 @@ export default class SfmcApiHelper
         let postBody = {
 
             "grant_type": "client_credentials",
-            "client_id": process.env.clientids,
+            "client_id": process.env.clientid,
             "client_secret": process.env.clientsecret
         };
 
