@@ -179,16 +179,7 @@ export default class SfmcApiHelper
       //this.getRefreshTokenHelper(this._accessToken, res);
       // this.getRefreshTokenHelper(req.body.refreshToken, req.body.tssd, false, res)
         
-          Utils.logInfo(
-            "datafolderTokenbody:" + JSON.stringify(response.refreshToken)
-          );
-          Utils.logInfo(
-            "datafolderAuthTokenbody:" + JSON.stringify(response.oauthToken)
-          );
-          refreshTokenbody = response.refreshToken;
-          Utils.logInfo(
-            "datafolderTokenbody1:" + JSON.stringify(refreshTokenbody)
-          );
+     
           let createFolderData =
             '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
             "<soapenv:Header>" +
