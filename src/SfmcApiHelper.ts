@@ -4,7 +4,7 @@ import axios from 'axios';
 import express = require("express");
 import { request } from 'http';
 import Utils from './Utils';
-// import xml2js = require("xml2js");
+import xml2js = require("xml2js");
 
 export default class SfmcApiHelper
 {
@@ -88,84 +88,6 @@ export default class SfmcApiHelper
         });
     }
 
-
-    // public domainConfigurationDECheck(
-    //   req: express.Request,
-    //   res: express.Response,
-      
-    // ) {
-    //   //this.getRefreshTokenHelper(this._accessToken, res);
-    //   console.log("domainConfigurationDECheck:" + this.member_id);
-    //   console.log("domainConfigurationDECheck:" + this.soap_instance_url );
-    //  // Utils.logInfo("domainConfigurationDECheck1:" + req.body.FolderID);
-    //  //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
-    //  //this.getRefreshTokenHelper(this._accessToken, res);
-    //   // this.getOAuthAccessToken(this.client_id, this.client_secret )
-    //   //   .then((response)=>{
-    //   //     Utils.logInfo(
-    //   //       "domainConfigurationDECheck:" + JSON.stringify(response.oauthAccessToken)
-    //   //     )
-    //   //   }
-    //   // );
-         
-    //       let soapMessage =
-    //         '<?xml version="1.0" encoding="UTF-8"?>' +
-    //         '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
-    //         "    <s:Header>" +
-    //         '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
-    //         '        <a:To s:mustUnderstand="1">' +
-    //         this.soap_instance_url +
-    //         "Service.asmx" +
-    //         "</a:To>" +
-    //         '        <fueloauth xmlns="http://exacttarget.com">' +
-    //         this.oauthAccessToken +
-    //         "</fueloauth>" +
-    //         "    </s:Header>" +
-    //         '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-    //         '        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-    //         "            <RetrieveRequest>" +
-    //         "                <ObjectType>DataExtension</ObjectType>" +
-    //         "                <Properties>ObjectID</Properties>" +
-    //         "                <Properties>CustomerKey</Properties>" +
-    //         "                <Properties>Name</Properties>" +
-    //         '                <Filter xsi:type="SimpleFilterPart">' +
-    //         "                    <Property>Name</Property>" +
-    //         "                    <SimpleOperator>equals</SimpleOperator>" +
-    //         "                    <Value>Domain Configuration-" +
-    //         this.member_id +
-    //         "</Value>" +
-    //         "                </Filter>" +
-    //         "            </RetrieveRequest>" +
-    //         "        </RetrieveRequestMsg>" +
-    //         "    </s:Body>" +
-    //         "</s:Envelope>";
-  
-    //       return new Promise<any>((resolve, reject) => {
-    //         let headers = {
-    //           "Content-Type": "text/xml",
-    //           SOAPAction: "Retrieve",
-    //         };
-  
-    //         axios({
-    //           method: "post",
-    //           url: "" + req.body.soapInstance + "Service.asmx" + "",
-    //           data: soapMessage,
-    //           headers: { "Content-Type": "text/xml" },
-    //         })
-    //           .then((response: any) => {
-    //               response.data
-                  
-
-    //           },
-    //           )},
-    //        ) }
-               
-        
-    //     // .catch((error: any,res:any) => {
-    //     //   res
-    //     //     .status(500)
-    //     //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-    //     // });
     public createSparkpostIntegrationFolder(
       req: express.Request,
       res: express.Response
@@ -182,41 +104,42 @@ export default class SfmcApiHelper
         
         let oauthToken = req.body.accessToken;
           let createFolderData =
-            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
-            "<soapenv:Header>" +
-            "<fueloauth>" +
-            oauthToken +
-            "</fueloauth>" +
-            "</soapenv:Header>" +
-            "<soapenv:Body>" +
-            '<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-            "<Options/>" +
-            '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
-            '<ns1:ModifiedDate xsi:nil="true"/>' +
-            '<ns1:ObjectID xsi:nil="true"/>' +
-            "<ns1:CustomerKey>Sparkpost Integrations - " +
-            this.member_id +
-            "</ns1:CustomerKey>" +
-            "<ns1:ParentFolder>" +
-            '<ns1:ModifiedDate xsi:nil="true"/>' +
-            "<ns1:ID>DATAFOLDER" +
-            "</ns1:ID>" +
-            '<ns1:ObjectID xsi:nil="true"/>' +
-            "</ns1:ParentFolder>" +
-            "<ns1:Name>Sparkpost Integrations - " +
-            this.member_id  +
-            "</ns1:Name>" +
-            "<ns1:Description>Sparkpost Integrations - " +
-            this.member_id  +
-            " Folder</ns1:Description>" +
-            "<ns1:ContentType>dataextension</ns1:ContentType>" +
-            "<ns1:IsActive>true</ns1:IsActive>" +
-            "<ns1:IsEditable>true</ns1:IsEditable>" +
-            "<ns1:AllowChildren>true</ns1:AllowChildren>" +
-            "</ns1:Objects>" +
-            "</CreateRequest>" +
-            "</soapenv:Body>" +
-            "</soapenv:Envelope>";
+          '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+          "<soapenv:Header>" +
+          "<fueloauth>" +
+          oauthToken +
+          "</fueloauth>" +
+          "</soapenv:Header>" +
+          "<soapenv:Body>" +
+          '<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+          "<Options/>" +
+          '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "<ns1:CustomerKey>Sparkpost Integrations - " +
+           this.member_id +
+          "</ns1:CustomerKey>" +
+          "<ns1:ParentFolder>" +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          "<ns1:ID> Data Extensions" +
+          
+          "</ns1:ID>" +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "</ns1:ParentFolder>" +
+          "<ns1:Name>mcapp44 - " +
+           this.member_id +
+          "</ns1:Name>" +
+          "<ns1:Description>mcapp44 - " +
+           this.member_id +
+          " Folder</ns1:Description>" +
+          "<ns1:ContentType>dataextension</ns1:ContentType>" +
+          "<ns1:IsActive>true</ns1:IsActive>" +
+          "<ns1:IsEditable>true</ns1:IsEditable>" +
+          "<ns1:AllowChildren>true</ns1:AllowChildren>" +
+          "</ns1:Objects>" +
+          "</CreateRequest>" +
+          "</soapenv:Body>" +
+          "</soapenv:Envelope>";
   
           return new Promise<any>((resolve, reject) => {
             let headers = {
