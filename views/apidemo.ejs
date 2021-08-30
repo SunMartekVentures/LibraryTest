@@ -33,7 +33,7 @@
         document.getElementById("demo").innerHTML = "token generated";
         
         var bt = document.getElementById('btSubmit');
-
+        console.log("bt=",bt);
             bt.disabled = false;
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
@@ -50,7 +50,7 @@
   function creatingDomainConfigurationDE()
  
  {
-   var dataextensionname = document.getElementById("btSubmit").value;
+   var dataextensionname = document.getElementById("txt").value;
    console.log("dataextensionname=",dataextensionname);
   //  console.log("methodcalled");
        axios({
