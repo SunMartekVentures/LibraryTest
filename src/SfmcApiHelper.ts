@@ -292,11 +292,11 @@ export default class SfmcApiHelper
               });
           });
         
-        .catch((error: any) => {
-          res
-            .status(500)
-            .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-        });
+        // .catch((error: any) => {
+        //   res
+        //     .status(500)
+        //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+        // });
     } 
     public creatingDomainConfigurationDE(
     req: express.Request,
