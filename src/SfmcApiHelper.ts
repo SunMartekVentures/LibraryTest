@@ -198,8 +198,7 @@ export default class SfmcApiHelper
             "</ns1:CustomerKey>" +
             "<ns1:ParentFolder>" +
             '<ns1:ModifiedDate xsi:nil="true"/>' +
-            "<ns1:ID>" +
-            req.body.ParentFolderID +
+            "<ns1:ID>DATAFOLDER" +
             "</ns1:ID>" +
             '<ns1:ObjectID xsi:nil="true"/>' +
             "</ns1:ParentFolder>" +
