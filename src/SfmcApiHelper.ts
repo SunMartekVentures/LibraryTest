@@ -199,10 +199,10 @@ export default class SfmcApiHelper
           '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
           '            <Objects xsi:type="DataExtension">' +
           
-          "                <CustomerKey>Pashtek Developer-" +
+          "                <CustomerKey>Pashtek Developer1-" +
           this.member_id +
           "</CustomerKey>" +
-          "                <Name>Pashtek Developer-" +
+          "                <Name>Pashtek Developer1-" +
           this.member_id +
           "</Name>" +
           "                <Fields>" +
