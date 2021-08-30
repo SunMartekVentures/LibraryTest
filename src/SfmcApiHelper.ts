@@ -12,7 +12,7 @@ export default class SfmcApiHelper
   private client_id="";
   private client_secret="";
   // private _accessToken = "";
-  private oauthAccessToken=""; 
+  // private oauthAccessToken=""; 
   private member_id = "514018007";
   private soap_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/";
   private _deExternalKey = "DF18Demo";
@@ -71,7 +71,8 @@ export default class SfmcApiHelper
                     oauthAccessTokenExpiry: tokenExpiry,
                     JSON:jsonData,
                     status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data)),
+                   
                 });
             })
             .catch((error: any) => {
@@ -179,12 +180,12 @@ export default class SfmcApiHelper
       //this.getRefreshTokenHelper(this._accessToken, res);
       // this.getRefreshTokenHelper(req.body.refreshToken, req.body.tssd, false, res)
         
-     
+        let oauthToken = req.body.accessToken;
           let createFolderData =
             '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
             "<soapenv:Header>" +
             "<fueloauth>" +
-             +
+            oauthToken +
             "</fueloauth>" +
             "</soapenv:Header>" +
             "<soapenv:Body>" +
@@ -194,7 +195,7 @@ export default class SfmcApiHelper
             '<ns1:ModifiedDate xsi:nil="true"/>' +
             '<ns1:ObjectID xsi:nil="true"/>' +
             "<ns1:CustomerKey>Sparkpost Integrations - " +
-            req.body.memberid +
+            this.member_id +
             "</ns1:CustomerKey>" +
             "<ns1:ParentFolder>" +
             '<ns1:ModifiedDate xsi:nil="true"/>' +
@@ -203,10 +204,10 @@ export default class SfmcApiHelper
             '<ns1:ObjectID xsi:nil="true"/>' +
             "</ns1:ParentFolder>" +
             "<ns1:Name>Sparkpost Integrations - " +
-            req.body.memberid +
+            this.member_id  +
             "</ns1:Name>" +
             "<ns1:Description>Sparkpost Integrations - " +
-            req.body.memberid +
+            this.member_id  +
             " Folder</ns1:Description>" +
             "<ns1:ContentType>dataextension</ns1:ContentType>" +
             "<ns1:IsActive>true</ns1:IsActive>" +
@@ -291,11 +292,7 @@ export default class SfmcApiHelper
               });
           });
         
-        // .catch((error: any) => {
-        //   res
-        //     .status(500)
-        //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-        // });
+        
     } 
     public creatingDomainConfigurationDE(
     req: express.Request,
