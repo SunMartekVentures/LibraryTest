@@ -150,7 +150,7 @@ export default class SfmcApiHelper
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
               method: "post",
-              url: "" + req.body.soapInstance + "Service.asmx" + "",
+              url: "" + this.soap_instance_url + "Service.asmx" + "",
               data: createFolderData,
               headers: headers,
             })
