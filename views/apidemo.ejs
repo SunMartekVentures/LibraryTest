@@ -59,7 +59,7 @@
           method: "POST",
           url: "/createsparkpostintegrationfolder",
           data: {
-              accessToken:response.data.oauthAccessToken
+              accessToken:response.oauthAccessToken
           }
         })
           .then(function (response) {
