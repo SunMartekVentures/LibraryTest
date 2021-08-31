@@ -78,12 +78,12 @@ app.get('/appdemoauthtoken', function(req, res) {
     appDemoRoutes.creatingDomainConfigurationDE(req, res);
   });
 
-// Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
-app.post('/login', function(req, res) {
-  appDemoRoutes.login(req, res); });
+// // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
+// app.post('/login', function(req, res) {
+//   appDemoRoutes.login(req, res); });
 
-// Marketing Cloud POSTs to the '/logout' endpoint when a user logs out
-app.post('/logout', function(req, res) {
-  appDemoRoutes.logout(req, res); });
+// // Marketing Cloud POSTs to the '/logout' endpoint when a user logs out
+// app.post('/logout', function(req, res) {
+//   appDemoRoutes.logout(req, res); });
 
 module.exports = app;

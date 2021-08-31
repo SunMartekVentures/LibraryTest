@@ -97,12 +97,12 @@ export default class SfmcAppDemoRoutes
     {   
     
         let self = this;
-        let sessionId = req.session.id;
+        // let sessionId = req.session.id;
         let clientId = process.env.clientid;
         let clientSecret = process.env.clientsecret;
 
-        req.session.oauthAccessToken = "";
-        req.session.oauthAccessTokenExpiry = "";
+        //req.session.oauthAccessToken = "";
+        //req.session.oauthAccessTokenExpiry = "";
 
         Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
 
@@ -113,8 +113,8 @@ export default class SfmcAppDemoRoutes
     
                 self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
                 .then((result) => {
-                    req.session.oauthAccessToken = result.oauthAccessToken;
-                    req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
+                  //  req.session.oauthAccessToken = result.oauthAccessToken;
+                    //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
                     res.status(result.status).send(result.statusText);
                 })
                 .catch((err) => {
