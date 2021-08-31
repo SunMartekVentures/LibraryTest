@@ -53,6 +53,7 @@
 
       // creating Sparkpost Integration Data folder
       function createSparkpostIntegrationFolder(response) {
+        console.log("sparkpost integretion",response.data.oauthAccessToken);
         axios({
           method: "POST",
           url: "/createsparkpostintegrationfolder",
@@ -65,14 +66,14 @@
               "createSparkpostIntegrationFolder:" +
                 JSON.stringify(response.data)
             );
-            if (response.data.statusText) {
-              thisdata.setState({ refreshtoken: response.data.refreshToken });
-              thisdata.setState({ FolderID: response.data.FolderID });
+            // if (response.data.statusText) {
+            //   thisdata.setState({ refreshtoken: response.data.refreshToken });
+            //   thisdata.setState({ FolderID: response.data.FolderID });
               
-              creatingDomainConfigurationDE(req,res)
-            } else {
-              console.log("Error creating data extension folder");
-            }
+            //   // creatingDomainConfigurationDE(req,res)
+            // } else {
+            //   console.log("Error creating data extension folder");
+            // }
           })
           .catch(function (error) {
             console.log(error);
