@@ -255,7 +255,7 @@ export default class SfmcApiHelper
         '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
         '            <Objects xsi:type="DataExtension">' +
         "                <CategoryID>24086" +
-         +
+        
         "</CategoryID>" +
         "                <CustomerKey>Domain Configuration-" +
         this.member_id +
