@@ -4,7 +4,7 @@ import axios from 'axios';
 import express = require("express");
 import { request } from 'http';
 import Utils from './Utils';
-// import xml2js = require("xml2js");
+import xml2js = require("xml2js");
 
 export default class SfmcApiHelper
 {
