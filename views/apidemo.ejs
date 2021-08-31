@@ -40,7 +40,7 @@
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data) );
          createSparkpostIntegrationFolder(
-                
+                thisdata,
                 response.data.accessToken
               );
         
@@ -56,8 +56,7 @@
 
       // creating Sparkpost Integration Data folder
       function createSparkpostIntegrationFolder(
-       
-        
+        thisdata,
         accessToken
         
       ) {
@@ -67,7 +66,6 @@
           data: {
             refreshToken: refreshToken,
             
-            soapInstance: soapInstance,
             accessToken:accessToken,
           },
         })
