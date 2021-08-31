@@ -239,68 +239,132 @@ export default class SfmcApiHelper
                );
         
         let DCmsg =
-          '<?xml version="1.0" encoding="UTF-8"?>' +
-          '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
-          "    <s:Header>" +
-          '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
-          '        <a:To s:mustUnderstand="1">' +
-          this.soap_instance_url +
-          "Service.asmx" +
-          "</a:To>" +
-          '        <fueloauth xmlns="http://exacttarget.com">' +
-          response.oauthAccessToken +
-          "</fueloauth>" +
-          "    </s:Header>" +
-          '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-          '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-          '            <Objects xsi:type="DataExtension">' +
-          
-          "                <CustomerKey>"+
-          req.body.dataextensionname +
-          this.member_id +
-          "</CustomerKey>" +
-          "                <Name>"+
-          req.body.dataextensionname+
-          this.member_id +
-          "</Name>" +
-          "                <Fields>" +
-          "                    <Field>" +
-          "                        <CustomerKey>Name</CustomerKey>" +
-          "                        <Name>Name</Name>" +
-          "                        <FieldType>Text</FieldType>" +
-          "                        <MaxLength>50</MaxLength>" +
-          "                        <IsRequired>true</IsRequired>" +
-          "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-          "                    </Field>" +
-          "                    <Field>" +
-          "                        <CustomerKey>Phone NUmber</CustomerKey>" +
-          "                        <Name>Phone Number</Name>" +          
-          "                         <DataType>Number</DataType>"+
-          "                        <FieldType>Phone</FieldType>" +
-          "                        <IsRequired>true</IsRequired>" +
-          "                        <IsPrimaryKey>true</IsPrimaryKey>" +
-          "                    </Field>" +
-          "                    <Field>" +
-          "                        <CustomerKey>Position</CustomerKey>" +
-          "                        <Name>Position</Name>" +
-          "                        <FieldType>Text</FieldType>" +
-          "                        <MaxLength>20</MaxLength>" +
-          "                        <IsRequired>true</IsRequired>" +
-          "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-          "                    </Field>" +
-          "                    <Field>" +
-          "                        <CustomerKey>Years of Experience</CustomerKey>" +
-          "                        <Name>Years of Experience</Name>" +
-          "                         <DataType>Number</DataType>"+
-          "                        <FieldType>Number</FieldType>" +
-          "                        <IsRequired>true</IsRequired>" +
-          "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-          "                    </Field>" +       
-          "                </Fields>" +
-          "            </Objects>" +
-          "        </CreateRequest>" +
-          "    </s:Body>" +
-          "</s:Envelope>";
+        '<?xml version="1.0" encoding="UTF-8"?>' +
+        '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+        "    <s:Header>" +
+        '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
+        '        <a:To s:mustUnderstand="1">' +
+        this.soap_instance_url +
+        "Service.asmx" +
+        "</a:To>" +
+        '        <fueloauth xmlns="http://exacttarget.com">' +
+        response.oauthToken +
+        "</fueloauth>" +
+        "    </s:Header>" +
+        '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+        '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+        '            <Objects xsi:type="DataExtension">' +
+        "                <CategoryID>24086" +
+         +
+        "</CategoryID>" +
+        "                <CustomerKey>Domain Configuration-" +
+        this.member_id +
+        "</CustomerKey>" +
+        "                <Name>Domain Configuration-" +
+        this.member_id +
+        "</Name>" +
+        "                <Fields>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Domain ID</CustomerKey>" +
+        "                        <Name>Domain ID</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>50</MaxLength>" +
+        "                        <IsRequired>true</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Domain Name</CustomerKey>" +
+        "                        <Name>Domain Name</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>100</MaxLength>" +
+        "                        <IsRequired>true</IsRequired>" +
+        "                        <IsPrimaryKey>true</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Inbox Threshold</CustomerKey>" +
+        "                        <Name>Inbox Threshold</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>100</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Engagement Threshold</CustomerKey>" +
+        "                        <Name>Engagement Threshold</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>100</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>SPF Threshold</CustomerKey>" +
+        "                        <Name>SPF Threshold</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>100</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>DKIM Threshold</CustomerKey>" +
+        "                        <Name>DKIM Threshold</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>100</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Campaign Min</CustomerKey>" +
+        "                        <Name>Campaign Min</Name>" +
+        "                        <FieldType>Decimal</FieldType>" +
+        "                        <Precision>18</Precision>" +
+        "                          <Scale>0</Scale>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Intelliseed Lists</CustomerKey>" +
+        "                        <Name>Intelliseed Lists</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>250</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Threshold Recipe</CustomerKey>" +
+        "                        <Name>Threshold Recipe</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>250</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Rules Recipe</CustomerKey>" +
+        "                        <Name>Rules Recipe</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <MaxLength>250</MaxLength>" +
+        "                        <IsRequired>false</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Created or Modified by</CustomerKey>" +
+        "                        <Name>Created or Modified by</Name>" +
+        "                        <FieldType>Text</FieldType>" +
+        "                        <IsRequired>true</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                    <Field>" +
+        "                        <CustomerKey>Created or Modified date</CustomerKey>" +
+        "                        <Name>Created or Modified date</Name>" +
+        "                        <FieldType>Date</FieldType>" +
+        "						  <DefaultValue>getdate()</DefaultValue>" +
+        "                        <IsRequired>true</IsRequired>" +
+        "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+        "                    </Field>" +
+        "                </Fields>" +
+        "            </Objects>" +
+        "        </CreateRequest>" +
+        "    </s:Body>" +
+        "</s:Envelope>";
 
         return new Promise<any>((resolve, reject) => {
           let headers = {
