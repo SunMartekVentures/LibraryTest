@@ -100,44 +100,46 @@ export default class SfmcApiHelper
       let refreshTokenbody = "";
       //this.getRefreshTokenHelper(this._accessToken, res);
       // this.getRefreshTokenHelper(req.body.refreshToken, req.body.tssd, false, res)
-        
+       
+      let oauthToken=req.body.accessToken;
      
           let createFolderData =
-            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
-            "<soapenv:Header>" +
-            "<fueloauth>" +
-             +
-            "</fueloauth>" +
-            "</soapenv:Header>" +
-            "<soapenv:Body>" +
-            '<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
-            "<Options/>" +
-            '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
-            '<ns1:ModifiedDate xsi:nil="true"/>' +
-            '<ns1:ObjectID xsi:nil="true"/>' +
-            "<ns1:CustomerKey>Sparkpost Integrations - " +
-            req.body.memberid +
-            "</ns1:CustomerKey>" +
-            "<ns1:ParentFolder>" +
-            '<ns1:ModifiedDate xsi:nil="true"/>' +
-            "<ns1:ID>DATAFOLDER" +
-            "</ns1:ID>" +
-            '<ns1:ObjectID xsi:nil="true"/>' +
-            "</ns1:ParentFolder>" +
-            "<ns1:Name>Sparkpost Integrations - " +
-            req.body.memberid +
-            "</ns1:Name>" +
-            "<ns1:Description>Sparkpost Integrations - " +
-            req.body.memberid +
-            " Folder</ns1:Description>" +
-            "<ns1:ContentType>dataextension</ns1:ContentType>" +
-            "<ns1:IsActive>true</ns1:IsActive>" +
-            "<ns1:IsEditable>true</ns1:IsEditable>" +
-            "<ns1:AllowChildren>true</ns1:AllowChildren>" +
-            "</ns1:Objects>" +
-            "</CreateRequest>" +
-            "</soapenv:Body>" +
-            "</soapenv:Envelope>";
+          '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+          "<soapenv:Header>" +
+          "<fueloauth>" +
+           oauthToken +
+          "</fueloauth>" +
+          "</soapenv:Header>" +
+          "<soapenv:Body>" +
+          '<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+          "<Options/>" +
+          '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "<ns1:CustomerKey>mcapp44 - " +
+           this.member_id +
+          "</ns1:CustomerKey>" +
+          "<ns1:ParentFolder>" +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          "<ns1:ID> Data Extensions" +
+           
+          "</ns1:ID>" +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "</ns1:ParentFolder>" +
+          "<ns1:Name>mcapp44 - " +
+          this.member_id +
+          "</ns1:Name>" +
+          "<ns1:Description>Smcapp44- " +
+          this.member_id +
+          " Folder</ns1:Description>" +
+          "<ns1:ContentType>dataextension</ns1:ContentType>" +
+          "<ns1:IsActive>true</ns1:IsActive>" +
+          "<ns1:IsEditable>true</ns1:IsEditable>" +
+          "<ns1:AllowChildren>true</ns1:AllowChildren>" +
+          "</ns1:Objects>" +
+          "</CreateRequest>" +
+          "</soapenv:Body>" +
+          "</soapenv:Envelope>";
   
           return new Promise<any>((resolve, reject) => {
             let headers = {
