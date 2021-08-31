@@ -43,7 +43,7 @@ export default class SfmcAppDemoRoutes
             // Decode JWT
             let encodedJWT = JSON.stringify(req.body.jwt);
             let jwtSecret = process.env.JWTSECRET;
-            Utils.logInfo("Decoding JWT with secret from DF18DEMO_JWTSECRET = " + jwtSecret);
+            Utils.logInfo("Decoding JWT with secret from DF20DEMO_JWTSECRET = " + jwtSecret);
             req.session.decodedJWT = jwt.decode(encodedJWT, jwtSecret, true); // pass 'noVerify = true' for this demo
             
             // Store JWT in the current session for redirect URL to pick up for display
