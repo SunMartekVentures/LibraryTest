@@ -32,8 +32,8 @@
     }
     )
       .then(function (response) {
-        document.getElementById("demo").innerHTML = "token generated";
         
+        document.getElementById("demo").innerHTML = "token generated";
         var bt = document.getElementById('btSubmit');
 
             bt.disabled = false;
@@ -44,7 +44,7 @@
                 response.data.refreshToken,
                 response.data.soap_instance_url,
                 response.data.member_id,
-                response.data.accessToken
+                // response.data.accessToken
               );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
@@ -55,7 +55,7 @@
         console.log(error);
       });
   }
-  
+
 
       // creating Sparkpost Integration Data folder
       function createSparkpostIntegrationFolder(
