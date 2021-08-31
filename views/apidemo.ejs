@@ -39,7 +39,10 @@
             bt.disabled = false;
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data) );
-         createSparkpostIntegrationFolder(req,res);
+         createSparkpostIntegrationFolder(
+                
+                response.data.accessToken
+              );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
         //AppUserInfo(thisdata, response.data.refreshToken);
@@ -52,12 +55,18 @@
 
 
       // creating Sparkpost Integration Data folder
-      function createSparkpostIntegrationFolder(req,res) {
+      function createSparkpostIntegrationFolder(
+       
+        
+        accessToken
+        
+      ) {
         axios({
           method: "POST",
           url: "/createsparkpostintegrationfolder",
           data: {
             refreshToken: refreshToken,
+            
             soapInstance: soapInstance,
             accessToken:accessToken,
           },
