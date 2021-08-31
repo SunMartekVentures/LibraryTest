@@ -38,13 +38,12 @@
 
             bt.disabled = false;
         
-         console.log("accesstokengeneration:" +JSON.stringify(response.data.accessToken) );
+         console.log("accesstokengeneration:" +JSON.stringify(response.data) );
          createSparkpostIntegrationFolder(
-                thisdata,
                 response.data.refreshToken,
                 response.data.soap_instance_url,
                 response.data.member_id,
-                // response.data.accessToken
+                response.data.accessToken
               );
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
@@ -59,11 +58,11 @@
 
       // creating Sparkpost Integration Data folder
       function createSparkpostIntegrationFolder(
-        thisdata,
+       
         refreshToken,
         soapInstance,
         memberid,
-        // accessToken
+        accessToken
         
       ) {
         axios({
@@ -74,7 +73,7 @@
             tssd: thisdata.state.tssd,
             memberid: memberid,
             soapInstance: soapInstance,
-            // accessToken:accessToken,
+            accessToken:accessToken,
           },
         })
           .then(function (response) {
