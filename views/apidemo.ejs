@@ -53,7 +53,7 @@
 
       // creating Sparkpost Integration Data folder
       function createSparkpostIntegrationFolder(response) {
-        console.log("sparkpost integretion",response.data.oauthAccessToken);
+        console.log("sparkpost integretion",response);
         axios({
           method: "POST",
           url: "/createsparkpostintegrationfolder",
