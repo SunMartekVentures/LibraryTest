@@ -257,10 +257,10 @@ export default class SfmcApiHelper
         "                <CategoryID>24086" +
         
         "</CategoryID>" +
-        "                <CustomerKey>Domain Configuration-" +
+        "                <CustomerKey>" +req.body.dataextensionname+
         this.member_id +
         "</CustomerKey>" +
-        "                <Name>Domain Configuration-" +
+        "                <Name>" +req.body.dataextensionname+
         this.member_id +
         "</Name>" +
         "                <Fields>" +
