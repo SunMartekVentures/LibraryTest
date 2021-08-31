@@ -104,7 +104,7 @@ export default class SfmcAppDemoRoutes
         //req.session.oauthAccessToken = "";
         //req.session.oauthAccessTokenExpiry = "";
 
-        Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
+        // Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
 
         if (clientId && clientSecret)
         
