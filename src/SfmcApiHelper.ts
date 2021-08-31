@@ -248,7 +248,7 @@ export default class SfmcApiHelper
         "Service.asmx" +
         "</a:To>" +
         '        <fueloauth xmlns="http://exacttarget.com">' +
-        response.oauthToken +
+        response.oauthAccessToken +
         "</fueloauth>" +
         "    </s:Header>" +
         '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
