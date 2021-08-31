@@ -39,6 +39,7 @@
             bt.disabled = false;
         
          console.log("accesstokengeneration:" +JSON.stringify(response.data) );
+         console.log("sparkpost ",response)
          createSparkpostIntegrationFolder(response.data);
         
         // thisdata.setState({ refreshtoken: response.data.refreshToken });
