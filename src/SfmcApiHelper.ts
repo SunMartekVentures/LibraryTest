@@ -380,8 +380,7 @@ export default class SfmcApiHelper
             .then((response: any) => {
              
                console.log("response-",response);
-               res.send(response);
-              
+               return res.send(response);
             })
             .catch((error: any) => {
               // error
