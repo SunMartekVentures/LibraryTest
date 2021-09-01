@@ -379,7 +379,7 @@ export default class SfmcApiHelper
           })
             .then((response: any) => {
              
-               console.log("response",response);
+               console.log("response-",response);
                
               
             })
