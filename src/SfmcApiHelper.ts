@@ -194,6 +194,7 @@ export default class SfmcApiHelper
                       res.status(200).send(sendresponse);
                     }
                   }
+                  
                 );
               })
               .catch((error: any) => {
@@ -380,8 +381,13 @@ export default class SfmcApiHelper
             .then((response: any) => {
              console.log("hello");
              
+             
                console.log("response-",response);
                 res.status(200).send(response);
+                resolve(
+                  {
+                      statusText: response + "\n" + Utils.prettyPrintJson(JSON.stringify(response))
+                  });
             })
             .catch((error: any) => {
               // error
