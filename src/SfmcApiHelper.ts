@@ -378,9 +378,10 @@ export default class SfmcApiHelper
             headers: headers,
           })
             .then((response: any) => {
+             console.log("hello");
              
-               console.log("response-",response);
-                res.send(response);
+              //  console.log("response-",response);
+                // res.send(response);
             })
             .catch((error: any) => {
               // error
