@@ -143,7 +143,7 @@ export default class SfmcAppDemoRoutes
       ) {
         let self = this;
         self._apiHelper.createSparkpostIntegrationFolder(req, res)
-        res.status(200).send()
+      
       }
     
      
