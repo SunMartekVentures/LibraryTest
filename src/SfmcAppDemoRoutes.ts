@@ -162,7 +162,9 @@ export default class SfmcAppDemoRoutes
         console.log("Response for Creating DE :::"+ JSON.stringify(response));
 
        })
-       
+       .catch((error: any) => {
+         console.log("error in creating domainconfiguration");
+         
       
       }
 }
