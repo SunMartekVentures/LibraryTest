@@ -160,6 +160,7 @@ export default class SfmcAppDemoRoutes
        .then((response:any)=>{
 
         console.log("Response for Creating DE :::"+ JSON.stringify(response));
+        res.status(200).send(response.statusText);
 
        })
        .catch((error: any) => {
