@@ -226,8 +226,9 @@ export default class SfmcApiHelper
     req: express.Request,
     res: express.Response,
   
-    ) {
-      console.log('dename'+req.body.dataextensionname);
+    ) : Promise<any> {
+      return new Promise<any>((resolve, reject) => {
+        console.log('dename'+req.body.dataextensionname);
     //this.getRefreshTokenHelper(this._accessToken, res);
     console.log("creatingDomainConfigurationDE:" + this.member_id);
     console.log("creatingDomainConfigurationDE:" + this.soap_instance_url);
@@ -367,7 +368,7 @@ export default class SfmcApiHelper
         "    </s:Body>" +
         "</s:Envelope>";
 
-        return new Promise<any>((resolve, reject) => {
+        
           let headers = {
             "Content-Type": "text/xml",
           };
@@ -383,8 +384,8 @@ export default class SfmcApiHelper
              
              
                console.log("response-",response);
-                res.status(200).send(response);
-                resolve(
+                
+                 resolve(
                   {
                       statusText: response + "\n" + Utils.prettyPrintJson(JSON.stringify(response))
                   });
@@ -406,14 +407,18 @@ export default class SfmcApiHelper
 
               reject(errorMsg);
             });
-        });
+        
       })
       .catch((error: any) => {
         res
           .status(500)
           .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
       });
-  }
+  });
+    
+  
+      
 
+}
 }    
 

@@ -1,5 +1,6 @@
 'use strict';
 
+import { json } from "body-parser";
 import express = require("express");
 import jwt = require('jwt-simple');
 import SfmcApiHelper from './SfmcApiHelper';
@@ -155,7 +156,12 @@ export default class SfmcAppDemoRoutes
         console.log("mkmkmkmkmk");
         
         let self = this;
-       self._apiHelper.creatingDomainConfigurationDE(req, res);
+       self._apiHelper.creatingDomainConfigurationDE(req, res)
+       .then((response:any)=>{
+
+        console.log("Response for Creating DE :::"+ JSON.stringify(response));
+
+       })
        
       
       }
