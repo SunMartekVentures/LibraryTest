@@ -387,7 +387,7 @@ export default class SfmcApiHelper
                 
                  resolve(
                   {
-                      statusText: response + "\n" + Utils.prettyPrintJson(JSON.stringify(response))
+                      statusText: response.data
                   });
             })
             .catch((error: any) => {
