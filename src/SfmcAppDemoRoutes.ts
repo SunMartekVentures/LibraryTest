@@ -163,11 +163,11 @@ export default class SfmcAppDemoRoutes
 
        })
        .catch((error: any) => {
-         console.log("error in creating domainconfiguration");
+         console.log("error in creating domainconfiguration")
          
       
-      }
+      })
 }
 
-}
 
+}
