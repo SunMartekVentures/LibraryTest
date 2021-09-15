@@ -32,7 +32,7 @@
           url: "/appdemoauthtoken",
           data: {
             authorization_code: thisdata.state.authorization_code,
-            tssd: thisdata.state.tssd,
+            // tssd: thisdata.state.tssd,
           },
         })
           .then(function (response) {
@@ -40,8 +40,7 @@
               "accesstokengeneration:" +
                 JSON.stringify(response.data.refreshToken)
             );
-            thisdata.setState({ refreshtoken: response.data.refreshToken });
-            AppUserInfo(thisdata, response.data.refreshToken);
+
           })
           .catch(function (error) {
             console.log(error);
