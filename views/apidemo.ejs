@@ -26,9 +26,9 @@
 </head>
 <body>
   <script>
-   
+    const authorization_code = url.searchParams.get("code");
       function accessTokenGeneration(req,res) {
-        let authorization_code=req.authorization_code;
+        let authorization_code=this.authorization_code;
         axios({
           method: "POST",
           url: "/appdemoauthtoken",
