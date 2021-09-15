@@ -127,27 +127,27 @@ export default class SfmcAppDemoRoutes
     }
   
      
-    public creatingDomainConfigurationDE(
-        req: express.Request,
-        res: express.Response,
+//     public creatingDomainConfigurationDE(
+//         req: express.Request,
+//         res: express.Response,
         
-      ) {
-        console.log("mkmkmkmkmk");
+//       ) {
+//         console.log("mkmkmkmkmk");
         
-        let self = this;
-       self._apiHelper.creatingDomainConfigurationDE(req, res)
-       .then((response:any)=>{
+//         let self = this;
+//        self._apiHelper.creatingDomainConfigurationDE(req, res)
+//        .then((response:any)=>{
 
-        console.log("Response for Creating DE :::"+ JSON.stringify(response));
-        res.status(200).send(response.statusText);
+//         console.log("Response for Creating DE :::"+ JSON.stringify(response));
+//         res.status(200).send(response.statusText);
 
-       })
-       .catch((error: any) => {
-         console.log("error in creating domainconfiguration")
+//        })
+//        .catch((error: any) => {
+//          console.log("error in creating domainconfiguration")
          
       
-      })
-}
+//       })
+// }
 
 
 }
