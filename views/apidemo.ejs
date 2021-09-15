@@ -28,7 +28,7 @@
   <script>
    
       function accessTokenGeneration(req,res) {
-        let authorization_code=req.query.code;
+        let authorization_code=req.authorization_code;
         axios({
           method: "POST",
           url: "/appdemoauthtoken",
