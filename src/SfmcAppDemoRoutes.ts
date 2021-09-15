@@ -101,8 +101,8 @@ export default class SfmcAppDemoRoutes
       let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
       let session = req.session;
   
-      req.session.oauthAccessToken = "";
-      req.session.oauthAccessTokenExpiry = "";
+      // req.session.oauthAccessToken = "";
+      // req.session.oauthAccessTokenExpiry = "";
   
       if (clientId && clientSecret) {
         // set the desired timeout in options
