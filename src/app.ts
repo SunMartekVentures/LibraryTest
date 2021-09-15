@@ -77,6 +77,7 @@ app.get('/appdemoauthtoken', function(req, res) {
   app.post("/creatingDomainConfigurationDE", function (req, res) {
     appDemoRoutes.creatingDomainConfigurationDE(req, res);
   });
+  
 
 // // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
 // app.post('/login', function(req, res) {

@@ -94,59 +94,38 @@ export default class SfmcAppDemoRoutes
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
      * 
      */
-    public getOAuthAccessToken(req: express.Request, res: express.Response)
-    {   
-    
-        let self = this;
-        // let sessionId = req.session.id;
-        let clientId = process.env.clientid;
-        let clientSecret = process.env.clientsecret;
-
-        //req.session.oauthAccessToken = "";
-        //req.session.oauthAccessTokenExpiry = "";
-
-        // Utils.logInfo("getOAuthAccessToken route entered. SessionId = " + sessionId);
-
-        if (clientId && clientSecret)
-        
-            {
-                // Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
-    
-                self._apiHelper.getOAuthAccessToken(clientId, clientSecret)
-                .then((result) => {
-                  //  req.session.oauthAccessToken = result.oauthAccessToken;
-                    //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-                    res.status(result.status).send(result);
-                })
-                .catch((err) => {
-                    res.status(500).send(err);
-                });
-            }
-            // else
-            // {
-            //     // error
-            //     let errorMsg = "refreshToken *not* found in session.\nCheck the '/login' URL specified in your\nMarketing Cloud App configuration."; 
-            //     Utils.logError(errorMsg);
-            //     res.status(500).send(errorMsg);
-            // }
-        
-        else
-        {
-            // error
-            let errorMsg = "ClientID or ClientSecret *not* found in environment variables."; 
-            Utils.logError(errorMsg);
-            res.status(500).send(errorMsg);
-        }
-    }
-    public createSparkpostIntegrationFolder(
-        req: express.Request,
-        res: express.Response
-      ) {
-        let self = this;
-        self._apiHelper.createSparkpostIntegrationFolder(req, res)
-      
+     public getOAuthAccessToken(req: express.Request, res: express.Response) {
+      let self = this;
+      let sessionId = req.session.id;
+      let clientId = process.env.DF18DEMO_CLIENTID;
+      let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+      let session = req.session;
+  
+      req.session.oauthAccessToken = "";
+      req.session.oauthAccessTokenExpiry = "";
+  
+      if (clientId && clientSecret) {
+        // set the desired timeout in options
+  
+        self._apiHelper
+          .getOAuthAccessToken(clientId, clientSecret, req, res)
+          .then((result) => {
+            // req.session.oauthAccessToken = result.oauthAccessToken;
+            //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
+            res.status(result.status).send(result.statusText);
+            req.setTimeout(0, () => {});
+          })
+          .catch((err) => {
+            res.status(500).send(err);
+          });
+      } else {
+        // error
+        let errorMsg =
+          "ClientID or ClientSecret *not* found in environment variables.";
+        res.status(500).send(errorMsg);
       }
-    
+    }
+  
      
     public creatingDomainConfigurationDE(
         req: express.Request,

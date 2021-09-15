@@ -10,7 +10,7 @@
     <title>OutPut Page </title>
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="getOAuthAccessToken()">ACCESS TOKEN</button>
+    onclick="accessTokenGeneration(req,res)">ACCESS TOKEN</button>
     <p id="demo" style="color:green;"></p>
     <p id="demo1" style="color:red;"></p>
     <body>
@@ -26,31 +26,28 @@
 </head>
 <body>
   <script>
-    function getOAuthAccessToken() {
-    axios({
-      method: "GET",
-      url: "/appdemoauthtoken",        
-    }
-    )
-      .then(function (response) {
-        
-        document.getElementById("demo").innerHTML = "token generated";
-        var bt = document.getElementById('btSubmit');
+      function accessTokenGeneration(req,res) {
+        axios({
+          method: "POST",
+          url: "/appdemoauthtoken",
+          data: {
+            authorization_code: thisdata.state.authorization_code,
+            tssd: thisdata.state.tssd,
+          },
+        })
+          .then(function (response) {
+            console.log(
+              "accesstokengeneration:" +
+                JSON.stringify(response.data.refreshToken)
+            );
+            thisdata.setState({ refreshtoken: response.data.refreshToken });
+            AppUserInfo(thisdata, response.data.refreshToken);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
 
-            bt.disabled = false;
-        
-         console.log("accesstokengeneration:" +JSON.stringify(response.data) );
-         console.log("sparkpost ",response)
-         createSparkpostIntegrationFolder(response.data);
-        
-        // thisdata.setState({ refreshtoken: response.data.refreshToken });
-        //AppUserInfo(thisdata, response.data.refreshToken);
-      })
-         .catch(function (error) {
-          document.getElementById("demo1").innerHTML = "token not generated";
-        console.log(error);
-      });
-  }
 
 
       // creating Sparkpost Integration Data folder
