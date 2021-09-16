@@ -81,6 +81,8 @@ const appDemoRoutes = new SfmcAppDemoRoutes();
     
 // Routes: called when this demo app runs as a Marketing Cloud app in an IFRAME in the Marketing Cloud web UI
 app.get('/appdemoauthtoken', function(req, res) {
+  console.log("getOAuthAccessToken called");
+  
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
   // app.post("/createsparkpostintegrationfolder", function (req, res) {
