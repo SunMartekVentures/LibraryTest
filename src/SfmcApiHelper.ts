@@ -85,6 +85,8 @@ export default class SfmcApiHelper
   ): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       console.log("author" + JSON.stringify(tssd));
+      console.log("headers",headers);
+      
       let sfmcAuthServiceApiUrl =
         "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
       // this.isAccessToken = true;
