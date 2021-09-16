@@ -31,7 +31,7 @@
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
     // const tssd = urlParams.get('tssd');
-    let tssd ="https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/";
+    const tssd ="https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/";
 
     console.log("tssd=",tssd);
       function accessTokenGeneration(req,res) {
@@ -41,7 +41,7 @@
           url: "/appdemoauthtoken",
           data: {
             authorization_code:authorization_code,
-            tssd: tssd,
+            tssd: tssd
           },
         })
           .then(function (response) {
