@@ -30,6 +30,8 @@
     const urlParams = new URLSearchParams(queryString);
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
+    const tssd = urlParams.get('tssd');
+    console.log("tssd=",tssd);
       function accessTokenGeneration(req,res) {
         
         axios({
@@ -37,7 +39,7 @@
           url: "/appdemoauthtoken",
           data: {
             authorization_code:authorization_code,
-            // tssd: thisdata.state.tssd,
+            tssd: tssd,
           },
         })
           .then(function (response) {
