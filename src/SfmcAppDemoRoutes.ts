@@ -99,8 +99,10 @@ export default class SfmcAppDemoRoutes
       let sessionId = req.session.id;
       let clientId = process.env.DF18DEMO_CLIENTID;
       let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+      let code = req.body.authorization_code;
+
       let session = req.session;
-      console.log("clientId",clientId,"clientSecret",clientSecret);
+      console.log("clientId",clientId,"clientSecret",clientSecret,"code",code);
       
       // req.session.oauthAccessToken = "";
       // req.session.oauthAccessTokenExpiry = "";
