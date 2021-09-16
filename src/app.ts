@@ -61,7 +61,7 @@ app.get("/", function (req, res) {
       authorization_code: req.query.code,
       tssd: req.query.tssd ? req.query.tssd : process.env.BASE_URL,
     });
-    console.log("authorization_code=",req.query.code,"tssd=",req.query.tssd);
+    console.log("authorization_code=",req.query.code,"tssd=",process.env.BASE_URL);
     
   }
 });
