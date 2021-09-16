@@ -67,7 +67,7 @@ app.get("/", function (req, res) {
 });
 
 
-//  app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
+ app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
 
 //const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
@@ -100,4 +100,4 @@ app.get('/appdemoauthtoken', function(req, res) {
 // app.post('/logout', function(req, res) {
 //   appDemoRoutes.logout(req, res); });
 
-// module.exports = app;
+module.exports = app;
