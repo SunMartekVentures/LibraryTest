@@ -84,7 +84,7 @@ export default class SfmcApiHelper
     tssd: string
   ): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      console.log("author" + JSON.stringify(tssd));
+      console.log("author" + JSON.stringify(postBody));
       console.log("headers",headers);
       
       let sfmcAuthServiceApiUrl =
