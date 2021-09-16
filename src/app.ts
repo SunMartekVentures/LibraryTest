@@ -100,4 +100,4 @@ app.get('/appdemoauthtoken', function(req, res) {
 // app.post('/logout', function(req, res) {
 //   appDemoRoutes.logout(req, res); });
 
-module.exports = app;
+// module.exports = app;
