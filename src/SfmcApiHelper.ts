@@ -88,7 +88,7 @@ export default class SfmcApiHelper
       console.log("headers",headers);
       
       let sfmcAuthServiceApiUrl =
-        "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
+        "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
       // this.isAccessToken = true;
       console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
       axios
