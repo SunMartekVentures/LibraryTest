@@ -30,7 +30,9 @@
     const urlParams = new URLSearchParams(queryString);
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
-    const tssd = urlParams.get('tssd');
+    // const tssd = urlParams.get('tssd');
+    const tssd =  mcj6cy1x9m-t5h5tz0bfsyqj38ky;
+
     console.log("tssd=",tssd);
       function accessTokenGeneration(req,res) {
         
@@ -39,7 +41,7 @@
           url: "/appdemoauthtoken",
           data: {
             authorization_code:authorization_code,
-            tssd: mcj6cy1x9m-t5h5tz0bfsyqj38ky,
+            tssd: tssd,
           },
         })
           .then(function (response) {
