@@ -28,7 +28,7 @@
   <script>
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const authorization_code = urlParams.get('authorization_code');
+    const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
       function accessTokenGeneration(req,res) {
         
