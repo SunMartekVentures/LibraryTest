@@ -145,6 +145,8 @@ export default class SfmcApiHelper
           // this._accessToken = response.data.refresh_token;
           //this._oauthToken = response.data.access_token;
           Utils.logInfo("Auth Token:" + response.data.access_token);
+          console.log("response.data.refresh_token",response.data.refresh_token,"response.data.access_token",response.data.access_token);
+          
           const customResponse = {
             refreshToken: response.data.refresh_token,
             oauthToken: response.data.access_token,
@@ -193,6 +195,7 @@ public appUserInfo(req: any, res: any) {
         "Content-Type": "application/json",
         Authorization: "Bearer " + response.oauthToken,
       };
+
       axios
         .get(userInfoUrl, { headers: headers })
         .then((response: any) => {
