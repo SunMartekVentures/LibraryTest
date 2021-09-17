@@ -48,7 +48,7 @@
         })
           .then(function (response) {
             console.log("response>>>>",response);
-            console.log("response.data.refresh_token",response.data.refresh_token,"response.data.access_token",response.data.access_token);
+            console.log("response.data.refresh_token",response.data.oauthToken);
 
             console.log(
                 "accesstokengeneration:" +
@@ -137,7 +137,7 @@
         axios({
           method: "POST",
           url: "/appuserinfo",
-          data: { refreshToken: refreshToken, tssd:tssd },
+          data: { refreshToken:response.data.oauthToken, tssd:tssd },
         })
           .then(function (response) {
             console.log("appuserinfo:" + JSON.stringify(response));
