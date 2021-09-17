@@ -55,7 +55,8 @@
                 JSON.stringify(response.data.refreshToken)
 
             );
-             AppUserInfo()
+            let apptoken = response.data.oauthToken;
+             AppUserInfo( apptoken)
           })
           .catch(function (error) {
             console.log(error);
@@ -133,12 +134,12 @@
 //          });
 //      }
       
-     function AppUserInfo( ) {
-       console.log("response.data.oauthToken",response.data.oauthToken);
+     function AppUserInfo( apptoken ) {
+       console.log("response.data.oauthToken", apptoken);
         axios({
           method: "POST",
           url: "/appuserinfo",
-          data: { refreshToken:response.data.oauthToken, tssd:tssd },
+          data: { refreshToken: apptoken, tssd:tssd },
         })
           // .then(function (response) {
           //   console.log("appuserinfo:" + JSON.stringify(response));
