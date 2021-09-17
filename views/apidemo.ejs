@@ -134,6 +134,7 @@
 //      }
       
      function AppUserInfo( refreshToken,response) {
+       console.log("response.data.oauthToken",response.data.oauthToken,"response.data.oauthToken",response);
         axios({
           method: "POST",
           url: "/appuserinfo",
