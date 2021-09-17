@@ -145,7 +145,7 @@
         })
           .then(function (response) {
             console.log("response>>>>",response);
-            var test = response.username;
+            var test = response.data.username;
               document.getElementById("myInput").value = test;
           })
           //   console.log("appuserinfo:" + JSON.stringify(response));
