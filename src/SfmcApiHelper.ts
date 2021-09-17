@@ -145,7 +145,7 @@ export default class SfmcApiHelper
           // this._accessToken = response.data.refresh_token;
           //this._oauthToken = response.data.access_token;
           Utils.logInfo("Auth Token:" + response.data.access_token);
-          console.log("response.data.refresh_token",response.data.refresh_token,"response.data.access_token",response.data.access_token);
+          console.log("response.data.refresh_token",response.data.refresh_token,"response.data.access_token",);
           
           const customResponse = {
             refreshToken: response.data.refresh_token,
@@ -177,23 +177,24 @@ public appUserInfo(req: any, res: any) {
   let self = this;
   console.log("req.body.tssd:" + req.body.tssd);
   console.log("req.body.trefreshToken:" + req.body.refreshToken);
+  let bodytoken = req.body.refreshToken;
   let userInfoUrl =
     "https://" + req.body.tssd + ".auth.marketingcloudapis.com/v2/userinfo";
   let access_token: string;
 
   self
-    .getRefreshTokenHelper(req.body.refreshToken, req.body.tssd, false, res)
-    .then((response) => {
-      Utils.logInfo(
-        "refreshTokenbody:" + JSON.stringify(response.refreshToken)
-      );
-      Utils.logInfo("AuthTokenbody:" + JSON.stringify(response.oauthToken));
-      access_token = response.oauthToken;
-      const refreshTokenbody = response.refreshToken;
-      Utils.logInfo("refreshTokenbody1:" + JSON.stringify(refreshTokenbody));
+    // .getRefreshTokenHelper(req.body.refreshToken, req.body.tssd, false, res)
+    // .then((response) => {
+      // Utils.logInfo(
+      //   "refreshTokenbody:" + JSON.stringify(response.refreshToken)
+      // );
+      // Utils.logInfo("AuthTokenbody:" + JSON.stringify(response.oauthToken));
+      access_token = bodytoken;
+      // const refreshTokenbody = response.refreshToken;
+      // Utils.logInfo("refreshTokenbody1:" + JSON.stringify(refreshTokenbody));
       let headers = {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + response.oauthToken,
+        Authorization: "Bearer "+ JSON.stringify(bodytoken),
       };
 
       axios
@@ -203,7 +204,7 @@ public appUserInfo(req: any, res: any) {
             member_id: response.data.organization.member_id,
             soap_instance_url: response.data.rest.soap_instance_url,
             rest_instance_url: response.data.rest.rest_instance_url,
-            refreshToken: refreshTokenbody,
+            // refreshToken: refreshTokenbody,
           };
 
           //Set the member_id into the session
@@ -230,12 +231,12 @@ public appUserInfo(req: any, res: any) {
             .status(500)
             .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
         });
-    })
-    .catch((error: any) => {
-      res
-        .status(500)
-        .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-    });
+    // })
+    // .catch((error: any) => {
+    //   res
+    //     .status(500)
+    //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+    // });
 }
 };
     // public createSparkpostIntegrationFolder(
