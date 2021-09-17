@@ -124,7 +124,8 @@ export default class SfmcApiHelper
     return new Promise<any>((resolve, reject) => {
       console.log("tssdrefresh:" + tssd);
       console.log("returnResponse:" + returnResponse);
-
+      console.log("refreshToken=>",refreshToken);
+      
       let sfmcAuthServiceApiUrl =
         "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
       let headers = {
