@@ -55,7 +55,7 @@
                 JSON.stringify(response.data.refreshToken)
 
             );
-             AppUserInfo(thisdata, refreshToken,response)
+             AppUserInfo(refreshToken,response)
           })
           .catch(function (error) {
             console.log(error);
@@ -133,24 +133,24 @@
 //          });
 //      }
       
-     function AppUserInfo(thisdata, refreshToken,response) {
+     function AppUserInfo( refreshToken,response) {
         axios({
           method: "POST",
           url: "/appuserinfo",
           data: { refreshToken:response.data.oauthToken, tssd:tssd },
         })
-          .then(function (response) {
-            console.log("appuserinfo:" + JSON.stringify(response));
+          // .then(function (response) {
+          //   console.log("appuserinfo:" + JSON.stringify(response));
 
-            thisdata.setState({ namex: response.data });
-            thisdata.setState({ refreshtoken: response.data.refreshToken });
-            thisdata.setState({ member_id: response.data.member_id });
-            thisdata.setState({
-              restInstance: response.data.rest_instance_url,
-            });
-            thisdata.setState({
-              soapInstance: response.data.soap_instance_url,
-            });
+          //   thisdata.setState({ namex: response.data });
+          //   thisdata.setState({ refreshtoken: response.data.refreshToken });
+          //   thisdata.setState({ member_id: response.data.member_id });
+          //   thisdata.setState({
+          //     restInstance: response.data.rest_instance_url,
+          //   });
+          //   thisdata.setState({
+          //     soapInstance: response.data.soap_instance_url,
+          //   });
 
           //   dataFolderCheck(
           //     thisdata,
@@ -159,7 +159,7 @@
           //     response.data.rest_instance_url,
           //     response.data.soap_instance_url
           //   );
-          })
+          // })
           .catch(function (error) {
             console.log(error);
           });
