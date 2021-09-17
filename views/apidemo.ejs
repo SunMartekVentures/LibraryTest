@@ -13,6 +13,7 @@
     onclick="accessTokenGeneration()">ACCESS TOKEN</button>
     <p id="demo" style="color:green;"></p>
     <p id="demo1" style="color:red;"></p>
+    <input id="myInput" type="text" value="Swag" />
     <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
     onclick="AppUserInfo()">AppUserInfo</button> -->
     <!-- <body>
@@ -140,8 +141,11 @@
           method: "POST",
           url: "/appuserinfo",
           data: { refreshToken: apptoken, tssd:tssd },
+
         })
-          // .then(function (response) {
+          .then(function (response) {
+            var test = response.username;
+              document.getElementById("myInput").value = test;
           //   console.log("appuserinfo:" + JSON.stringify(response));
 
           //   thisdata.setState({ namex: response.data });

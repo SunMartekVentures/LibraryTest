@@ -208,12 +208,13 @@ public appUserInfo(req: any, res: any) {
             soap_instance_url: response.data.rest.soap_instance_url,
             rest_instance_url: response.data.rest.rest_instance_url,
             refreshToken: req.body.refreshToken,
+            username:response.data.user.name
           };
 
           //Set the member_id into the session
           console.log("Setting active sfmc mid into session:" + getUserInfoResponse.member_id);
           req.session.sfmcMemberId = getUserInfoResponse.member_id;
-          console.log("UserInf>>>>>>",getUserInfoResponse.member_id);
+          console.log("UserInfo>>>>>>",getUserInfoResponse.member_id);
           
           //this.CheckAutomationStudio(access_token, req.body.refreshToken, req.body.tssd, getUserInfoResponse.member_id);
           res.status(200).send(getUserInfoResponse);
