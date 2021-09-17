@@ -201,6 +201,8 @@ public appUserInfo(req: any, res: any) {
       axios
         .get(userInfoUrl, { headers: headers })
         .then((response: any) => {
+          console.log("userinfo>>>>",response);
+          
           const getUserInfoResponse = {
             member_id: response.data.organization.member_id,
             soap_instance_url: response.data.rest.soap_instance_url,
