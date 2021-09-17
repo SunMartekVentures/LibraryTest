@@ -55,7 +55,7 @@
                 JSON.stringify(response.data.refreshToken)
 
             );
-             AppUserInfo()
+             AppUserInfo(thisdata, refreshToken,response)
           })
           .catch(function (error) {
             console.log(error);
@@ -133,7 +133,7 @@
 //          });
 //      }
       
-     function AppUserInfo(thisdata, refreshToken) {
+     function AppUserInfo(thisdata, refreshToken,response) {
         axios({
           method: "POST",
           url: "/appuserinfo",
