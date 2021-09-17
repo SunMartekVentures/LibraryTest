@@ -128,6 +128,10 @@ export default class SfmcAppDemoRoutes
         res.status(500).send(errorMsg);
       }
     }
+    public appUserInfo(req: express.Request, res: express.Response) {
+      let self = this;
+      self._apiHelper.appUserInfo(req, res);
+    }
   
      
 //     public creatingDomainConfigurationDE(
