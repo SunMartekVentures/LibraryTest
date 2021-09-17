@@ -13,8 +13,8 @@
     onclick="accessTokenGeneration()">ACCESS TOKEN</button>
     <p id="demo" style="color:green;"></p>
     <p id="demo1" style="color:red;"></p>
-    <button type="button" id="AppUserInfo" class="btn btn-primary"
-    onclick="AppUserInfo()">AppUserInfo</button>
+    <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
+    onclick="AppUserInfo()">AppUserInfo</button> -->
     <!-- <body>
       <h3>Enter Dataextension Name</h3>
       <input type="text" id="txt"/>
@@ -50,8 +50,9 @@
             console.log(
               "accesstokengeneration:" +
                 JSON.stringify(response.data.refreshToken)
+
             );
-            
+             AppUserInfo()
           })
           .catch(function (error) {
             console.log(error);
@@ -133,7 +134,7 @@
         axios({
           method: "POST",
           url: "/appuserinfo",
-          data: { refreshToken: refreshToken, tssd: thisdata.state.tssd },
+          data: { refreshToken: refreshToken, tssd:tssd },
         })
           .then(function (response) {
             console.log("appuserinfo:" + JSON.stringify(response));
