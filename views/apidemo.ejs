@@ -47,8 +47,10 @@
           },
         })
           .then(function (response) {
+            console.log("response.data.refresh_token",response.data.refresh_token,"response.data.access_token",response.data.access_token);
+
             console.log(
-              "accesstokengeneration:" +
+                "accesstokengeneration:" +
                 JSON.stringify(response.data.refreshToken)
 
             );
