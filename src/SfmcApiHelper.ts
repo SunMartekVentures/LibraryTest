@@ -88,7 +88,7 @@ export default class SfmcApiHelper
 
     let accessTokenMethod = new mcAccessToken.default();
 
-    accessTokenMethod.getOAuthAccessToken()
+    accessTokenMethod.getOAuthAccessToken(postBody.client_id, postBody.client_secret, postBody.grant_type, postBody.code, postBody.redirect_uri)
     .then((res : any)=>{
       console.log("AccessToken Method from library" , res.data);
     }).catch((err : any)=>{
