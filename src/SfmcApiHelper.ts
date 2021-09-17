@@ -201,7 +201,7 @@ public appUserInfo(req: any, res: any) {
       axios
         .get(userInfoUrl, { headers: headers })
         .then((response: any) => {
-          console.log("userinfo>>>>",response);
+          console.log("userinfo>>>>",response.data.user.name);
           
           const getUserInfoResponse = {
             member_id: response.data.organization.member_id,
