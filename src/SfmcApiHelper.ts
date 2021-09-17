@@ -5,6 +5,8 @@ import express = require("express");
 import { request } from 'http';
 import Utils from './Utils';
 import xml2js = require("xml2js");
+import mcAccessToken =  require("mc_generic_methods");
+import { access } from 'fs';
 
 export default class SfmcApiHelper
 {
@@ -83,6 +85,16 @@ export default class SfmcApiHelper
     res: any,
     tssd: string
   ): Promise<any> {
+
+    let accessTokenMethod = new mcAccessToken.default();
+
+    accessTokenMethod.getOAuthAccessToken()
+    .then((res : any)=>{
+      console.log("AccessToken Method from library" , res.data);
+    }).catch((err : any)=>{
+      console.error("error getting access token from library" + err);
+      
+    })
     return new Promise<any>((resolve, reject) => {
       console.log("author" + JSON.stringify(postBody));
       console.log("headers",headers);
