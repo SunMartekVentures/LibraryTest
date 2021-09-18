@@ -95,8 +95,8 @@ export default class SfmcApiHelper
         process.env.BASE_URL,
         postBody.client_id,
         postBody.client_secret)
-    .then((res : any)=>{
-      console.log("Refresh token Method from library" , res.data);
+    .then((response : any)=>{
+      console.log("Refresh token Method from library" , response.customResponse);
     }).catch((err : any)=>{
       console.error("error getting refresh token from library" + err);
       
