@@ -19,7 +19,7 @@ export default class SfmcApiHelper
   private soap_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/";
   private _deExternalKey = "DF20Demo";
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-
+  private refreshToken = "";
     /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -91,20 +91,23 @@ export default class SfmcApiHelper
     accessTokenMethod.getOAuthAccessToken(postBody.client_id, postBody.client_secret, postBody.grant_type, postBody.code, postBody.redirect_uri)
     .then((res : any)=>{
       console.log("AccessToken Method from library" , res.data);
-      accessTokenMethod.getRefreshToken(res.data.refresh_token, 
-        process.env.BASE_URL,
-        postBody.client_id,
-        postBody.client_secret)
-    .then((response : any)=>{
-      console.log("Refresh token Method from library" , response.customResponse);
-    }).catch((err : any)=>{
-      console.error("error getting refresh token from library" + err);
+      this.refreshToken = res.data.refresh_token;
       
-    })
     }).catch((err : any)=>{
       console.error("error getting access token from library" + err);
       
     })
+
+    accessTokenMethod.getRefreshToken(this.refreshToken, 
+      process.env.BASE_URL,
+      postBody.client_id,
+      postBody.client_secret)
+  .then((response : any)=>{
+    console.log("Refresh token Method from library" , response.customResponse);
+  }).catch((err : any)=>{
+    console.error("error getting refresh token from library" + err);
+    
+  })
 
     
     return new Promise<any>((resolve, reject) => {
