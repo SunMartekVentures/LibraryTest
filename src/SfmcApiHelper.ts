@@ -96,7 +96,7 @@ export default class SfmcApiHelper
       
     })
     return new Promise<any>((resolve, reject) => {
-      console.log("author" + JSON.stringify(postBody));
+      console.log("author" + JSON.stringify(postBody.code));
       console.log("headers",headers);
       
       let sfmcAuthServiceApiUrl =
