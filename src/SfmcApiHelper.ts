@@ -93,24 +93,26 @@ export default class SfmcApiHelper
       console.log("AccessToken Method from library" , res.data.refresh_token);
       this.refreshToken = res.data.refresh_token;
 
+      if(res.data.refresh_token){
+        console.log("Refresh token", this.refreshToken, "Refresh token from response", res.data.refresh_token);
+        
+        accessTokenMethod.getRefreshToken(this.refreshToken, 
+          process.env.BASE_URL,
+          postBody.client_id,
+          postBody.client_secret)
+      .then((response : any)=>{
+        console.log("Refresh token Method from library" , response.customResponse);
+      }).catch((err : any)=>{
+        console.error("error getting refresh token from library" + err);
+        
+      })
+      }
       
     }).catch((err : any)=>{
       console.error("error getting access token from library" + err);
       
     })
 
-    accessTokenMethod.getRefreshToken(this.refreshToken, 
-      process.env.BASE_URL,
-      postBody.client_id,
-      postBody.client_secret)
-  .then((response : any)=>{
-    console.log("Refresh token Method from library" , response.customResponse);
-  }).catch((err : any)=>{
-    console.error("error getting refresh token from library" + err);
-    
-  })
-
-    
     return new Promise<any>((resolve, reject) => {
       console.log("author" + JSON.stringify(postBody.code));
       console.log("headers",headers);
