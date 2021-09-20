@@ -90,7 +90,7 @@ export default class SfmcApiHelper
 
     accessTokenMethod.getOAuthAccessToken(postBody.client_id, postBody.client_secret, postBody.grant_type, postBody.code, postBody.redirect_uri)
     .then((res : any)=>{
-      console.log("AccessToken Method from library" , res.data);
+      console.log("AccessToken Method from library" , res);
       this.refreshToken = res.data.refresh_token;
       
     }).catch((err : any)=>{
