@@ -97,8 +97,8 @@ export default class SfmcAppDemoRoutes
      public getOAuthAccessToken(req: express.Request, res: express.Response) {
       let self = this;
       let sessionId = req.session.id;
-      let clientId = process.env.DF18DEMO_CLIENTID;
-      let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+      let clientId = process.env.CLIENTID;
+      let clientSecret = process.env.CLIENTSECRET;
       let code = req.body.authorization_code;
 
       let session = req.session;
