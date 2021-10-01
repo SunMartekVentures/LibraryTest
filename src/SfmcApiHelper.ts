@@ -5,7 +5,7 @@ import express = require("express");
 import { request } from 'http';
 import Utils from './Utils';
 import xml2js = require("xml2js");
-import mcAccessToken =  require("mc_generic_methods");
+import MC_Generic_Methods from "./Generic-method/src/";
 import { access } from 'fs';
 
 export default class SfmcApiHelper
@@ -14,6 +14,7 @@ export default class SfmcApiHelper
   private client_id="";
   private client_secret="";
   // private _accessToken = "";
+  private genericMethods = new MC_Generic_Methods();
   private oauthAccessToken=""; 
   private member_id = "514018007";
   private soap_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/";
@@ -79,44 +80,75 @@ export default class SfmcApiHelper
     return self.getOAuthTokenHelper(headers, postBody, res, tssd);
   }
 
-   public getOAuthTokenHelper(
+  public getOAuthTokenHelper(
     headers: any,
     postBody: any,
     res: any,
     tssd: string
   ): Promise<any> {
+    this.genericMethods
+      .getOAuthAccessToken(
+        postBody.client_id,
+        postBody.client_secret,
+        postBody.grant_type,
+        postBody.code,
+        postBody.redirect_uri
+      )
+      .then((res: any) => {
+        console.log("AccessToken Method from library", res.data.refresh_token);
+        this.refreshToken = res.data.refresh_token;
 
-    let accessTokenMethod = new mcAccessToken.default();
+        if (res.data.refresh_token) {
+          console.log(
+            "Refresh token",
+            this.refreshToken,
+            "Refresh token from response",
+            res.data.refresh_token
+          );
 
-    accessTokenMethod.getOAuthAccessToken(postBody.client_id, postBody.client_secret, postBody.grant_type, postBody.code, postBody.redirect_uri)
-    .then((res : any)=>{
-      console.log("AccessToken Method from library" , res.data.refresh_token);
-      this.refreshToken = res.data.refresh_token;
-
-      if(res.data.refresh_token){
-        console.log("Refresh token", this.refreshToken, "Refresh token from response", res.data.refresh_token);
-        
-        accessTokenMethod.getRefreshToken(this.refreshToken, 
-          process.env.BASE_URL,
-          postBody.client_id,
-          postBody.client_secret)
-      .then((response : any)=>{
-        console.log("Refresh token Method from library" , response);
-      }).catch((err : any)=>{
-        console.error("error getting refresh token from library" + err);
-        
+          this.genericMethods
+            .getRefreshToken(
+              this.refreshToken,
+              process.env.BASE_URL,
+              postBody.client_id,
+              postBody.client_secret
+            )
+            .then((response: any) => {
+              const paramData = {
+                senderProfileID: "76441b26-df1a-ec11-a30a-48df373429c9",
+                oauthToken: response.oauthToken,
+                soapInstance: this.soap_instance_url,
+              };
+              this.genericMethods
+                .getSenderDomain(paramData)
+                .then((response: any) => {
+                  console.log(
+                    "Sender Domain Response ::: " + JSON.stringify(response)
+                  );
+                })
+                .catch((err: any) => {
+                  console.error(
+                    "error getting Sender Domain from library" + err
+                  );
+                });
+              console.log(
+                "Refresh token Method from library",
+                response.refreshToken
+              );
+            })
+            .catch((err: any) => {
+              console.error("error getting refresh token from library" + err);
+            });
+        }
       })
-      }
-      
-    }).catch((err : any)=>{
-      console.error("error getting access token from library" + err);
-      
-    })
+      .catch((err: any) => {
+        console.error("error getting access token from library" + err);
+      });
 
     return new Promise<any>((resolve, reject) => {
       console.log("author" + JSON.stringify(postBody.code));
-      console.log("headers",headers);
-      
+      console.log("headers", headers);
+
       let sfmcAuthServiceApiUrl =
         "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
       // this.isAccessToken = true;
@@ -143,6 +175,7 @@ export default class SfmcApiHelper
         });
     });
   }
+  
 
   //Helper method to get refresh token
   public getRefreshTokenHelper(
