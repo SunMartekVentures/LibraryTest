@@ -161,11 +161,10 @@ export default class mcGenericMethods {
                     "RetrieveResponseMsg"
                   ][0]["Results"][0]["Name"][0];
                 let sendresponse = {
-                  
+                  // domainName: domainName,
                   data :response
                 };
-                response.status(200).json(sendresponse)
-                // resolve(sendresponse);
+                resolve(sendresponse);
               }
             }
           );
