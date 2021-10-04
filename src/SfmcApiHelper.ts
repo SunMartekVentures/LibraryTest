@@ -98,7 +98,7 @@ export default class SfmcApiHelper
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
         console.log("AccessToken Method  library", res);
-         res.status(200).send(res);
+        
 
         if (res.data.refresh_token) {
           console.log(

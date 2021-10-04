@@ -79,6 +79,7 @@ export default class mcGenericMethods {
             refreshToken: response.data.refresh_token,
             oauthToken: response.data.access_token,
           };
+          console.log()
           return resolve(customResponse);
         })
         .catch((error: any) => {
