@@ -127,6 +127,9 @@ export default class SfmcApiHelper
                 .getSenderDomain(paramData)
                 .then((response: any) => {
                   console.log(
+                    "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
+                  );
+                  console.log(
                     "Sender Domain Response ::: " + JSON.stringify(response)
                   );
                 })
