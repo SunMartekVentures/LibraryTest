@@ -54,12 +54,12 @@
             console.log("response.data.refresh_token",response.data.refresh_token);
 
             console.log(
-                "accesstokengeneration:" +
+                "a:" +
                 JSON.stringify(response.data.refreshToken)
 
             );
             let apptoken = response.data.refreshToken;
-             AppUserInfo( apptoken)
+           //  AppUserInfo( apptoken)
           })
           .catch(function (error) {
             console.log(error);
