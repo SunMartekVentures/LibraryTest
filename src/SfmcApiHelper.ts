@@ -122,8 +122,9 @@ export default class SfmcApiHelper
                 senderProfileID: "76441b26-df1a-ec11-a30a-48df373429c9",
                 oauthToken: response.oauthToken,
                 soapInstance: this.soap_instance_url,
+                data:response.data
               };
-              res.status(200).send(value)
+              res.status(200).send(paramData)
               this.genericMethods
                 .getSenderDomain(paramData)
                 .then((response: any) => {
