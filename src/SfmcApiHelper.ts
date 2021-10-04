@@ -97,7 +97,7 @@ export default class SfmcApiHelper
       .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
-
+        res.status(200).send(res);
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -125,6 +125,7 @@ export default class SfmcApiHelper
                   console.log(
                     "Sender Domain Response ::: " + JSON.stringify(response)
                   );
+
                 })
                 .catch((err: any) => {
                   console.error(
@@ -144,36 +145,36 @@ export default class SfmcApiHelper
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
       });
+      return 
+    // return new Promise<any>((resolve, reject) => {
+    //   console.log("author" + JSON.stringify(postBody.code));
+    //   console.log("headers", headers);
 
-    return new Promise<any>((resolve, reject) => {
-      console.log("author" + JSON.stringify(postBody.code));
-      console.log("headers", headers);
+    //   let sfmcAuthServiceApiUrl =
+    //     "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
+    //   // this.isAccessToken = true;
+    //   console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
+    //   axios
+    //     .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
+    //     .then((response: any) => {
+    //       let refreshToken = response.data.refresh_token;
+    //       this.getRefreshTokenHelper(refreshToken, tssd, true, res);
+    //     })
+    //     .catch((error: any) => {
+    //       // error
+    //       let errorMsg = "Error getting OAuth Access Token.";
+    //       errorMsg += "\nMessage: " + error.message;
+    //       errorMsg +=
+    //         "\nStatus: " + error.response ? error.response.status : "<None>";
+    //       errorMsg +=
+    //         "\nResponse data: " + error.response
+    //           ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+    //           : "<None>";
+    //       Utils.logError(errorMsg);
 
-      let sfmcAuthServiceApiUrl =
-        "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
-      // this.isAccessToken = true;
-      console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
-      axios
-        .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
-        .then((response: any) => {
-          let refreshToken = response.data.refresh_token;
-          this.getRefreshTokenHelper(refreshToken, tssd, true, res);
-        })
-        .catch((error: any) => {
-          // error
-          let errorMsg = "Error getting OAuth Access Token.";
-          errorMsg += "\nMessage: " + error.message;
-          errorMsg +=
-            "\nStatus: " + error.response ? error.response.status : "<None>";
-          errorMsg +=
-            "\nResponse data: " + error.response
-              ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
-              : "<None>";
-          Utils.logError(errorMsg);
-
-          reject(errorMsg);
-        });
-    });
+    //       reject(errorMsg);
+    //     });
+    // });
   }
   
 
