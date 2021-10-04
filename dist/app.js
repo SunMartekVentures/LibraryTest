@@ -69,9 +69,9 @@ app.post('/appdemoauthtoken', function (req, res) {
     console.log("getOAuthAccessToken called");
     appDemoRoutes.getOAuthAccessToken(req, res);
 });
-app.post("/appuserinfo", function (req, res) {
-    appDemoRoutes.appUserInfo(req, res);
-});
+// app.post("/appuserinfo", function (req, res) {
+//   appDemoRoutes.appUserInfo(req, res);
+// });
 // app.post("/createsparkpostintegrationfolder", function (req, res) {
 //   appDemoRoutes.createSparkpostIntegrationFolder(req, res);
 // });

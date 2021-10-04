@@ -6,6 +6,10 @@ class SfmcAppDemoRoutes {
     constructor() {
         // Instance variables
         this._apiHelper = new SfmcApiHelper_1.default();
+        // public appUserInfo(req: express.Request, res: express.Response) {
+        //   let self = this;
+        //   self._apiHelper.appUserInfo(req, res);
+        // }
         //     public creatingDomainConfigurationDE(
         //         req: express.Request,
         //         res: express.Response,
@@ -123,10 +127,6 @@ class SfmcAppDemoRoutes {
             let errorMsg = "ClientID or ClientSecret *not* found in environment variables.";
             res.status(500).send(errorMsg);
         }
-    }
-    appUserInfo(req, res) {
-        let self = this;
-        self._apiHelper.appUserInfo(req, res);
     }
 }
 exports.default = SfmcAppDemoRoutes;
