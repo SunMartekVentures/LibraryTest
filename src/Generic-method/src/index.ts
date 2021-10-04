@@ -162,7 +162,7 @@ export default class mcGenericMethods {
                   ][0]["Results"][0]["Name"][0];
                 let sendresponse = {
                   domainName: domainName,
-                  active :response,
+                  data :response
                 };
                 resolve(sendresponse);
               }

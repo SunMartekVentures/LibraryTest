@@ -129,7 +129,7 @@ export default class SfmcApiHelper
                   console.log(
                     "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
                   );
-                   let domainResponse = JSON.stringify(response);
+                   let domainResponse = JSON.stringify(response.data);
                    console.log("Sender Domain Response:::",domainResponse);
                   
                 })
