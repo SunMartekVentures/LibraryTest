@@ -129,10 +129,7 @@ export default class SfmcApiHelper
                   console.log(
                     "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
                   );
-                   
-                   console.log("Sender Domain Response:::",response);
-                  
-                })
+                  })
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err

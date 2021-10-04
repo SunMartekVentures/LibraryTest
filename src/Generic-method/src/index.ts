@@ -161,10 +161,10 @@ export default class mcGenericMethods {
                     "RetrieveResponseMsg"
                   ][0]["Results"][0]["Name"][0];
                 let sendresponse = {
-                  domainName: domainName,
-                  data :response
+                  domainName: domainName  
                 };
                 resolve(sendresponse);
+                
               }
             }
           );
