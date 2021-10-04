@@ -144,6 +144,7 @@ export default class mcGenericMethods {
       };
       await axios(configs)
         .then(function (response: any) {
+          console.log("Response in senderdomain lib:",response)
           let senderProfileResponse = response.data;
           var senderDomainData = "";
           var parser = new xml2js.Parser();
