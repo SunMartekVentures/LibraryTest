@@ -98,7 +98,9 @@ export default class SfmcApiHelper
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
         console.log("AccessToken Method  library", res);
-        res.status(200).send(res);
+        let value = res ;
+        
+        // res.status(200).send(res);
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -114,18 +116,21 @@ export default class SfmcApiHelper
               postBody.client_id,
               postBody.client_secret
             )
+
             .then((response: any) => {
               const paramData = {
                 senderProfileID: "76441b26-df1a-ec11-a30a-48df373429c9",
                 oauthToken: response.oauthToken,
                 soapInstance: this.soap_instance_url,
               };
+              res.status(200).send(value)
               this.genericMethods
                 .getSenderDomain(paramData)
                 .then((response: any) => {
                   console.log(
                     "Sender Domain Response ::: " + JSON.stringify(response)
                   );
+                  
 
                 })
                 .catch((err: any) => {
