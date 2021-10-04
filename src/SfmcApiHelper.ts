@@ -114,7 +114,6 @@ export default class SfmcApiHelper
               postBody.client_id,
               postBody.client_secret
             )
-
             .then((response: any) => {
               console.log("Respo in refresh token generic method:",response)
               const paramData = {
@@ -130,8 +129,6 @@ export default class SfmcApiHelper
                   console.log(
                     "Sender Domain Response ::: " + JSON.stringify(response)
                   );
-                  
-
                 })
                 .catch((err: any) => {
                   console.error(
