@@ -98,9 +98,8 @@ export default class SfmcApiHelper
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
         console.log("AccessToken Method  library", res);
-        let value = res ;
-        
-        // res.status(200).send(res);
+         res.status(200).send(res);
+
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -118,6 +117,7 @@ export default class SfmcApiHelper
             )
 
             .then((response: any) => {
+              console.log("Respo in refresh token generic method:",response)
               const paramData = {
                 senderProfileID: "76441b26-df1a-ec11-a30a-48df373429c9",
                 oauthToken: response.oauthToken,
