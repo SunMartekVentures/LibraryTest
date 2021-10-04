@@ -130,6 +130,16 @@ export default class SfmcApiHelper
                     "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
                   );
                   })
+
+              this.genericMethods
+              .userInfo(
+                process.env.BASE_URL,
+                response.oauthToken
+              )
+              .then((response:any)=>
+              {
+                console.log("UserInfo::>>",response);
+              })
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err
@@ -178,6 +188,10 @@ export default class SfmcApiHelper
     //       reject(errorMsg);
     //     });
     // });
+  }
+  public appUserInfo(req: any, res: any)
+  {
+
   }
 }
   

@@ -182,7 +182,9 @@ export default class mcGenericMethods {
         });
     });
   }
-
+  public async userInfo(BASE_URL:any,oauthToken:any)
+{
+ 
 }
 
 //hari raj
