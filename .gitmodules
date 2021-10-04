@@ -1,3 +1,6 @@
 [submodule "Generic-method"]
 	path = Generic-method
 	url = https://github.com/Manikandanpashtek/Generic-method.git
+[submodule "LibraryTest"]
+	path = LibraryTest
+	url = https://github.com/HariRaj01/LibraryTest.git
