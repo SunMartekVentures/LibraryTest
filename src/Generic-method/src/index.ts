@@ -224,9 +224,9 @@ export default class mcGenericMethods {
             : "<None>";
        // Utils.logError(errorMsg);
 
-        resolve
-          .status(500)
-          .send(JSON.stringify(error.response.data));
+        // resolve
+        //   .status(500)
+        //   .send(JSON.stringify(error.response.data));
       });
   })
 }
