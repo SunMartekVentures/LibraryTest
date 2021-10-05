@@ -199,13 +199,12 @@ export default class mcGenericMethods {
       .then((response: any) => {
         const getUserInfoResponse = {
           member_id: response.data.organization.member_id,
-          // soap_instance_url: response.data.rest.soap_instance_url,
-          // rest_instance_url: response.data.rest.rest_instance_url,
-          data:response
+          soap_instance_url: response.data.rest.soap_instance_url,
+          rest_instance_url: response.data.rest.rest_instance_url,
+          // data:response
           // refreshToken: refreshTokenbody,
         };
         console.log("Response in lib app user info>>",JSON.stringify(getUserInfoResponse))
-        
         resolve(getUserInfoResponse);
         //Set the member_id into the session
         //console.log("Setting active sfmc mid into session:" + getUserInfoResponse.member_id);
