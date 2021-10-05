@@ -189,10 +189,7 @@ export default class SfmcApiHelper
     //     });
     // });
   }
-  public appUserInfo(req: any, res: any)
-  {
-
-  }
+  
 }
   
 

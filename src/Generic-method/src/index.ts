@@ -182,9 +182,60 @@ export default class mcGenericMethods {
         });
     });
   }
-  public async userInfo(BASE_URL:any,oauthToken:any)
+
+  public async userInfo(tssd:string,token:string):Promise<any>
 {
- 
+  return new Promise<any>(async (resolve, reject) => {
+    console.log("tssd:",tssd," ","token:",token)
+  let userInfoUrl =
+  "https://" + tssd + ".auth.marketingcloudapis.com/v2/userinfo";
+
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
+    axios
+      .get(userInfoUrl, { headers: headers })
+      .then((response: any) => {
+        const getUserInfoResponse = {
+          member_id: response.data.organization.member_id,
+          soap_instance_url: response.data.rest.soap_instance_url,
+          rest_instance_url: response.data.rest.rest_instance_url,
+          // refreshToken: refreshTokenbody,
+        };
+        console.log("Response in lib app user info>>",JSON.stringify(getUserInfoResponse))
+        resolve(getUserInfoResponse);
+        //Set the member_id into the session
+        console.log("Setting active sfmc mid into session:" + getUserInfoResponse.member_id);
+        // req.session.sfmcMemberId = getUserInfoResponse.member_id;
+        //this.CheckAutomationStudio(access_token, req.body.refreshToken, req.body.tssd, getUserInfoResponse.member_id);
+       
+      })
+      .catch((error: any) => {
+        // error
+        let errorMsg = "Error getting User's Information.";
+        errorMsg += "\nMessage: " + error.message;
+        errorMsg +=
+          "\nStatus: " + error.response ? error.response.status : "<None>";
+        errorMsg +=
+          "\nResponse data: " + error.response
+            ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+            : "<None>";
+        Utils.logError(errorMsg);
+
+        resolve
+          .status(500)
+          .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+      });
+  })
+}
+//   .catch((error: any) => {
+//     res
+//       .status(500)
+//       .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+//   });
+// }
+// }
+
 }
 
-//hari raj
