@@ -172,7 +172,7 @@ export default class SfmcApiHelper
                {
                  console.error(err)
                })
-
+               
                this.genericMethods
                .dataFolderCheck(
                  paramData.oauthToken,

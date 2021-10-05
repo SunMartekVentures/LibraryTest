@@ -411,6 +411,7 @@ export default class mcGenericMethods {
 
       public async dataFolderCheck(token:string,soap_instance_url:string,member_id:string)
       {
+        return new Promise<any>(async (resolve, reject) => {
         let self = this;
         self
           .getCategoryIDHelper(
@@ -427,7 +428,7 @@ export default class mcGenericMethods {
               FolderID: result.FolderID,
             };
             console.log("sendresponse:" + JSON.stringify(sendresponse));
-            return (sendresponse)
+            resolve(sendresponse)
             
             //res.status(result.status).send(sendresponse);
           })
@@ -440,7 +441,7 @@ export default class mcGenericMethods {
       //     .status(500)
       //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
       // });
-  
+    }
 
   //Helper method for checking Sparkpost Integration Data extension
   public getCategoryIDHelper(
