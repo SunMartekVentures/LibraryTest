@@ -219,13 +219,14 @@ export default class mcGenericMethods {
           "\nStatus: " + error.response ? error.response.status : "<None>";
         errorMsg +=
           "\nResponse data: " + error.response
-            ? Utils.prettyPrintJson(JSON.stringify(error.response.data))
+            ? //Utils.prettyPrintJson
+            JSON.stringify(error.response.data)
             : "<None>";
-        Utils.logError(errorMsg);
+       // Utils.logError(errorMsg);
 
-        resolve
-          .status(500)
-          .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+        // resolve
+        //   .status(500)
+        //   .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
       });
   })
 }
