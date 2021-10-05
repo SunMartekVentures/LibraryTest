@@ -168,7 +168,7 @@ export default class SfmcApiHelper
                )
                .then((response:any)=>
                {
-                 console.log("Journey Details:>>>:",response)
+                 console.log("Journey Details:>>>:",JSON.stringify(response));
                })
                .catch((err:any)=>
                {
