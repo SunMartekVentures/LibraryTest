@@ -201,7 +201,7 @@ export default class mcGenericMethods {
           member_id: response.data.organization.member_id,
           soap_instance_url: response.data.rest.soap_instance_url,
           rest_instance_url: response.data.rest.rest_instance_url,
-          // data:response
+          data:response.data
           // refreshToken: refreshTokenbody,
         };
         console.log("Response in lib app user info>>",JSON.stringify(getUserInfoResponse))
