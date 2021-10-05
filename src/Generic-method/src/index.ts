@@ -236,6 +236,7 @@ export default class mcGenericMethods {
 }
   public async createFolder(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string)
   {
+    console.log("OauthToken in creating folder :",token)
     console.log("createSparkpostIntegrationFolder:" + member_id);
     console.log("createSparkpostIntegrationFolder:" + soap_instance_url); 
     console.log("createSparkpostIntegrationFolder:" + ParentFolderID);

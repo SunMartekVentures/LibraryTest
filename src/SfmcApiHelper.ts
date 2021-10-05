@@ -145,7 +145,7 @@ export default class SfmcApiHelper
               
                 this.genericMethods
                .createFolder( 
-                response.oauthToken,
+                 paramData.oauthToken,
                 response.soap_instance_url,
                 response.member_id,
                 this.parentFolderId
