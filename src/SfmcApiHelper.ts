@@ -21,7 +21,8 @@ export default class SfmcApiHelper
   private _deExternalKey = "DF20Demo";
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
   private refreshToken = "";
-    /**
+  private param ={}
+      /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-access-token.htm
@@ -140,20 +141,22 @@ export default class SfmcApiHelper
               {
                 console.log("UserInfo::>>",response);
                //console.log("Member id:",response.member_id)
-               const param={
+                this.param={
                  token:response.oauthToken,
                  soap_instance_url:response.soap_instance_url,
                  member_id: response.member_id,
                  parentFolderId: "12785"
-               };
+               }
+               console.log(JSON.stringify(this.param))
+              })
+
               this.genericMethods
-              .createFolder(param)
+              .createFolder(this.param)
               .then((response:any)=>
               {
                 console.log("Data Extension Created...Check MC App")
               }
               )
-            })
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err

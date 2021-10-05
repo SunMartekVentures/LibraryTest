@@ -308,7 +308,6 @@ export default class mcGenericMethods {
                     ][0]["Results"][0]["NewID"][0];
                   if (SparkpostIntegrationsID != undefined) {
                     //  this.FolderID = SparkpostIntegrationsID;
-
                     sendresponse = {
                      // refreshToken: refreshTokenbody,
                       statusText: true,
