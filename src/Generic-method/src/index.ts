@@ -280,7 +280,7 @@ export default class mcGenericMethods {
             "Content-Type": "text/xml",
             SOAPAction: "Create",
           };
-
+          console.log("Headers in Creating Folder",JSON.stringify(headers));
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
             method: "post",
