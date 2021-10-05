@@ -285,6 +285,7 @@ export default class mcGenericMethods {
           };
           console.log("Headers in Creating Folder",JSON.stringify(headers));
           console.log("Create folder data:",createFolderData);
+          console.log("Soap in creating:",soap_instance_url)
 
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
@@ -297,7 +298,7 @@ export default class mcGenericMethods {
               let sendresponse = {};
               console.log("Response after axios");
               console.log("Response in creating folder",response.data)
-
+              
               var parser = new xml2js.Parser();
               parser.parseString(
                 response.data,
