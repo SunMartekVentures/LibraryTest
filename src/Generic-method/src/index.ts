@@ -231,13 +231,131 @@ export default class mcGenericMethods {
       });
   })
 }
-//   .catch((error: any) => {
-//     res
-//       .status(500)
-//       .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-//   });
-// }
-// }
+  public async createFolder(param:any)
+  {
+    console.log("createSparkpostIntegrationFolder:" + param.body.memberid);
+    console.log("createSparkpostIntegrationFolder:" + param.body.soapInstance); 
+    console.log("createSparkpostIntegrationFolder:" + param.body.ParentFolderID);
 
-}
+        let createFolderData =
+          '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+          "<soapenv:Header>" +
+          "<fueloauth>" +
+          param.token +
+          "</fueloauth>" +
+          "</soapenv:Header>" +
+          "<soapenv:Body>" +
+          '<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+          "<Options/>" +
+          '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "<ns1:CustomerKey>Sparkpost Integrations - " +
+          req.body.memberid +
+          "</ns1:CustomerKey>" +
+          "<ns1:ParentFolder>" +
+          '<ns1:ModifiedDate xsi:nil="true"/>' +
+          "<ns1:ID>" +
+          req.body.ParentFolderID +
+          "</ns1:ID>" +
+          '<ns1:ObjectID xsi:nil="true"/>' +
+          "</ns1:ParentFolder>" +
+          "<ns1:Name>Sparkpost Integrations - " +
+          req.body.memberid +
+          "</ns1:Name>" +
+          "<ns1:Description>Sparkpost Integrations - " +
+          req.body.memberid +
+          " Folder</ns1:Description>" +
+          "<ns1:ContentType>dataextension</ns1:ContentType>" +
+          "<ns1:IsActive>true</ns1:IsActive>" +
+          "<ns1:IsEditable>true</ns1:IsEditable>" +
+          "<ns1:AllowChildren>true</ns1:AllowChildren>" +
+          "</ns1:Objects>" +
+          "</CreateRequest>" +
+          "</soapenv:Body>" +
+          "</soapenv:Envelope>";
+
+        return new Promise<any>((resolve, reject) => {
+          let headers = {
+            "Content-Type": "text/xml",
+            SOAPAction: "Create",
+          };
+
+          // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+          axios({
+            method: "post",
+            url: "" + req.body.soapInstance + "Service.asmx" + "",
+            data: createFolderData,
+            headers: headers,
+          })
+            .then((response: any) => {
+              let sendresponse = {};
+
+              var parser = new xml2js.Parser();
+              parser.parseString(
+                response.data,
+                (
+                  err: any,
+                  result: {
+                    [x: string]: {
+                      [x: string]: { [x: string]: { [x: string]: any }[] }[];
+                    };
+                  }
+                ) => {
+                  let SparkpostIntegrationsID =
+                    result["soap:Envelope"]["soap:Body"][0][
+                    "CreateResponse"
+                    ][0]["Results"][0]["NewID"][0];
+                  if (SparkpostIntegrationsID != undefined) {
+                    //  this.FolderID = SparkpostIntegrationsID;
+
+                    sendresponse = {
+                      refreshToken: refreshTokenbody,
+                      statusText: true,
+                      soap_instance_url: req.body.soapInstance,
+                      member_id: req.body.memberid,
+                      FolderID: SparkpostIntegrationsID,
+                    };
+                    res.status(200).send(sendresponse);
+                  } else {
+                    sendresponse = {
+                      refreshToken: refreshTokenbody,
+                      statusText: false,
+                      soap_instance_url: req.body.soapInstance,
+                      member_id: req.body.memberid,
+                      FolderID: SparkpostIntegrationsID,
+                    };
+                    res.status(200).send(sendresponse);
+                  }
+                }
+              );
+            })
+            .catch((error: any) => {
+              // error
+              let errorMsg =
+                "Error creating the Sparkpost Integrations folder......";
+              errorMsg += "\nMessage: " + error.message;
+              errorMsg +=
+                "\nStatus: " + error.response
+                  ? error.response.status
+                  : "<None>";
+              errorMsg +=
+                "\nResponse data: " + error.response.data
+                  ? //Utils.prettyPrintJson
+                  JSON.stringify(error.response.data)
+                  : "<None>";
+             // Utils.logError(errorMsg);
+
+              reject(errorMsg);
+            });
+        });
+      }
+      // .catch((error: any) => {
+      //   res
+      //     .status(500)
+      //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+      // });
+  }
+
+
 

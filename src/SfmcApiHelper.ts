@@ -139,13 +139,21 @@ export default class SfmcApiHelper
               .then((response:any)=>
               {
                 console.log("UserInfo::>>",response);
-                console.log("Member id:",response.member_id)
-              })
-
-              // this.genericMethods
-              // .createFolder(
-
-              // )
+               //console.log("Member id:",response.member_id)
+               const param={
+                 token:response.oauthToken,
+                 soap_instance_url:response.soap_instance_url,
+                 member_id: response.member_id,
+                 parentFolderId: "12785"
+               };
+              this.genericMethods
+              .createFolder(param)
+              .then((response:any)=>
+              {
+                console.log("Data Extension Created...Check MC App")
+              }
+              )
+            })
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err
