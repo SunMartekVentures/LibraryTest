@@ -231,17 +231,17 @@ export default class mcGenericMethods {
       });
   })
 }
-  public async createFolder(param:any)
+  public async createFolder(token:string,member_id:string,soap_instance_url:string,ParentFolderID:string)
   {
-    console.log("createSparkpostIntegrationFolder:" + param.body.memberid);
-    console.log("createSparkpostIntegrationFolder:" + param.body.soapInstance); 
-    console.log("createSparkpostIntegrationFolder:" + param.body.ParentFolderID);
+    console.log("createSparkpostIntegrationFolder:" + member_id);
+    console.log("createSparkpostIntegrationFolder:" + soap_instance_url); 
+    console.log("createSparkpostIntegrationFolder:" + ParentFolderID);
 
         let createFolderData =
           '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
           "<soapenv:Header>" +
           "<fueloauth>" +
-          param.token +
+          token +
           "</fueloauth>" +
           "</soapenv:Header>" +
           "<soapenv:Body>" +
@@ -251,20 +251,20 @@ export default class mcGenericMethods {
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "<ns1:CustomerKey>Sparkpost Integrations - " +
-          param.body.memberid +
+          member_id +
           "</ns1:CustomerKey>" +
           "<ns1:ParentFolder>" +
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           "<ns1:ID>" +
-          param.body.ParentFolderID +
+          ParentFolderID +
           "</ns1:ID>" +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "</ns1:ParentFolder>" +
           "<ns1:Name>Sparkpost Integrations - " +
-          param.body.memberid +
+          member_id +
           "</ns1:Name>" +
           "<ns1:Description>Sparkpost Integrations - " +
-          param.body.memberid +
+          member_id +
           " Folder</ns1:Description>" +
           "<ns1:ContentType>dataextension</ns1:ContentType>" +
           "<ns1:IsActive>true</ns1:IsActive>" +
@@ -284,7 +284,7 @@ export default class mcGenericMethods {
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
             method: "post",
-            url: "" + param.body.soapInstance + "Service.asmx" + "",
+            url: "" + soap_instance_url + "Service.asmx" + "",
             data: createFolderData,
             headers: headers,
           })
@@ -311,8 +311,8 @@ export default class mcGenericMethods {
                     sendresponse = {
                      // refreshToken: refreshTokenbody,
                       statusText: true,
-                      soap_instance_url: param.body.soapInstance,
-                      member_id: param.body.memberid,
+                      soap_instance_url: soap_instance_url,
+                      member_id:member_id,
                       FolderID: SparkpostIntegrationsID,
                     };
                     resolve(sendresponse)
@@ -321,8 +321,8 @@ export default class mcGenericMethods {
                     sendresponse = {
                      // refreshToken: refreshTokenbody,
                       statusText: false,
-                      soap_instance_url: param.body.soapInstance,
-                      member_id: param.body.memberid,
+                      soap_instance_url: soap_instance_url,
+                      member_id: member_id,
                       FolderID: SparkpostIntegrationsID,
                     };
                     resolve(sendresponse);

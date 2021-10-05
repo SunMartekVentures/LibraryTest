@@ -21,7 +21,7 @@ export default class SfmcApiHelper
   private _deExternalKey = "DF20Demo";
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
   private refreshToken = "";
-  private param ={}
+  private parentFolderId= "12785";
       /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -141,16 +141,21 @@ export default class SfmcApiHelper
               {
                 console.log("UserInfo::>>",response);
                //console.log("Member id:",response.member_id)
-                const param={
-                 token:response.oauthToken,
-                 soap_instance_url:response.soap_instance_url,
-                 member_id: response.member_id,
-                 parentFolderId: "12785"
-               }
-               console.log("Parameters:",JSON.stringify(param))
+              //   const param={
+              //    token:response.oauthToken,
+              //    soap_instance_url:response.soap_instance_url,
+              //    member_id: response.member_id,
+              //    parentFolderId: "12785"
+              //  }
+               
               
                 this.genericMethods
-               .createFolder( param)
+               .createFolder( 
+                response.oauthToken,
+                response.soap_instance_url,
+                response.member_id,
+                this.parentFolderId
+                 )
                .then((response:any)=>
                {
                  console.log("Data Extension Created...Check MC App")
