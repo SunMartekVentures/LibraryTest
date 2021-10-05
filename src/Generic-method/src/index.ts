@@ -1,6 +1,7 @@
 // module.exports exports the function getContests as a promise and exposes it as a module.
 // we can import an exported module by using require().
 import axios, { AxiosRequestConfig } from "axios";
+import { resolve } from "dns";
 import { url } from "inspector";
 import { data } from "jquery";
 import { updateRestTypeNode } from "typescript";
@@ -407,8 +408,146 @@ export default class mcGenericMethods {
               });
           });
         }
-        
+
+      public async dataFolderCheck(token:string,soap_instance_url:string,member_id:string)
+      {
+        let self = this;
+        self
+          .getCategoryIDHelper(
+            token,
+            soap_instance_url,
+            member_id
+          )
+          .then((result) => {
+            const sendresponse = {
+             // refreshToken: refreshTokenbody,
+              statusText: result.statusText,
+              soap_instance_url: soap_instance_url,
+              member_id: member_id,
+              FolderID: result.FolderID,
+            };
+            console.log("sendresponse:" + JSON.stringify(sendresponse));
+            return (sendresponse)
+            
+            //res.status(result.status).send(sendresponse);
+          })
+          // .catch((err) => {
+          //   reject(err);
+          // });
       }
+      // .catch((error: any) => {
+      //   res
+      //     .status(500)
+      //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+      // });
+  
+
+  //Helper method for checking Sparkpost Integration Data extension
+  public getCategoryIDHelper(
+    token:string,
+    soap_instance_url:string,
+    member_id:string
+  ): Promise<any> {
+    let soapMessage =
+      '<?xml version="1.0" encoding="UTF-8"?>' +
+      '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+      "    <s:Header>" +
+      '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
+      '        <a:To s:mustUnderstand="1">' +
+      soap_instance_url +
+      "Service.asmx" +
+      "</a:To>" +
+      '        <fueloauth xmlns="http://exacttarget.com">' +
+      token +
+      "</fueloauth>" +
+      "    </s:Header>" +
+      '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+      '        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+      "            <RetrieveRequest>" +
+      "                <ObjectType>DataFolder</ObjectType>" +
+      "                <Properties>ID</Properties>" +
+      "                <Properties>CustomerKey</Properties>" +
+      "                <Properties>Name</Properties>" +
+      "                <Properties>ParentFolder.ID</Properties>" +
+      "                <Properties>ParentFolder.Name</Properties>" +
+      '                <Filter xsi:type="SimpleFilterPart">' +
+      "                    <Property>Name</Property>" +
+      "                    <SimpleOperator>equals</SimpleOperator>" +
+      "                    <Value>LibraryCreated- " +
+      member_id +
+      "</Value>" +
+      "                </Filter>" +
+      "            </RetrieveRequest>" +
+      "        </RetrieveRequestMsg>" +
+      "    </s:Body>" +
+      "</s:Envelope>";
+
+    return new Promise<any>((resolve, reject) => {
+      let headers = {
+        "Content-Type": "text/xml",
+        SOAPAction: "Retrieve",
+      };
+
+      axios({
+        method: "post",
+        url: "" + soap_instance_url + "Service.asmx" + "",
+        data: soapMessage,
+        headers: { "Content-Type": "text/xml" },
+      })
+        .then((response: any) => {
+          var extractedData = "";
+          var parser = new xml2js.Parser();
+          parser.parseString(
+            response.data,
+            (
+              err: any,
+              result: {
+                [x: string]: {
+                  [x: string]: { [x: string]: { [x: string]: any }[] }[];
+                };
+              }
+            ) => {
+              let FolderID =
+                result["soap:Envelope"]["soap:Body"][0][
+                "RetrieveResponseMsg"
+                ][0]["Results"];
+              if (FolderID != undefined) {
+                //    this.FolderID = FolderID[0]["ID"][0];
+                resolve({
+                  status: response.status,
+                  statusText: true,
+                  FolderID: FolderID[0]["ID"][0],
+                });
+              } else {
+                resolve({
+                  status: response.status,
+                  statusText: false,
+                });
+              }
+            }
+          );
+        })
+        .catch((error: any) => {
+          // error
+          let errorMsg =
+            "Error loading sample data. POST response from Marketing Cloud:";
+          errorMsg += "\nMessage: " + error.message;
+          errorMsg +=
+            "\nStatus: " + error.response ? error.response.status : "<None>";
+          errorMsg +=
+            "\nResponse data: " + error.response.data
+              ? //Utils.prettyPrintJson(
+                JSON.stringify(error.response.data)
+              : "<None>";
+          //Utils.logError(errorMsg);
+
+          reject(errorMsg);
+        });
+    });
+      }
+}
+        
+      
      
   
 

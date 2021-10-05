@@ -141,8 +141,6 @@ export default class SfmcApiHelper
               {
                 console.log("UserInfo::>>",response);
                
-               
-              
                 this.genericMethods
                .createFolder( 
                  paramData.oauthToken,
@@ -173,6 +171,21 @@ export default class SfmcApiHelper
                .catch((err:any)=>
                {
                  console.error(err)
+               })
+
+               this.genericMethods
+               .dataFolderCheck(
+                 paramData.oauthToken,
+                 response.soap_instance_url,
+                 response.member_id
+               )
+               .then((response:any)=>
+               {
+                 console.log("FOlderID got!!")
+               })
+               .catch((err:any)=>
+               {
+                 console.log(err)
                })
               })
              
