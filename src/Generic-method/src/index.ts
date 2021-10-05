@@ -361,6 +361,8 @@ export default class mcGenericMethods {
       }
      public async getJourneyDetails(token:string,tssd:string)
      {
+       console.log("Token in GetJourneyDetails:",token);
+       console.log("tssd:",tssd)
           return new Promise<any>((resolve, reject) => {
             let headers = {
               "Content-Type": "application/json",
