@@ -141,6 +141,8 @@ export default class SfmcApiHelper
               {
                 console.log("UserInfo::>>",response);
                
+               
+              
                 this.genericMethods
                .createFolder( 
                 response.oauthToken,
@@ -153,19 +155,18 @@ export default class SfmcApiHelper
                  console.log("Data Extension Created...Check MC App")
                }
                )
-               .catch((err: any) => {
-                console.error(
-                  "error in creating folder" + err
-                );
-              });
                
               })
              
-               
-              // console.log(
-              //   "Refresh token Method from library",
-              //   response.refreshToken
-              // );
+                .catch((err: any) => {
+                  console.error(
+                    "error getting Sender Domain from library" + err
+                  );
+                });
+              console.log(
+                "Refresh token Method from library",
+                response.refreshToken
+              );
             })
             .catch((err: any) => {
               console.error("error getting refresh token from library" + err);
