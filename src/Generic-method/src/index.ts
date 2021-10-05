@@ -430,18 +430,18 @@ export default class mcGenericMethods {
             console.log("sendresponse:" + JSON.stringify(sendresponse));
             resolve(sendresponse)
             
-            //res.status(result.status).send(sendresponse);
-          })
+          });
           // .catch((err) => {
           //   reject(err);
           // });
-      }
+      };
+    }
       // .catch((error: any) => {
       //   res
       //     .status(500)
       //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
       // });
-    }
+    
 
   //Helper method for checking Sparkpost Integration Data extension
   public getCategoryIDHelper(
