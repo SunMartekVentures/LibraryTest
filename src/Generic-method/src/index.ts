@@ -251,20 +251,20 @@ export default class mcGenericMethods {
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "<ns1:CustomerKey>Sparkpost Integrations - " +
-          req.body.memberid +
+          param.body.memberid +
           "</ns1:CustomerKey>" +
           "<ns1:ParentFolder>" +
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           "<ns1:ID>" +
-          req.body.ParentFolderID +
+          param.body.ParentFolderID +
           "</ns1:ID>" +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "</ns1:ParentFolder>" +
           "<ns1:Name>Sparkpost Integrations - " +
-          req.body.memberid +
+          param.body.memberid +
           "</ns1:Name>" +
           "<ns1:Description>Sparkpost Integrations - " +
-          req.body.memberid +
+          param.body.memberid +
           " Folder</ns1:Description>" +
           "<ns1:ContentType>dataextension</ns1:ContentType>" +
           "<ns1:IsActive>true</ns1:IsActive>" +
@@ -284,7 +284,7 @@ export default class mcGenericMethods {
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
             method: "post",
-            url: "" + req.body.soapInstance + "Service.asmx" + "",
+            url: "" + param.body.soapInstance + "Service.asmx" + "",
             data: createFolderData,
             headers: headers,
           })
@@ -310,22 +310,23 @@ export default class mcGenericMethods {
                     //  this.FolderID = SparkpostIntegrationsID;
 
                     sendresponse = {
-                      refreshToken: refreshTokenbody,
+                     // refreshToken: refreshTokenbody,
                       statusText: true,
-                      soap_instance_url: req.body.soapInstance,
-                      member_id: req.body.memberid,
+                      soap_instance_url: param.body.soapInstance,
+                      member_id: param.body.memberid,
                       FolderID: SparkpostIntegrationsID,
                     };
-                    res.status(200).send(sendresponse);
+                    resolve(sendresponse)
+                    //res.status(200).send(sendresponse);
                   } else {
                     sendresponse = {
-                      refreshToken: refreshTokenbody,
+                     // refreshToken: refreshTokenbody,
                       statusText: false,
-                      soap_instance_url: req.body.soapInstance,
-                      member_id: req.body.memberid,
+                      soap_instance_url: param.body.soapInstance,
+                      member_id: param.body.memberid,
                       FolderID: SparkpostIntegrationsID,
                     };
-                    res.status(200).send(sendresponse);
+                    resolve(sendresponse);
                   }
                 }
               );
