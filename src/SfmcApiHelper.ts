@@ -139,7 +139,13 @@ export default class SfmcApiHelper
               .then((response:any)=>
               {
                 console.log("UserInfo::>>",response);
+                console.log("Member id:",response.member_id)
               })
+
+              // this.genericMethods
+              // .createFolder(
+
+              // )
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err
