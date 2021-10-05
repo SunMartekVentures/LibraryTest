@@ -140,7 +140,7 @@ export default class SfmcApiHelper
               .then((response:any)=>
               {
                 console.log("UserInfo::>>",response);
-               
+              })
                 this.genericMethods
                .createFolder( 
                 response.oauthToken,
@@ -161,16 +161,12 @@ export default class SfmcApiHelper
                
               })
              
-                .catch((err: any) => {
-                  console.error(
-                    "error getting Sender Domain from library" + err
-                  );
-                });
+               
               // console.log(
               //   "Refresh token Method from library",
               //   response.refreshToken
               // );
-            })
+            
             .catch((err: any) => {
               console.error("error getting refresh token from library" + err);
             });
@@ -179,7 +175,7 @@ export default class SfmcApiHelper
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
       });
-      return 
+      return; 
     // return new Promise<any>((resolve, reject) => {
     //   console.log("author" + JSON.stringify(postBody.code));
     //   console.log("headers", headers);
