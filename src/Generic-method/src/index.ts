@@ -1,6 +1,9 @@
 // module.exports exports the function getContests as a promise and exposes it as a module.
 // we can import an exported module by using require().
 import axios, { AxiosRequestConfig } from "axios";
+import { url } from "inspector";
+import { data } from "jquery";
+import { updateRestTypeNode } from "typescript";
 const xml2js = require("xml2js");
 
 export default class mcGenericMethods {
@@ -281,6 +284,8 @@ export default class mcGenericMethods {
             SOAPAction: "Create",
           };
           console.log("Headers in Creating Folder",JSON.stringify(headers));
+          console.log("Create folder data:",createFolderData);
+
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
             method: "post",
