@@ -148,16 +148,19 @@ export default class SfmcApiHelper
                  parentFolderId: "12785"
                }
                console.log("Parameters:",JSON.stringify(param))
-               this.genericMethods
-               .createFolder(param)
+              })
+              
+              this.genericMethods
+               .createFolder(
+                 param
+               )
                .then((response:any)=>
                {
                  console.log("Data Extension Created...Check MC App")
                }
                )
                
-              })
-
+              
              
                 .catch((err: any) => {
                   console.error(
