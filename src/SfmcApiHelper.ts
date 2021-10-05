@@ -152,7 +152,7 @@ export default class SfmcApiHelper
               
               this.genericMethods
                .createFolder(
-                 param
+                 this.param  
                )
                .then((response:any)=>
                {
