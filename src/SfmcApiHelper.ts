@@ -136,6 +136,7 @@ export default class SfmcApiHelper
                 process.env.BASE_URL,
                 response.oauthToken
               )
+              console.log("Check userinfo respo::??")
               .then((response:any)=>
               {
                 console.log("UserInfo::>>",response);

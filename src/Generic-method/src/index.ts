@@ -186,7 +186,7 @@ export default class mcGenericMethods {
   public async userInfo(tssd:string,token:string):Promise<any>
 {
   return new Promise<any>(async (resolve, reject) => {
-    console.log("tssd:",tssd," ","token:",token)
+    console.log("UserInfo's tssd:",tssd," ","token:",token)
   let userInfoUrl =
   "https://" + tssd + ".auth.marketingcloudapis.com/v2/userinfo";
 
@@ -224,9 +224,9 @@ export default class mcGenericMethods {
             : "<None>";
        // Utils.logError(errorMsg);
 
-        // resolve
-        //   .status(500)
-        //   .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+        resolve
+          .status(500)
+          .send(JSON.stringify(error.response.data));
       });
   })
 }
