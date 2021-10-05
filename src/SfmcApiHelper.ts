@@ -140,15 +140,7 @@ export default class SfmcApiHelper
               .then((response:any)=>
               {
                 console.log("UserInfo::>>",response);
-               //console.log("Member id:",response.member_id)
-              //   const param={
-              //    token:response.oauthToken,
-              //    soap_instance_url:response.soap_instance_url,
-              //    member_id: response.member_id,
-              //    parentFolderId: "12785"
-              //  }
                
-              
                 this.genericMethods
                .createFolder( 
                 response.oauthToken,
@@ -161,6 +153,11 @@ export default class SfmcApiHelper
                  console.log("Data Extension Created...Check MC App")
                }
                )
+               .catch((err: any) => {
+                console.error(
+                  "error in creating folder" + err
+                );
+              });
                
               })
              
@@ -169,10 +166,10 @@ export default class SfmcApiHelper
                     "error getting Sender Domain from library" + err
                   );
                 });
-              console.log(
-                "Refresh token Method from library",
-                response.refreshToken
-              );
+              // console.log(
+              //   "Refresh token Method from library",
+              //   response.refreshToken
+              // );
             })
             .catch((err: any) => {
               console.error("error getting refresh token from library" + err);

@@ -250,7 +250,7 @@ export default class mcGenericMethods {
           '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           '<ns1:ObjectID xsi:nil="true"/>' +
-          "<ns1:CustomerKey>Sparkpost Integrations - " +
+          "<ns1:CustomerKey>LibraryCreated - " +
           member_id +
           "</ns1:CustomerKey>" +
           "<ns1:ParentFolder>" +
@@ -260,10 +260,10 @@ export default class mcGenericMethods {
           "</ns1:ID>" +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "</ns1:ParentFolder>" +
-          "<ns1:Name>Sparkpost Integrations - " +
+          "<ns1:Name>LibraryCreated - " +
           member_id +
           "</ns1:Name>" +
-          "<ns1:Description>Sparkpost Integrations - " +
+          "<ns1:Description>LibraryCreated- " +
           member_id +
           " Folder</ns1:Description>" +
           "<ns1:ContentType>dataextension</ns1:ContentType>" +
@@ -290,6 +290,8 @@ export default class mcGenericMethods {
           })
             .then((response: any) => {
               let sendresponse = {};
+              console.log("Response after axios");
+              console.log("Response in creating folder",response.data)
 
               var parser = new xml2js.Parser();
               parser.parseString(
