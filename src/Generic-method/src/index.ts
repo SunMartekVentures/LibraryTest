@@ -234,7 +234,7 @@ export default class mcGenericMethods {
       });
   })
 }
-  public async createFolder(token:string,member_id:string,soap_instance_url:string,ParentFolderID:string)
+  public async createFolder(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string)
   {
     console.log("createSparkpostIntegrationFolder:" + member_id);
     console.log("createSparkpostIntegrationFolder:" + soap_instance_url); 
