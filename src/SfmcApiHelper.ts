@@ -155,6 +155,10 @@ export default class SfmcApiHelper
                  console.log("Data Extension Created...Check MC App")
                }
                )
+               .catch((err:any)=>
+               {
+                 console.error("Error in creating folder")
+               })
                
               })
              
