@@ -359,12 +359,56 @@ export default class mcGenericMethods {
             });
         });
       }
-      // .catch((error: any) => {
-      //   res
-      //     .status(500)
-      //     .send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
-      // });
-  }
+     public async getJourneyDetails(token:string,tssd:string)
+     {
+          return new Promise<any>((resolve, reject) => {
+            let headers = {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            };
+            let JourneyUrl =
+              "https://" +
+               tssd +
+              ".rest.marketingcloudapis.com/interaction/v1/interactions/" 
+              //+
+              //req.body.journeyId;
+            axios({
+              method: "get",
+              url: JourneyUrl,
+              headers: headers,
+            })
+              .then((response: any) => {
+                let sendresponse = {
+                  //refreshToken: refreshTokenbody,
+                  activity: response.data,
+                };
+                resolve(sendresponse)
+                //res.status(200).send(sendresponse);
+                // res.status(200).send(response.data);
+              })
+              .catch((error: any) => {
+                // error
+                let errorMsg = "Error getting the Active Journeys......";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg +=
+                  "\nStatus: " + error.response
+                    ? error.response.status
+                    : "<None>";
+                errorMsg +=
+                  "\nResponse data: " + error.response.data
+                    ? //Utils.prettyPrintJson(
+                      JSON.stringify(error.response.data)
+                    : "<None>";
+                //Utils.logError(errorMsg);
+  
+                reject(errorMsg);
+              });
+          });
+        }
+        
+      }
+     
+  
 
 
 

@@ -152,7 +152,7 @@ export default class SfmcApiHelper
                  )
                .then((response:any)=>
                {
-                 console.log("Data Extension Created...Check MC App",response)
+                 console.log("Data Extension Created...Check MC App")
                }
                )
                .catch((err:any)=>
@@ -160,6 +160,20 @@ export default class SfmcApiHelper
                  console.error("Error in creating folder",err)
                })
                
+
+               this.genericMethods
+               .getJourneyDetails(
+                 paramData.oauthToken,
+                 process.env.BASE_URL
+               )
+               .then((response:any)=>
+               {
+                 console.log("Journey Details:>>>:",response)
+               })
+               .catch((err:any)=>
+               {
+                 console.error(err)
+               })
               })
              
                 .catch((err: any) => {
