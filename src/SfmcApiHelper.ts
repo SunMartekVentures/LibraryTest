@@ -202,8 +202,8 @@ export default class SfmcApiHelper
                  console.log("Folder id for use :",response.data.folderid);
                  console.log("Folder id for use :",response.data.FolderID);
 
-                this.FolderID=response.data.FolderID
-                 console.log("FOlderID got!!")
+                // this.FolderID=response.data.FolderID
+                //  console.log("FOlderID got!!")
                })
                .catch((err:any)=>
                {
