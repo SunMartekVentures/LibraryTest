@@ -360,6 +360,54 @@ export default class mcGenericMethods {
             });
         });
       }
+
+     public async getActiveJourney(token:string,tssd:string)
+     {
+       return new Promise<any>((resolve, reject) => {
+          let headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          };
+          // https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/
+          let JourneyUrl =
+            "https://" +
+            tssd +
+            ".rest.marketingcloudapis.com/interaction/v1/interactions?status=Published";
+          axios({
+            method: "get",
+            url: JourneyUrl,
+            headers: headers,
+          })
+            .then((response: any) => {
+              let sendresponse = {
+                // refreshToken: refreshTokenbody,
+                journeys: response.data,
+              };
+              resolve(sendresponse);
+            })
+            .catch((error: any) => {
+              // error
+              let errorMsg = "Error getting the Active Journeys......";
+              errorMsg += "\nMessage: " + error.message;
+              errorMsg +=
+                "\nStatus: " + error.response
+                  ? error.response.status
+                  : "<None>";
+              errorMsg +=
+                "\nResponse data: " + error.response.data
+                  ? //Utils.prettyPrintJson(
+                    JSON.stringify(error.response.data)
+                  : "<None>";
+              //Utils.logError(errorMsg);
+
+              reject(errorMsg);
+            });
+        });
+      
+      
+     } 
+
+
      public async getJourneyDetails(token:string,tssd:string)
      {
        console.log("Token in GetJourneyDetails:",token);

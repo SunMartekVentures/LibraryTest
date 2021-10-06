@@ -157,6 +157,21 @@ export default class SfmcApiHelper
                {
                  console.error("Error in creating folder",err)
                })
+
+
+               this.genericMethods
+               .getActiveJourney(
+                 paramData.oauthToken,
+                 process.env.BASE_URL
+               )
+               .then((response:any)=>
+               {
+                 console.log("Active Journeys:>>>:",JSON.stringify(response));
+               })
+               .catch((err:any)=>
+               {
+                 console.error(err)
+               })
                
 
                this.genericMethods
