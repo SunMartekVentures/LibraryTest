@@ -22,6 +22,7 @@ export default class SfmcApiHelper
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
   private refreshToken = "";
   private parentFolderId= "12785";
+  private FolderID="";
       /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -198,6 +199,7 @@ export default class SfmcApiHelper
                .then((response:any)=>
                {
                  console.log("Response in dataFolderCheck >>>",response)
+                this.FolderID=response.data.FolderID
                  console.log("FOlderID got!!")
                })
                .catch((err:any)=>
@@ -211,7 +213,7 @@ export default class SfmcApiHelper
                  response.member_id,
                 response.soap_instance_url,
                 paramData.oauthToken,
-                response.data.FolderID,
+                this.FolderID,
                 process.env.BASE_URL
                
                )
