@@ -226,7 +226,7 @@ export default class SfmcApiHelper
                })
                .catch((err:any)=>
                {
-                 console.log(err)
+                 console.log("Erroe in creatong data extension in folder",err)
                })
               })
              
