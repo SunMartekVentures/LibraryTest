@@ -434,7 +434,7 @@ export default class mcGenericMethods {
           // .catch((err) => {
           //   reject(err);
           // });
-      };
+      });
     }
       // .catch((error: any) => {
       //   res
