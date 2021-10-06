@@ -606,6 +606,7 @@ export default class mcGenericMethods {
         FolderID: string,
         tssd: string
       ) {
+        console.log("Param values>>> Mid:",member_id,"soap-url:",soap_instance_url,"token:",token,"folderid:",FolderID,"tssd:",tssd);
             let DCmsg =
               '<?xml version="1.0" encoding="UTF-8"?>' +
               '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
