@@ -646,7 +646,7 @@ export default class mcGenericMethods {
               "                        <IsRequired>true</IsRequired>" +
               "                        <IsPrimaryKey>true</IsPrimaryKey>" +
               "                    </Field>" +
-              "                    
+                                 
               "                </Fields>" +
               "            </Objects>" +
               "        </CreateRequest>" +
