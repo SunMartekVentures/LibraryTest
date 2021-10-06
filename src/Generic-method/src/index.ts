@@ -514,6 +514,7 @@ export default class mcGenericMethods {
                 ][0]["Results"];
               if (FolderID != undefined) {
                 //    this.FolderID = FolderID[0]["ID"][0];
+                console.log("Folder id in check:",FolderID)
                 resolve({
                   status: response.status,
                   statusText: true,
