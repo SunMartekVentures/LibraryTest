@@ -603,7 +603,7 @@ export default class mcGenericMethods {
         member_id: string,
         soap_instance_url: string,
         token:string,
-        FolderID: string,
+        FolderID: any,
         tssd: string
       ) {
         console.log
