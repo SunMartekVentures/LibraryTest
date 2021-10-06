@@ -512,6 +512,7 @@ export default class mcGenericMethods {
                 result["soap:Envelope"]["soap:Body"][0][
                 "RetrieveResponseMsg"
                 ][0]["Results"];
+                console.log("Folder id in check>>",FolderID)
               if (FolderID != undefined) {
                 //    this.FolderID = FolderID[0]["ID"][0];
                 console.log("Folder id in check:",FolderID)
