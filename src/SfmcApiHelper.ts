@@ -123,7 +123,7 @@ export default class SfmcApiHelper
                 soapInstance: this.soap_instance_url,
                 data:response.data
               };
-              response.status(200).send(paramData)
+             // response.status(200).send(paramData)
               //res.status(200).send(paramData)
               this.genericMethods
                 .getSenderDomain(paramData)
