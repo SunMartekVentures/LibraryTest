@@ -200,7 +200,8 @@ export default class SfmcApiHelper
                {
                  console.log("Response in dataFolderCheck >>>",response)
                  console.log("Folder id in use:",response.FolderID)
-                  this.FolderID = response.FolderID 
+                  this.FolderID = response.FolderID
+                  console.log(this.FolderID) 
                   console.log("FOlderID got!!")
                })
                .catch((err:any)=>
