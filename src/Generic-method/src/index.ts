@@ -654,12 +654,12 @@ export default class mcGenericMethods {
               "    </s:Body>" +
               "</s:Envelope>";
 
-              console.log("DC Msg:>>>",DCmsg)
-            return new Promise<any>((resolve, reject) => {
+              
+              return new Promise<any>((resolve, reject) => {
               let headers = {
                 "Content-Type": "text/xml",
               };
-    
+              console.log("DC Msg:>>>",DCmsg);
               axios({
                 method: "post",
                 url: "" + soap_instance_url + "Service.asmx" + "",
