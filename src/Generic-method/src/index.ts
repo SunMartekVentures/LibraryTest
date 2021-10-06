@@ -653,7 +653,8 @@ export default class mcGenericMethods {
               "        </CreateRequest>" +
               "    </s:Body>" +
               "</s:Envelope>";
-    
+
+              console.log("DC Msg:>>>",DCmsg)
             return new Promise<any>((resolve, reject) => {
               let headers = {
                 "Content-Type": "text/xml",
