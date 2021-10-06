@@ -199,6 +199,9 @@ export default class SfmcApiHelper
                .then((response:any)=>
                {
                  console.log("Response in dataFolderCheck >>>",response)
+                 console.log("Folder id for use :",response.data.folderid);
+                 console.log("Folder id for use :",response.data.FolderID);
+
                 this.FolderID=response.data.FolderID
                  console.log("FOlderID got!!")
                })
