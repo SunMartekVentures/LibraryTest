@@ -653,8 +653,7 @@ export default class mcGenericMethods {
               "                        <MaxLength>100</MaxLength>" +
               "                        <IsRequired>true</IsRequired>" +
               "                        <IsPrimaryKey>true</IsPrimaryKey>" +
-              "                    </Field>" +
-                                 
+              "                    </Field>" +                    
               "                </Fields>" +
               "            </Objects>" +
               "        </CreateRequest>" +
@@ -664,7 +663,7 @@ export default class mcGenericMethods {
               
               return new Promise<any>((resolve, reject) => {
               let headers = {
-                "Content-Type": "text/xml",
+                "Content-Type": "application/xml",
               };
               console.log("DC Msg:>>>",DCmsg);
               axios({
