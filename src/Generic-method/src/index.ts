@@ -597,7 +597,141 @@ export default class mcGenericMethods {
         });
     });
       }
-}
+
+      public async createDataExtension   
+      ( 
+        member_id: string,
+        soap_instance_url: string,
+        token:string,
+        FolderID: string,
+        tssd: string
+      ) {
+            let DCmsg =
+              '<?xml version="1.0" encoding="UTF-8"?>' +
+              '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+              "    <s:Header>" +
+              '        <a:Action s:mustUnderstand="1">Create</a:Action>' +
+              '        <a:To s:mustUnderstand="1">' +
+              soap_instance_url +
+              "Service.asmx" +
+              "</a:To>" +
+              '        <fueloauth xmlns="http://exacttarget.com">' +
+              token +
+              "</fueloauth>" +
+              "    </s:Header>" +
+              '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+              '        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+              '            <Objects xsi:type="DataExtension">' +
+              "                <CategoryID>" +
+              FolderID +
+              "</CategoryID>" +
+              "                <CustomerKey>LibraryModules"
+              "</CustomerKey>" +
+              "                <Name>LibraryModules"
+              "</Name>" +
+              "                <Fields>" +
+              "                    <Field>" +
+              "                        <CustomerKey>Domain ID</CustomerKey>" +
+              "                        <Name>Domain ID</Name>" +
+              "                        <FieldType>Text</FieldType>" +
+              "                        <MaxLength>50</MaxLength>" +
+              "                        <IsRequired>true</IsRequired>" +
+              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+              "                    </Field>" +
+              "                    <Field>" +
+              "                        <CustomerKey>Domain Name</CustomerKey>" +
+              "                        <Name>Domain Name</Name>" +
+              "                        <FieldType>Text</FieldType>" +
+              "                        <MaxLength>100</MaxLength>" +
+              "                        <IsRequired>true</IsRequired>" +
+              "                        <IsPrimaryKey>true</IsPrimaryKey>" +
+              "                    </Field>" +
+              "                    
+              "                </Fields>" +
+              "            </Objects>" +
+              "        </CreateRequest>" +
+              "    </s:Body>" +
+              "</s:Envelope>";
+    
+            return new Promise<any>((resolve, reject) => {
+              let headers = {
+                "Content-Type": "text/xml",
+              };
+    
+              axios({
+                method: "post",
+                url: "" + soap_instance_url + "Service.asmx" + "",
+                data: DCmsg,
+                headers: headers,
+              })
+                .then((response: any) => {
+                  var parser = new xml2js.Parser();
+                  parser.parseString(
+                    response.data,
+                    (
+                      err: any,
+                      result: {
+                        [x: string]: {
+                          [x: string]: { [x: string]: { [x: string]: any }[] }[];
+                        };
+                      }
+                    ) => {
+                      let DomainConfiguration =
+                        result["soap:Envelope"]["soap:Body"][0][
+                        "CreateResponse"
+                        ][0]["Results"];
+    
+                      if (DomainConfiguration != undefined) {
+                        let DEexternalKeyDomainConfiguration =
+                          DomainConfiguration[0]["Object"][0]["CustomerKey"];
+    
+                        //this.DEexternalKeyDomainConfiguration =
+                        // DomainConfiguration[0]["Object"][0]["CustomerKey"];
+                        let sendresponse = {};
+                        sendresponse = {
+                         // refreshToken: refreshTokenbody,
+                          statusText:
+                            "Domain Configuration Data extension has been created Successfully",
+                          soap_instance_url: soap_instance_url,
+                          member_id: member_id,
+                          DEexternalKeyDomainConfiguration:
+                            DEexternalKeyDomainConfiguration,
+                        };
+                        resolve(sendresponse);
+    
+                        /*  res
+                      .status(200)
+                      .send(
+                        "Domain Configuration Data extension has been created Successfully"
+                      );*/
+                      }
+                    }
+                  );
+                })
+                .catch((error: any) => {
+                  // error
+                  let errorMsg =
+                    "Error creating the Domain Configuration Data extension......";
+                  errorMsg += "\nMessage: " + error.message;
+                  errorMsg +=
+                    "\nStatus: " + error.response
+                      ? error.response.status
+                      : "<None>";
+                  errorMsg +=
+                    "\nResponse data: " + error.response.data
+                      ? //Utils.prettyPrintJson(
+                        JSON.stringify(error.response.data)
+                      : "<None>";
+                  //Utils.logError(errorMsg);
+    
+                  reject(errorMsg);
+                });
+            });
+          
+         
+          };
+      }
+
         
       
      

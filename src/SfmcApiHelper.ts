@@ -204,6 +204,26 @@ export default class SfmcApiHelper
                {
                  console.log(err)
                })
+
+               this.genericMethods
+               .createDataExtension
+               (
+                 response.member_id,
+                response.soap_instance_url,
+                paramData.oauthToken,
+                response.FolderID,
+                process.env.BASE_URL
+               
+               )
+               .then((response:any)=>
+               {
+                 console.log("<><><Response in creating Data xtension><><>",response)
+                 
+               })
+               .catch((err:any)=>
+               {
+                 console.log(err)
+               })
               })
              
                 .catch((err: any) => {
