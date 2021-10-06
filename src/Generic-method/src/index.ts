@@ -728,8 +728,6 @@ export default class mcGenericMethods {
                   reject(errorMsg);
                 });
             });
-          
-         
           };
       }
 
