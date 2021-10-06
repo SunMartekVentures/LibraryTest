@@ -99,7 +99,7 @@ export default class SfmcApiHelper
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
         console.log("AccessToken Method  library", res);
-        
+        res.status(200).send(res)
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -123,6 +123,7 @@ export default class SfmcApiHelper
                 soapInstance: this.soap_instance_url,
                 data:response.data
               };
+              response.status(200).send(paramData)
               //res.status(200).send(paramData)
               this.genericMethods
                 .getSenderDomain(paramData)
