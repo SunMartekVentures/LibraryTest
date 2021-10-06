@@ -22,7 +22,7 @@ export default class SfmcApiHelper
   private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
   private refreshToken = "";
   private parentFolderId= "12785";
-  private FolderID="";
+  private FolderID = "";
       /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -208,7 +208,7 @@ export default class SfmcApiHelper
                {
                  console.log(err)
                })
-
+               console.log("Folder id outside",this.FolderID)
                this.genericMethods
                .createDataExtension
                (
