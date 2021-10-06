@@ -255,7 +255,7 @@ export default class mcGenericMethods {
           '<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">' +
           '<ns1:ModifiedDate xsi:nil="true"/>' +
           '<ns1:ObjectID xsi:nil="true"/>' +
-          "<ns1:CustomerKey>LibraryCreated - " +
+          "<ns1:CustomerKey>LibraryCreated-" +
           member_id +
           "</ns1:CustomerKey>" +
           "<ns1:ParentFolder>" +
@@ -265,10 +265,10 @@ export default class mcGenericMethods {
           "</ns1:ID>" +
           '<ns1:ObjectID xsi:nil="true"/>' +
           "</ns1:ParentFolder>" +
-          "<ns1:Name>LibraryCreated - " +
+          "<ns1:Name>LibraryCreated-" +
           member_id +
           "</ns1:Name>" +
-          "<ns1:Description>LibraryCreated- " +
+          "<ns1:Description>LibraryCreated-" +
           member_id +
           " Folder</ns1:Description>" +
           "<ns1:ContentType>dataextension</ns1:ContentType>" +
