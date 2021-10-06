@@ -496,6 +496,7 @@ export default class mcGenericMethods {
         headers: { "Content-Type": "text/xml" },
       })
         .then((response: any) => {
+          console.log("Response data in foldercheck:>>:>>",response.data)
           var extractedData = "";
           var parser = new xml2js.Parser();
           parser.parseString(
@@ -515,7 +516,7 @@ export default class mcGenericMethods {
                 console.log("Folder id in check>>",FolderID)
               if (FolderID != undefined) {
                 //    this.FolderID = FolderID[0]["ID"][0];
-                console.log("Folder id in check:",FolderID)
+                
                 resolve({
                   status: response.status,
                   statusText: true,
