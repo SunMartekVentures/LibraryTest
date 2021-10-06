@@ -496,7 +496,7 @@ export default class mcGenericMethods {
         headers: headers,
       })
         .then((response: any) => {
-          console.log("Response data in foldercheck:>>:>>",response.data)
+          console.log("Response data in foldercheck:>>:>>",response)
           var extractedData = "";
           var parser = new xml2js.Parser();
           parser.parseString(
