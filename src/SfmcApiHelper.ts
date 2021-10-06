@@ -211,7 +211,7 @@ export default class SfmcApiHelper
                  response.member_id,
                 response.soap_instance_url,
                 paramData.oauthToken,
-                response.FolderID,
+                response.data.FolderID,
                 process.env.BASE_URL
                
                )
