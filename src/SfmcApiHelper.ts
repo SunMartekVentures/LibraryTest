@@ -181,6 +181,7 @@ export default class SfmcApiHelper
                )
                .then((response:any)=>
                {
+                 console.log("Response in dataFolderCheck >>>",response)
                  console.log("FOlderID got!!")
                })
                .catch((err:any)=>
