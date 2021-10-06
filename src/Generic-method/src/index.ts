@@ -474,7 +474,7 @@ export default class mcGenericMethods {
       '                <Filter xsi:type="SimpleFilterPart">' +
       "                    <Property>Name</Property>" +
       "                    <SimpleOperator>equals</SimpleOperator>" +
-      "                    <Value>LibraryCreated- " +
+      "                    <Value>LibraryCreated-" +
       member_id +
       "</Value>" +
       "                </Filter>" +
