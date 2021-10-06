@@ -493,7 +493,7 @@ export default class mcGenericMethods {
         method: "post",
         url: "" + soap_instance_url + "Service.asmx" + "",
         data: soapMessage,
-        headers: { "Content-Type": "text/xml" },
+        headers: headers,
       })
         .then((response: any) => {
           console.log("Response data in foldercheck:>>:>>",response.data)
