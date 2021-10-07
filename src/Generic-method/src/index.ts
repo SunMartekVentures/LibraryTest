@@ -820,7 +820,7 @@ export default class mcGenericMethods {
               "        </CreateRequest>" +
               "    </s:Body>" +
               "</s:Envelope>";
-
+              console.log("BodySoapDataa:",bodySoapData)
               
               return new Promise<any>((resolve, reject) => {
               let headers = {
