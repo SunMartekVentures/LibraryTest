@@ -203,13 +203,8 @@ export default class SfmcApiHelper
                   this.FolderID = response.FolderID
                   console.log(this.FolderID) 
                   console.log("FOlderID got!!")
-               })
-               .catch((err:any)=>
-               {
-                 console.log(err)
-               })
-               console.log("Folder id outside",this.FolderID)
-               this.genericMethods
+
+                  this.genericMethods
                .createDataExtension
                (
                  response.member_id,
@@ -229,7 +224,11 @@ export default class SfmcApiHelper
                  console.log("Erroe in creatong data extension in folder",err)
                })
               })
-             
+               })
+               .catch((err:any)=>
+               {
+                 console.log(err)
+               })
                 .catch((err: any) => {
                   console.error(
                     "error getting Sender Domain from library" + err
