@@ -23,6 +23,16 @@ export default class SfmcApiHelper
   private refreshToken = "";
   private parentFolderId= "12785";
   private FolderID = "";
+  private rest_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/";
+  private datas =[ {
+    "keys":{
+            "id": "47"
+            },
+    "values":{
+            "name": "alex",
+            "email": "alex@gamil.com",
+            }
+}]
       /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
@@ -251,6 +261,36 @@ export default class SfmcApiHelper
                {
                  console.log("Erroe in creatong data extension in folder",err)
                })
+              })
+              this.genericMethods
+              .retrievingDataExtensionRows( paramData.oauthToken,
+                response.soap_instance_url,
+                response.member_id,
+                this.parentFolderId)
+                
+              .then((response:any)=>
+              {
+                console.log("<<<<success>>>>");
+                
+                console.log("Journey Details:>>>:",JSON.stringify(response));
+              })
+            
+              this.genericMethods
+              .insertRowHelper(paramData.oauthToken,this.rest_instance_url,this._deExternalKey,this.datas)
+                
+              .then((response:any)=>
+              {
+                console.log("<<<<success>>>>");
+                
+                console.log("insert data:>>>:",JSON.stringify(response));
+              })
+              .catch((err:any)=>
+              {
+                console.error(err)
+              })
+              .catch((err:any)=>
+              {
+                console.error(err)
               })
                })
                .catch((err:any)=>

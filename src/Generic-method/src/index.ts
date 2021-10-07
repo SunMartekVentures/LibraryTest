@@ -597,6 +597,140 @@ export default class mcGenericMethods {
         });
     });
       }
+      public async retrievingDataExtensionRows(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string) 
+      {
+             console.log("retrievingDataExtensionRows:" + token);
+             console.log("retrievingDataExtensionRows:" + soap_instance_url);
+             console.log("retrievingDataExtensionRows:" + member_id);
+             console.log("retrievingDataExtensionRows:" +ParentFolderID);
+             //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
+             let refreshTokenbody = "";
+             let soapMessage = "";
+                   let FiltersoapMessage =
+                     '<?xml version="1.0" encoding="UTF-8"?>' +
+                     '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
+                     "    <s:Header>" +
+                     '        <a:Action s:mustUnderstand="1">Retrieve</a:Action>' +
+                     '        <a:To s:mustUnderstand="1">' +
+                     soap_instance_url +
+                     "Service.asmx" +
+                     "</a:To>" +
+                     '        <fueloauth xmlns="http://exacttarget.com">' +
+                     token +
+                     "</fueloauth>" +
+                     "    </s:Header>" +
+                     '    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
+                     '        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">' +
+                     "            <RetrieveRequest>" +
+                     "                <ObjectType>DataExtensionObject[MCAPP44]</ObjectType>" +
+                     "      <Properties>id</Properties>" +
+                     "        <Properties>name</Properties>" +
+                     "        <Properties>email</Properties>" +
+                     "        <Properties>created_dts</Properties>" +
+                     "            </RetrieveRequest>" +
+                     "        </RetrieveRequestMsg>" +
+                     "    </s:Body>" +
+                     "</s:Envelope>";
+                   soapMessage = FiltersoapMessage;
+                 // }
+                 return new Promise<any>((resolve, reject) => {
+                   const configs: AxiosRequestConfig = {
+                     method: "post",
+                     url: "" + soap_instance_url + "Service.asmx" + "",
+                     headers: {
+                       "Content-Type": "text/xml",
+                     },
+                     data: soapMessage,
+                   };
+                   axios(configs)
+                     .then(function (response: any) {
+                       console.log("::::::::: " + response.data);
+                       let rawdata = response.data;
+                       var rawData = "";
+                       var parser = new xml2js.Parser();
+                       parser.parseString(rawdata, function (err: any, result: any) {
+                         rawData =
+                           result["soap:Envelope"]["soap:Body"][0][
+                             "RetrieveResponseMsg"
+                           ][0]["Results"];
+                       });
+                       let sendresponse = {
+                         refreshToken: refreshTokenbody,
+                         rawData: rawData,
+                       };
+                       console.log(
+                         "raw data and send response " + JSON.stringify(rawData) + "\n" + sendresponse
+                       );
+                       resolve(sendresponse);
+                     })
+                     .catch(function (error: any) {
+                       let errorMsg = "Error getting the Data extensions getting rows";
+                       errorMsg += "\nMessage: " + error.message;
+                       errorMsg +=
+                         "\nStatus: " + error.response
+                           ? error.response.status
+                           : "<None>";
+                       errorMsg +=
+                         "\nResponse data: " + error.response.data
+                           ? console.log(JSON.stringify(error.response.data))
+                           : "<None>";
+                       console.log("errormsg:" + errorMsg);
+                       reject(errorMsg);
+                     });
+                 });
+           };
+
+           public async insertRowHelper(
+             oauthAccessToken: string,
+             rest_instance_url: string,
+             DEexternalKeyDomainConfiguration: any,
+             jsonData: any
+           ): Promise<any> {
+             let self = this;
+             console.log(" oauthAccessToken:", oauthAccessToken,"rest_instance_url:",rest_instance_url,"DEexternalKeyDomainConfiguration:",DEexternalKeyDomainConfiguration,"jsonData",jsonData);
+             let _sfmcDataExtensionApiUrl =
+               rest_instance_url +
+               "/hub/v1/dataevents/key:" +
+               DEexternalKeyDomainConfiguration +
+               "/rowset";
+             let ReqBody = jsonData;
+             console.log("reqBody insert ::: " +ReqBody);
+             let post_data = jsonData;
+             return new Promise<any>((resolve, reject) => {
+               let headers = {
+                 "Content-Type": "application/json",
+                 Authorization: "Bearer " + oauthAccessToken,
+               };
+               console.log("started");
+               axios
+                 .post(_sfmcDataExtensionApiUrl, post_data, { headers: headers })
+                 .then((response: any) => {
+                   // success
+                   console.log("ended");
+                   resolve({
+                     status: response.status,
+                     statusText:
+                       response.statusText +
+                       "\n" +
+                       console.log(JSON.stringify(response.data)),
+                   });
+                 })
+                 .catch((error: any) => {
+                   // error
+                   let errorMsg =
+                     "Error loading sample data. POST response from Marketing Cloud:";
+                   errorMsg += "\nMessage: " + error.message;
+                   errorMsg +=
+                     "\nStatus: " + error.response ? error.response.status : "<None>";
+                   errorMsg +=
+                     "\nResponse data: " + error.response.data
+                       ? console.log(JSON.stringify(error.response.data))
+                       : "<None>";
+                       console.log(errorMsg);
+                   reject(errorMsg);
+                 });
+             });
+           };
 
       public async createDataExtension   
       ( 
@@ -616,11 +750,8 @@ export default class mcGenericMethods {
         "tssd:",tssd,
         "JsonArr:",jsonArr
         );
-        console.log
-        (
-          "Array length >>",jsonArr.length,
-          "Array Name's:>>",jsonArr[0].name
-        )
+        
+            let bodySoapData  = '';
             let DCmsg =
               '<?xml version="1.0" encoding="UTF-8"?>' +
               '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
@@ -644,6 +775,24 @@ export default class mcGenericMethods {
               "</CustomerKey>" +
               "                <Name>LibraryModules"+
               "</Name>" +
+              
+/**
+ *  for(var i =0 ; i< fieldList.length; i++ ){
+ *  if(FieldList[i].fieldName != null && FieldList[i].fieldType == 'Text'|| FieldList[i].fieldType == 'text' && ){
+ *  bodySoapData += "<Field>" +
+//       "                        <CustomerKey>FieldList[i].fieldName</CustomerKey>" +
+//       "                        <Name>FieldList[i].fieldName</Name>" +
+//       "                        <FieldType>FieldList[i].fieldType</FieldType>" +
+//       "                        <MaxLength>FieldList[i].length</MaxLength>" +
+//       "                        <IsRequired>true</IsRequired>" +
+//       "                        <IsPrimaryKey>false</IsPrimaryKey>" +
+//       "                    </Field>"
+ * }
+ * }*/
+              // for(var i=0;i<jsonArr.length;i++)
+              // {
+              //   if(jsonArr[i].name != null && jsonArr[i].)
+              // }
               "                <Fields>" +
               "                    <Field>" +
               "                        <CustomerKey>Domain ID</CustomerKey>" +
@@ -745,8 +894,9 @@ export default class mcGenericMethods {
           };
       }
 
+     
         
-      
+          
      
   
 
