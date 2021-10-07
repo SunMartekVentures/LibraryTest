@@ -36,11 +36,11 @@
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
     // const tssd = urlParams.get('tssd');
-    const tssd ="mcj6cy1x9m-t5h5tz0bfsyqj38ky";
-
+    const tssd = process.env.BASE_URL;
     console.log("tssd=",tssd);
+
+
       function accessTokenGeneration(req,res) {
-        
         axios({
           method: "POST",
           url: "/appdemoauthtoken",
@@ -59,121 +59,122 @@
 
             );
             let apptoken = response.data.refreshToken;
-           //  AppUserInfo( apptoken)
+           // AppUserInfo( apptoken)
           })
           .catch(function (error) {
             console.log(error);
           });
       }
 
+      function AppUserInfo( apptoken ) {
+        console.log("response.data.oauthToken", apptoken);
+         axios({
+           method: "POST",
+           url: "/appuserinfo",
+           data: { refreshToken: apptoken, tssd:tssd },
+ 
+         })
+           .then(function (response) {
+             console.log("response>>>>",response);
+             var test = response.data.username;
+               document.getElementById("myInput").value = test;
+           })
+           //   console.log("appuserinfo:" + JSON.stringify(response));
+ 
+           //   thisdata.setState({ namex: response.data });
+           //   thisdata.setState({ refreshtoken: response.data.refreshToken });
+           //   thisdata.setState({ member_id: response.data.member_id });
+           //   thisdata.setState({
+           //     restInstance: response.data.rest_instance_url,
+           //   });
+           //   thisdata.setState({
+           //     soapInstance: response.data.soap_instance_url,
+           //   });
+ 
+          //   dataFolderCheck(
+           //     thisdata,
+           //     response.data.refreshToken,
+           //     response.data.member_id,
+           //     response.data.rest_instance_url,
+           //     response.data.soap_instance_url
+           //   );
+           // })
+           .catch(function (error) {
+             console.log(error);
+           });
+       }
 
 
-      // // creating Sparkpost Integration Data folder
-      // function createSparkpostIntegrationFolder(response) {
-      //   console.log("sparkpost integretion",response);
-      //   axios({
-      //     method: "POST",
-      //     url: "/createsparkpostintegrationfolder",
-      //     data: {
-      //         accessToken:response.oauthAccessToken
-      //     }
-      //   })
-      //     .then(function (response) {
-      //       console.log(
-      //         "createSparkpostIntegrationFolder:" +
-      //           JSON.stringify(response.data)
-      //       );
-      //       // if (response.data.statusText) {
-      //       //   thisdata.setState({ refreshtoken: response.data.refreshToken });
-      //       //   thisdata.setState({ FolderID: response.data.FolderID });
-              
-      //       //   // creatingDomainConfigurationDE(req,res)
-      //       // } else {
-      //       //   console.log("Error creating data extension folder");
-      //       // }
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
-      // }
+       // creating Sparkpost Integration Data folder
+       function createSparkpostIntegrationFolder(response) {
+         console.log("sparkpost integretion",response);
+         axios({
+           method: "POST",
+           url: "/createsparkpostintegrationfolder",
+           data: {
+               accessToken:response.oauthAccessToken
+           }
+         })
+           .then(function (response) {
+             console.log(
+               "createSparkpostIntegrationFolder:" +
+                 JSON.stringify(response.data)
+             );
+             // if (response.data.statusText) {
+             //   thisdata.setState({ refreshtoken: response.data.refreshToken });
+             //   thisdata.setState({ FolderID: response.data.FolderID });
+            
+             //   // creatingDomainConfigurationDE(req,res)
+             // } else {
+             //   console.log("Error creating data extension folder");
+             // }
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
+       }
 
      
-//   function creatingDomainConfigurationDE(req,res)
+   function creatingDomainConfigurationDE(req,res)
  
-//  {
-//    var dataextensionname = document.getElementById("txt").value;
-//    console.log("dataextensionname=",dataextensionname);
-//   //  console.log("methodcalled");
-//        axios({
-//          method: "POST",
-//          url: "/creatingDomainConfigurationDE",
-//          data: {
-//           dataextensionname : dataextensionname,
-//            soap_instance_url: "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/",
-           
-//          },
-         
-//        })
-//          .then(function (response) {
-//            console.log(
-//              "creatingDomainConfigurationDE:" + JSON.stringify(response)
-//            );
-//            document.getElementById("demo2").innerHTML = "dataextension created";
-//            document.getElementById("demo4").innerHTML = JSON.stringify(response);
-//            // if (response.data) {
-           
-//            //   thisdata.setState({
-//            //     DEexternalKeyDomainConfiguration:
-//            //       response.data.DEexternalKeyDomainConfiguration,
-//            //   });
-            
-//            // } else {
-//            //   console.log("Error creating data extension folder");
-//            // }
-//          })
-//          .catch(function (error) {
-//           document.getElementById("demo3").innerHTML = "dataextension not created";
-//            console.log(error);
-//          });
-//      }
-      
-     function AppUserInfo( apptoken ) {
-       console.log("response.data.oauthToken", apptoken);
+  {
+    var dataextensionname = document.getElementById("txt").value;
+    console.log("dataextensionname=",dataextensionname);
+   //  console.log("methodcalled");
         axios({
           method: "POST",
-          url: "/appuserinfo",
-          data: { refreshToken: apptoken, tssd:tssd },
-
+          url: "/creatingDomainConfigurationDE",
+          data: {
+           dataextensionname : dataextensionname,
+            soap_instance_url: "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/",
+           
+          },
+         
         })
           .then(function (response) {
-            console.log("response>>>>",response);
-            var test = response.data.username;
-              document.getElementById("myInput").value = test;
+            console.log(
+              "creatingDomainConfigurationDE:" + JSON.stringify(response)
+            );
+            document.getElementById("demo2").innerHTML = "dataextension created";
+            document.getElementById("demo4").innerHTML = JSON.stringify(response);
+            // if (response.data) {
+        
+            //   thisdata.setState({
+            //     DEexternalKeyDomainConfiguration:
+           //       response.data.DEexternalKeyDomainConfiguration,
+            //   });
+            
+            // } else {
+            //   console.log("Error creating data extension folder");
+            // }
           })
-          //   console.log("appuserinfo:" + JSON.stringify(response));
-
-          //   thisdata.setState({ namex: response.data });
-          //   thisdata.setState({ refreshtoken: response.data.refreshToken });
-          //   thisdata.setState({ member_id: response.data.member_id });
-          //   thisdata.setState({
-          //     restInstance: response.data.rest_instance_url,
-          //   });
-          //   thisdata.setState({
-          //     soapInstance: response.data.soap_instance_url,
-          //   });
-
-          //   dataFolderCheck(
-          //     thisdata,
-          //     response.data.refreshToken,
-          //     response.data.member_id,
-          //     response.data.rest_instance_url,
-          //     response.data.soap_instance_url
-          //   );
-          // })
           .catch(function (error) {
+           document.getElementById("demo3").innerHTML = "dataextension not created";
             console.log(error);
           });
       }
+      
+    
   </script>
 
 </body>

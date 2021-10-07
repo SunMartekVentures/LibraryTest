@@ -86,19 +86,19 @@ app.post('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); 
 });
 
-// app.post("/appuserinfo", function (req, res) {
-//   appDemoRoutes.appUserInfo(req, res);
-// });
+app.post("/appuserinfo", function (req, res) {
+  appDemoRoutes.appUserInfo(req, res);
+});
 
 
 
-  // app.post("/createsparkpostintegrationfolder", function (req, res) {
-  //   appDemoRoutes.createSparkpostIntegrationFolder(req, res);
-  // });
+  app.post("/createsparkpostintegrationfolder", function (req, res) {
+    appDemoRoutes.createSparkpostIntegrationFolder(req, res);
+  });
 
-  // app.post("/creatingDomainConfigurationDE", function (req, res) {
-  //   appDemoRoutes.creatingDomainConfigurationDE(req, res);
-  // });
+  app.post("/creatingDomainConfigurationDE", function (req, res) {
+    appDemoRoutes.creatingDomainConfigurationDE(req, res);
+  });
   
 
 // // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in

@@ -100,7 +100,9 @@ export default class SfmcApiHelper
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
         console.log("AccessToken Method  library", res);
-        // res.status(200).send(res)
+        res.status(200).send(res)
+
+
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -116,6 +118,7 @@ export default class SfmcApiHelper
               postBody.client_id,
               postBody.client_secret
             )
+
             .then((response: any) => {
               console.log("Respo in refresh token generic method:",response)
               const paramData = {
@@ -204,6 +207,31 @@ export default class SfmcApiHelper
                   console.log(this.FolderID) 
                   console.log("FOlderID got!!")
 
+
+                  const jsonArr=[
+                    {
+                      name:"LibraryName",
+                      type:"text",
+                      length:100,
+                      isReq:true,
+                      isKey:true
+                    },
+                    {
+                      name:"LibraryModules",
+                      type:"decimal",
+                      precision:20,
+                      scale:0,
+                      isReq:true,
+                      isKey:false
+                    },
+                    {
+                      name:"Email",
+                      type:"Email Address",
+                      length:100,
+                      isReq:true,
+                      isKey:true
+                    }
+                  ]
                   this.genericMethods
                .createDataExtension
                (
@@ -211,8 +239,8 @@ export default class SfmcApiHelper
                 response.soap_instance_url,
                 paramData.oauthToken,
                 this.FolderID,
-                process.env.BASE_URL
-               
+                process.env.BASE_URL,
+                jsonArr
                )
                .then((response:any)=>
                {

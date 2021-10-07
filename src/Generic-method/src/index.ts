@@ -604,7 +604,8 @@ export default class mcGenericMethods {
         soap_instance_url: string,
         token:string,
         FolderID: string,
-        tssd: string
+        tssd: string,
+        jsonArr:any
       ) {
         console.log
         (
@@ -612,7 +613,8 @@ export default class mcGenericMethods {
         "soap-url:",soap_instance_url,
         "token:",token,
         "folderid:",FolderID,
-        "tssd:",tssd
+        "tssd:",tssd,
+        "JsonArr:",jsonArr
         );
             let DCmsg =
               '<?xml version="1.0" encoding="UTF-8"?>' +
