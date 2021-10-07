@@ -236,7 +236,7 @@ export default class SfmcApiHelper
                     },
                     {
                       name:"LibraryScale",
-                      type:"decimal",
+                      type:"number",
                       precision:20,
                       isReq:true,
                       isKey:false
