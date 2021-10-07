@@ -12,8 +12,8 @@
     <title>Library Methods </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
     onclick="accessTokenGeneration()"> Get Access Token</button>
-    <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
-    onclick="AppUserInfo()">AppUserInfo</button> -->
+    <button type="button" id="AppUserInfo" class="btn btn-primary"
+    onclick="AppUserInfo()">AppUserInfo</button>
     <!-- <body>
       <h3>Enter Dataextension Name</h3>
       <input type="text" id="txt"/>
@@ -34,6 +34,7 @@
     // const tssd = urlParams.get('tssd');
     const tssd = process.env.BASE_URL;
     console.log("tssd=",tssd);
+    let apptoken ="";
       function accessTokenGeneration(req,res) {
         
         axios({
@@ -53,7 +54,7 @@
                 JSON.stringify(response.data.refreshToken)
 
             );
-            let apptoken = response.data.refreshToken;
+           apptoken = response.data.refreshToken;
            //  AppUserInfo( apptoken)
           })
           .catch(function (error) {
@@ -130,9 +131,9 @@
            document.getElementById("demo3").innerHTML = "dataextension not created";
             console.log(error);
           });
-      }
+      }*/
       
-     function AppUserInfo( apptoken ) {
+     function AppUserInfo() {
        console.log("response.data.oauthToken", apptoken);
         axios({
           method: "POST",
@@ -145,18 +146,18 @@
             var test = response.data.username;
               document.getElementById("myInput").value = test;
           })
-          //   console.log("appuserinfo:" + JSON.stringify(response));
+             console.log("appuserinfo:" + JSON.stringify(response));
 
-          //   thisdata.setState({ namex: response.data });
-          //   thisdata.setState({ refreshtoken: response.data.refreshToken });
-          //   thisdata.setState({ member_id: response.data.member_id });
-          //   thisdata.setState({
-          //     restInstance: response.data.rest_instance_url,
-          //   });
-          //   thisdata.setState({
-          //     soapInstance: response.data.soap_instance_url,
-          //   });
-
+             thisdata.setState({ namex: response.data });
+             thisdata.setState({ refreshtoken: response.data.refreshToken });
+             thisdata.setState({ member_id: response.data.member_id });
+             thisdata.setState({
+               restInstance: response.data.rest_instance_url,
+             });
+             thisdata.setState({
+               soapInstance: response.data.soap_instance_url,
+             });
+/*
          //   dataFolderCheck(
           //     thisdata,
           //     response.data.refreshToken,
@@ -168,7 +169,8 @@
           .catch(function (error) {
             console.log(error);
           });
-      }*/
+      */
+        }
   </script>
 
 </body>
