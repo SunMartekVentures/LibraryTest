@@ -813,13 +813,15 @@ export default class mcGenericMethods {
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
                   "                    </Field>"
                 }
-              }       
-
+              } 
+              let footer=      
               "                </Fields>" +
               "            </Objects>" +
               "        </CreateRequest>" +
               "    </s:Body>" +
               "</s:Envelope>";
+
+              console.log("Data Extension Format:",DCmsg,bodySoapData,footer)
               console.log("BodySoapDataa:",bodySoapData)
               
               return new Promise<any>((resolve, reject) => {
