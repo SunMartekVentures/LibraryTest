@@ -792,8 +792,7 @@ export default class mcGenericMethods {
                 }
                 else if(jsonArr[i].name != null && jsonArr[i].type=='decimal'|| jsonArr[i].type=="Decimal")
                 {
-                  if(jsonArr[i].scale != null)
-                  {
+                  
                   bodySoapData +="         <Field>" +
                   "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
                   "                        <Name>"+jsonArr[i].name+"</Name>" +
@@ -802,7 +801,18 @@ export default class mcGenericMethods {
                   "                          <Scale>0</Scale>" +
                   "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
-                  "                    </Field>" 
+                  "                    </Field>"   
+                }
+                else if(jsonArr[i].name != null && jsonArr[i].type=='email address'|| jsonArr[i].type=="Email Address")
+                {
+                  bodySoapData +="        <Field>" +
+                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                  "                        <Name>"+jsonArr[i].name+"</Name>" +
+                  "                        <FieldType>EmailAddress</FieldType>" +
+                  "                        <MaxLength>254</MaxLength>" +
+                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                  "                    </Field>"
                 }
                 else
                 {
@@ -814,19 +824,6 @@ export default class mcGenericMethods {
                   "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
                   "                    </Field>" 
-                }
-                
-                }
-                else
-                {
-                  bodySoapData +="        <Field>" +
-                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
-                  "                        <Name>"+jsonArr[i].name+"</Name>" +
-                  "                        <FieldType>EmailAddress</FieldType>" +
-                  "                        <MaxLength>254</MaxLength>" +
-                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
-                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
-                  "                    </Field>"
                 }
               } 
               let footer=      
