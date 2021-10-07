@@ -633,9 +633,9 @@ export default class mcGenericMethods {
               "                <CategoryID>"+
               FolderID+
               "</CategoryID>" +
-              "                <CustomerKey>LibraryModules"
+              "                <CustomerKey>LibraryModules"+
               "</CustomerKey>" +
-              "                <Name>LibraryModules"
+              "                <Name>LibraryModules"+
               "</Name>" +
               "                <Fields>" +
               "                    <Field>" +
