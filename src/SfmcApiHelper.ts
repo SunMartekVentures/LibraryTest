@@ -237,9 +237,8 @@ export default class SfmcApiHelper
                     {
                       name:"Email",
                       type:"Email Address",
-                      length:100,
                       isReq:true,
-                      isKey:true
+                      isKey:false
                     }
                   ]
                   this.genericMethods

@@ -775,41 +775,44 @@ export default class mcGenericMethods {
               "</CustomerKey>" +
               "                <Name>LibraryModules"+
               "</Name>" +
-              
-/**
- *  for(var i =0 ; i< fieldList.length; i++ ){
- *  if(FieldList[i].fieldName != null && FieldList[i].fieldType == 'Text'|| FieldList[i].fieldType == 'text' && ){
- *  bodySoapData += "<Field>" +
-//       "                        <CustomerKey>FieldList[i].fieldName</CustomerKey>" +
-//       "                        <Name>FieldList[i].fieldName</Name>" +
-//       "                        <FieldType>FieldList[i].fieldType</FieldType>" +
-//       "                        <MaxLength>FieldList[i].length</MaxLength>" +
-//       "                        <IsRequired>true</IsRequired>" +
-//       "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-//       "                    </Field>"
- * }
- * }*/
-              // for(var i=0;i<jsonArr.length;i++)
-              // {
-              //   if(jsonArr[i].name != null && jsonArr[i].)
-              // }
-              "                <Fields>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Domain ID</CustomerKey>" +
-              "                        <Name>Domain ID</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>50</MaxLength>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>false</IsPrimaryKey>" +
-              "                    </Field>" +
-              "                    <Field>" +
-              "                        <CustomerKey>Domain Name</CustomerKey>" +
-              "                        <Name>Domain Name</Name>" +
-              "                        <FieldType>Text</FieldType>" +
-              "                        <MaxLength>100</MaxLength>" +
-              "                        <IsRequired>true</IsRequired>" +
-              "                        <IsPrimaryKey>true</IsPrimaryKey>" +
-              "                    </Field>" +                    
+              "                <Fields>" 
+              for(var i=0;i<jsonArr.length;i++)
+              {
+                if(jsonArr[i].name != null && jsonArr[i].type=='text'|| jsonArr[i].type=="Text")
+                {
+                bodySoapData +="         <Field>" +
+                "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                "                        <Name>"+jsonArr[i].name+"</Name>" +
+                "                        <FieldType>Text</FieldType>" +
+                "                        <MaxLength>"+jsonArr[i].length+"</MaxLength>" +
+                "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                "                    </Field>" 
+                }
+                else if(jsonArr[i].name != null && jsonArr[i].type=='decimal'|| jsonArr[i].type=="Decimal")
+                {
+                  bodySoapData +="         <Field>" +
+                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                  "                        <Name>"+jsonArr[i].name+"</Name>" +
+                  "                        <FieldType>Decimal</FieldType>" +
+                  "                        <Precision>"+jsonArr[i].precision+"</Precision>" +
+                  "                          <Scale>0</Scale>" +
+                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                  "                    </Field>" 
+                }
+                else
+                {
+                  bodySoapData +="        <Field>" +
+                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                  "                        <Name>"+jsonArr[i].name+"</Name>" +
+                  "                        <FieldType>EmailAddress</FieldType>" +
+                  "                        <MaxLength>254</MaxLength>" +
+                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                  "                    </Field>"
+                }
+              }              
               "                </Fields>" +
               "            </Objects>" +
               "        </CreateRequest>" +
