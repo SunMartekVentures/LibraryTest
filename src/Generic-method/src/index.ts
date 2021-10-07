@@ -809,7 +809,7 @@ export default class mcGenericMethods {
                   bodySoapData +="         <Field>" +
                   "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
                   "                        <Name>"+jsonArr[i].name+"</Name>" +
-                  "                        <FieldType>Decimal</FieldType>" +
+                  "                        <FieldType>Number</FieldType>" +
                   "                        <Precision>"+jsonArr[i].precision+"</Precision>" +                 
                   "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
