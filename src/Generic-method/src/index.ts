@@ -822,7 +822,7 @@ export default class mcGenericMethods {
               "</s:Envelope>";
 
               console.log("Data Extension Format:",DCmsg,bodySoapData,footer)
-              console.log("BodySoapDataa:",bodySoapData)
+              let dataDE = DCmsg + bodySoapData + footer;
               
               return new Promise<any>((resolve, reject) => {
               let headers = {
@@ -832,7 +832,7 @@ export default class mcGenericMethods {
               axios({
                 method: "post",
                 url: "" + soap_instance_url + "Service.asmx" + "",
-                data: DCmsg,
+                data: dataDE,
                 headers: headers,
               })
                 .then((response: any) => {
