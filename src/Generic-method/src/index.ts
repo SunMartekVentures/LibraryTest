@@ -663,7 +663,7 @@ export default class mcGenericMethods {
               
               return new Promise<any>((resolve, reject) => {
               let headers = {
-                "Content-Type": "application/xml",
+                "Content-Type": "text/xml",
               };
               console.log("DC Msg:>>>",DCmsg);
               axios({
