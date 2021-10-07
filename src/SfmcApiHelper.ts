@@ -233,6 +233,13 @@ export default class SfmcApiHelper
                       scale:0,
                       isReq:true,
                       isKey:false
+                    }, 
+                    {
+                      name:"LibraryScale",
+                      type:"number",
+                      length:20,
+                      isReq:true,
+                      isKey:false
                     },
                     {
                       name:"Email",

@@ -803,7 +803,7 @@ export default class mcGenericMethods {
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
                   "                    </Field>"   
                 }
-                else 
+                else if(jsonArr[i].name != null && jsonArr[i].type=='email address'|| jsonArr[i].type=="Email Address")
                 {
                   bodySoapData +="        <Field>" +
                   "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
@@ -813,6 +813,16 @@ export default class mcGenericMethods {
                   "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
                   "                    </Field>"
+                }
+                else
+                {
+                  bodySoapData +="         <Field>" +
+                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                  "                        <Name>"+jsonArr[i].name+"</Name>" +
+                  "                        <FieldType>Number</FieldType>" +                 
+                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                  "                    </Field>" 
                 }
                
               } 
