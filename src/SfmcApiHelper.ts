@@ -109,6 +109,8 @@ export default class SfmcApiHelper
       .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
+        console.log("tokken tokken>>",this.refreshToken);
+        
         console.log("AccessToken Method  library", res);
        // res.status(200).send(res)
 
@@ -415,7 +417,7 @@ public appUserInfo(req: any, res: any) {
   this.genericMethods
   .userInfo(
     process.env.BASE_URL,
-    req.data.refreshToken
+    this.refreshToken
   )
   .then((response:any)=>
   {
