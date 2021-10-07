@@ -235,6 +235,13 @@ export default class SfmcApiHelper
                       isKey:false
                     },
                     {
+                      name:"LibraryScale",
+                      type:"decimal",
+                      precision:20,
+                      isReq:true,
+                      isKey:false
+                    },
+                    {
                       name:"Email",
                       type:"Email Address",
                       isReq:true,

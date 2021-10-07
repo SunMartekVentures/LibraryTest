@@ -792,6 +792,8 @@ export default class mcGenericMethods {
                 }
                 else if(jsonArr[i].name != null && jsonArr[i].type=='decimal'|| jsonArr[i].type=="Decimal")
                 {
+                  if(jsonArr[i].scale != null)
+                  {
                   bodySoapData +="         <Field>" +
                   "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
                   "                        <Name>"+jsonArr[i].name+"</Name>" +
@@ -801,6 +803,19 @@ export default class mcGenericMethods {
                   "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
                   "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
                   "                    </Field>" 
+                }
+                else
+                {
+                  bodySoapData +="         <Field>" +
+                  "                        <CustomerKey>"+jsonArr[i].name+"</CustomerKey>" +
+                  "                        <Name>"+jsonArr[i].name+"</Name>" +
+                  "                        <FieldType>Decimal</FieldType>" +
+                  "                        <Precision>"+jsonArr[i].precision+"</Precision>" +                 
+                  "                        <IsRequired>"+jsonArr[i].isReq+"</IsRequired>" +
+                  "                        <IsPrimaryKey>"+jsonArr[i].isKey+"</IsPrimaryKey>" +
+                  "                    </Field>" 
+                }
+                
                 }
                 else
                 {
