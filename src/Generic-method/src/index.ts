@@ -619,7 +619,7 @@ export default class mcGenericMethods {
         console.log
         (
           "Array length >>",jsonArr.length,
-          "Array Name's:>>",jsonArr.name
+          "Array Name's:>>",jsonArr[0].name
         )
             let DCmsg =
               '<?xml version="1.0" encoding="UTF-8"?>' +
