@@ -772,9 +772,9 @@ export default class mcGenericMethods {
               "                <CategoryID>"+
               FolderID+
               "</CategoryID>" +
-              "                <CustomerKey>LibraryModulesCheck"+
+              "                <CustomerKey>LibraryMethod"+
               "</CustomerKey>" +
-              "                <Name>LibraryModulesCheck"+
+              "                <Name>LibraryMethod"+
               "</Name>" +
               "                <Fields>" 
               for(var i=0;i<jsonArr.length;i++)
