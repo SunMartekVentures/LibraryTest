@@ -7,15 +7,11 @@
       integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
       crossorigin="anonymous"
     ></script>
-    <title>OutPut Page </title>
+  
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
+    <title>Library Methods </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="accessTokenGeneration()">ACCESS TOKEN</button>
-    <!-- <p id="demo" style="color:green;"></p>
-    <p id="demo1" style="color:red;"></p> -->
-    <!-- <input id="myInput" type="text" value="no username" />
-    <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="Journey Builder()">Journey</button> -->
+    onclick="accessTokenGeneration()"> Get Access Token</button>
     <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
     onclick="AppUserInfo()">AppUserInfo</button> -->
     <!-- <body>
@@ -36,7 +32,7 @@
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
     // const tssd = urlParams.get('tssd');
-    const tssd ="mcj6cy1x9m-t5h5tz0bfsyqj38ky";
+    const tssd = process.env.BASE_URL;
     console.log("tssd=",tssd);
       function accessTokenGeneration(req,res) {
         
