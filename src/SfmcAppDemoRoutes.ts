@@ -12,7 +12,6 @@ export default class SfmcAppDemoRoutes
 {
     // Instance variables
     private _apiHelper = new SfmcApiHelper();
-
     /**
      * login: called by Marketing Cloud when hosted app is launched. Decodes JWT in BODY passed by Marketing Cloud.
      * Handles POST on: /login
@@ -86,7 +85,6 @@ export default class SfmcAppDemoRoutes
     
     //     res.sendStatus(202); // accepted
     // }
-
     /**
      * GET handler for: /appdemooauthtoken
      * getOAuthAccessToken: called by demo app to get an OAuth access token
@@ -100,7 +98,6 @@ export default class SfmcAppDemoRoutes
       let clientId = process.env.CLIENTID;
       let clientSecret = process.env.CLIENTSECRET;
       let code = req.body.authorization_code;
-
       let session = req.session;
       console.log("clientId",clientId,"clientSecret",clientSecret,"code",code);
       
@@ -109,7 +106,6 @@ export default class SfmcAppDemoRoutes
   
       if (clientId && clientSecret) {
         // set the desired timeout in options
-  
         self._apiHelper
           .getOAuthAccessToken(clientId, clientSecret, req, res)
           .then((result) => {
