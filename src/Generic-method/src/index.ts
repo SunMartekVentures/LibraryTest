@@ -198,6 +198,8 @@ export default class mcGenericMethods {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     };
+    console.log("headers",headers);
+    
     axios
       .get(userInfoUrl, { headers: headers })
       .then((response: any) => {
