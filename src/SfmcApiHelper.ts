@@ -118,8 +118,6 @@ export default class SfmcApiHelper
         this.oauthAccessToken = res.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
-        res.status(200).send(res.data)
-
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -128,7 +126,6 @@ export default class SfmcApiHelper
             res.data.refresh_token
           );
         }
-
           this.genericMethods
             .getRefreshToken(
               this.refreshToken,
@@ -146,13 +143,12 @@ export default class SfmcApiHelper
             .catch((err)=>
             {
               console.log(err)
-            })    
-
-      .catch((err: any) => {
-        console.error("error getting access token from library" + err);
-      });
-    
+            })   
+            res.status(200).send(res.data) 
     })
+    .catch((err: any) => {
+      console.error("error getting access token from library" + err);
+    });
     return
   }    
      public appUserInfo(req: any, res: any) {
