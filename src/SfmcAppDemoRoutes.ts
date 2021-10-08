@@ -125,9 +125,9 @@ export default class SfmcAppDemoRoutes
       }
     }
 
-    public appUserInfo(req: express.Request, res: express.Response) {
+    public appuserInfo(req: express.Request, res: express.Response) {
       let self = this;
-      self._apiHelper.appUserInfo(req, res);
+      self._apiHelper.appuserInfo(req, res);
     }
   
     // public insertRowForDC(req: express.Request, res: express.Response) {

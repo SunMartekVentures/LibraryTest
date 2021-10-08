@@ -148,7 +148,7 @@ export default class SfmcApiHelper
     })
   })  
   }    
-     public appUserInfo(req: any, res: any) {
+     public appuserInfo(req: any, res: any) {
       return new Promise<any>(async (resolve, reject) => {
                 this.genericMethods
                 .userInfo(
