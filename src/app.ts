@@ -107,10 +107,10 @@ app.post("/appuserInfo", function (req, res) {
     appDemoRoutes.getActiveJourneys(req, res);
   });
   
-//   //get Journeys By ID
-//   app.post("/getJourneysById", function (req, res) {
-//     appDemoRoutes.getJourneysById(req, res);
-//   });
+  //get Journeys By ID
+  app.post("/getJourneysById", function (req, res) {
+    appDemoRoutes.getJourneysById(req, res);
+  });
   
 //   app.get("/retrievingdataextensionfolderid", function (req, res) {
 //     appDemoRoutes.getActiveJourneys(req, res);

@@ -107,7 +107,26 @@
           });
         
       }
+      function retrivejourneysbyid()
+      {
+       axios({
+       method: "POST",
+       url: "/getJourneysById",
+       params: {
+         oauthToken : this.oauthToken      
+  },
+})
+  .then(function (response) {
+  console.log("Retrieve Journey By ID:",response)
+  })
+  .catch(function (error) {
+    /**
+     * Error Handler of Get Journeys by id
+     */
+  });
+ }
 
+ 
 
       function createSparkpostIntegrationFolder(
         thisdata,
@@ -354,34 +373,7 @@
       }
       
     
- function retrivejourneysbyid()
-      {
-       axios({
-       method: "POST",
-       url: "/getJourneysById",
-       data: {
-      journeyId: response.data.journeys.items[i].id,
-      name: response.data.journeys.items[i].name,
-      status: response.data.journeys.items[i].status,
-      version: response.data.journeys.items[i].version,
-      refreshToken: journeyrefreshtoken,
-      tssd: tssd,
-      memberid: memberid,
-      soapInstance: soapInstance,
-      restInstance: restInstance,
-  },
-})
-  .then(function (response) {
-    /**
-     * Response Handler of Get Journeys by id
-     */
-  })
-  .catch(function (error) {
-    /**
-     * Error Handler of Get Journeys by id
-     */
-  });
- }
+
 function domainConfigurationDECheck(
   thisdata,
   refreshToken,

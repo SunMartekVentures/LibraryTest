@@ -229,23 +229,23 @@ export default class SfmcApiHelper
                }
                
                
-        //        public getJourneyDetails(req:any,res:any)
-        //        {
-        //         this.genericMethods
-        //         .getJourneyDetails(
-        //           paramData.oauthToken,
-        //           process.env.BASE_URL
-        //         )
-        //         .then((response:any)=>
-        //         {
-        //           console.log("Journey Details:>>>:",JSON.stringify(response));
-        //           res.status(200).send(response)
-        //         })
-        //         .catch((err:any)=>
-        //         {
-        //           console.error(err)
-        //         })
-        //        }
+               public getJourneysById(req:any,res:any)
+               {
+                this.genericMethods
+                .getJourneyDetails(
+                  req.query.oauthToken,
+                  process.env.BASE_URL
+                )
+                .then((response:any)=>
+                {
+                  console.log("Journey Details:>>>:",JSON.stringify(response));
+                  res.status(200).send(response)
+                })
+                .catch((err:any)=>
+                {
+                  console.error(err)
+                })
+               }
               
         //       public dataFolderCheck(req:any,res:any)
         //       {
