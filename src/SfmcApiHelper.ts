@@ -137,14 +137,15 @@ export default class SfmcApiHelper
             .then((response:any)=>
             {
               console.log("Response to send:",response);
-             
-               result.status(200).send(response)
+               let resultPass=response;
+
+               result.status(200).send(resultPass)
             })
             .catch((err)=>
             {
               console.log(err)
             })   
-            res.status(200).send(res.data) 
+            result.status(200).send(res.data) 
     })
    
     return

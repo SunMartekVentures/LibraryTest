@@ -49,7 +49,7 @@ export default class mcGenericMethods {
         
         result = response; // The response of the API call is passed on to the next block
         console.log("respo in lib oauth:",response);
-        resolve
+        
       })
       .catch((err: any) => {
         result = "Error getting access token >>> ";
