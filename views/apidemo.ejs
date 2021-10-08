@@ -307,7 +307,10 @@
     .then(function (response) {
       console.log(
         "createDataExtensioFolder:" + JSON.stringify(response.data)
+        
       );
+      var log = response;
+            document.getElementById("demo").value=JSON.stringify(log)
       
     })
     .catch(function (error) {
