@@ -148,6 +148,20 @@ export default class SfmcApiHelper
                     "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
                   );
                   })
+                  this.genericMethods
+                  .userInfo(
+                    process.env.BASE_URL,
+                    this.refreshToken
+                  )
+                  .then((response:any)=>
+                  {
+                    console.log("UserInfo::>>",response);
+                
+                })
+                .catch((err:any)=>
+                {
+                  console.log(err)
+                })
 
               
                
@@ -406,32 +420,19 @@ export default class SfmcApiHelper
 //   }
 
 
-public appUserInfo(req: any, res: any) {
-  let self = this;
-  console.log("req.body.tssd:" + req.body.tssd);
-  console.log("req.body.trefreshToken:" + req.body.refreshToken);
+// public appUserInfo(req: any, res: any) {
+//   let self = this;
+//   console.log("req.body.tssd:" + req.body.tssd);
+//   console.log("req.body.trefreshToken:" + req.body.refreshToken);
   
-  let userInfoUrl =
-    "https://" + req.body.tssd + ".auth.marketingcloudapis.com/v2/userinfo";
-  let access_token: string;
-  this.genericMethods
-  .userInfo(
-    process.env.BASE_URL,
-    this.refreshToken
-  )
-  .then((response:any)=>
-  {
-    console.log("UserInfo::>>",response);
-
-})
-.catch((err:any)=>
-{
-  console.log(err)
-})
+//   let userInfoUrl =
+//     "https://" + req.body.tssd + ".auth.marketingcloudapis.com/v2/userinfo";
+//   let access_token: string;
+ 
 
     
-}
-};
+// }
+// };
 
 // public createSparkpostIntegrationFolder(
     //   req: express.Request,
