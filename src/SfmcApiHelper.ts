@@ -135,12 +135,13 @@ export default class SfmcApiHelper
             )
             .then((response:any)=>
             {
-
+              console.log("Response to send:",response);
             })
             .catch((err)=>
             {
 
             })    
+
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
       });
