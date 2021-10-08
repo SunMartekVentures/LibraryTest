@@ -128,6 +128,7 @@ export default class SfmcApiHelper
         //     res.data.refresh_token
         //   );
         // }
+        {
           this.genericMethods
             .getRefreshToken(
               this.refreshToken,
@@ -145,7 +146,8 @@ export default class SfmcApiHelper
               console.log(err)
             })   
           
-    })
+    }
+  })
     .catch((err)=>
     {
       console.error(err)      
