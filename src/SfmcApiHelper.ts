@@ -106,10 +106,18 @@ export default class SfmcApiHelper
         postBody.code,
         postBody.redirect_uri
       )
-      .then((res: any) => {
+      .then((response: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
-        this.refreshToken = res.data.refresh_token;
+        this.refreshToken = response.data.refresh_token;
+        this.oauthAccessToken = response.data.oauthAccessToken
+        console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
+        res.status(200).send(response)
+      })
+      .catch((err: any) => {
+        console.error("error getting access token from library" + err);
+      });
+    }
        // res.status(200).send(res)
 
 
@@ -137,186 +145,239 @@ export default class SfmcApiHelper
                 soapInstance: this.soap_instance_url,
                 data:response.data
               };
+            })
+            .catch((err: any) => {
+              console.error("error getting refresh token from library" + err);
+            });
+          }
+
+
              // response.status(200).send(paramData)
               //res.status(200).send(paramData)
-              this.genericMethods
-                .getSenderDomain(paramData)
-                .then((response: any) => {
-                  console.log(
-                    "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)
-                  );
-                  })
 
-              this.genericMethods
-              .userInfo(
-                process.env.BASE_URL,
-                response.oauthToken
-              )
-              .then((response:any)=>
-              {
-                console.log("UserInfo::>>",response);
-               
+              public appUserInfo(req: any, res: any) {
+                let self = this;
+                console.log("req.body.tssd:" + req.body.tssd);
+                console.log("req.body.trefreshToken:" + req.body.refreshToken);
+                let access_token: string;
                 this.genericMethods
-               .createFolder( 
-                 paramData.oauthToken,
-                response.soap_instance_url,
-                response.member_id,
-                this.parentFolderId
-                 )
-               .then((response:any)=>
-               {
-                 console.log("Data Extension Created...Check MC App")
-               }
-               )
-               .catch((err:any)=>
-               {
-                 console.error("Error in creating folder",err)
-               })
-
-
-               this.genericMethods
-               .getActiveJourney(
-                 paramData.oauthToken,
-                 process.env.BASE_URL
-               )
-               .then((response:any)=>
-               {
-                 console.log("Active Journeys:>>>:",JSON.stringify(response));
-               })
-               .catch((err:any)=>
-               {
-                 console.error(err)
-               })
-               
-
-               this.genericMethods
-               .getJourneyDetails(
-                 paramData.oauthToken,
-                 process.env.BASE_URL
-               )
-               .then((response:any)=>
-               {
-                 console.log("Journey Details:>>>:",JSON.stringify(response));
-               })
-               .catch((err:any)=>
-               {
-                 console.error(err)
-               })
-               
-               this.genericMethods
-               .dataFolderCheck(
-                 paramData.oauthToken,
-                 response.soap_instance_url,
-                 response.member_id
-               )
-               .then((response:any)=>
-               {
-                 console.log("Response in dataFolderCheck >>>",response)
-                 console.log("Folder id in use:",response.FolderID)
-                  this.FolderID = response.FolderID
-                  console.log(this.FolderID) 
-                  console.log("FOlderID got!!")
-
-
-                  const jsonArr=[
-                    {
-                      name:"LibraryName",
-                      type:"text",
-                      length:100,
-                      isReq:true,
-                      isKey:true
-                    },
-                    {
-                      name:"LibraryModules",
-                      type:"decimal",
-                      precision:20,
-                      scale:0,
-                      isReq:true,
-                      isKey:false
-                    },
-                    {
-                      name:"Email",
-                      type:"Email Address",
-                      length:100,
-                      isReq:true,
-                      isKey:true
-                    }
-                  ]
-                  this.genericMethods
-               .createDataExtension
-               (
-                 response.member_id,
-                response.soap_instance_url,
-                paramData.oauthToken,
-                this.FolderID,
-                process.env.BASE_URL,
-                jsonArr
-               )
-               .then((response:any)=>
-               {
-                 console.log("<><><Response in creating Data xtension><><>",response)
-                 
-               })
-               .catch((err:any)=>
-               {
-                 console.log("Erroe in creatong data extension in folder",err)
-               })
+                .userInfo(
+                  process.env.BASE_URL,
+                  this.oauthAccessToken
+                )
+                .then((response:any)=>
+                {
+                  console.log("UserInfo::>>",response);
+                  res.status(200).send(response)
               })
-              this.genericMethods
-              .retrievingDataExtensionRows( paramData.oauthToken,
-                response.soap_instance_url,
-                response.member_id,
-                this.parentFolderId)
-                
-              .then((response:any)=>
+              .catch((err:any)=>
               {
-                console.log("<<<<success>>>>");
-                
-                console.log("Journey Details:>>>:",JSON.stringify(response));
+                console.log(err)
               })
+              
+                  
+              }
+
+        public senderdomain(req:any,res:any)
+        {
+          this.genericMethods
+          .getSenderDomain(paramData)
+          .then((response: any) => {
+            console.log(
+              "Sender Domain Response (Domain Name)::: " + JSON.stringify(response.domainName)  
+            );
+            res.status(200).send(response)
+            })
+            .catch((err: any) => {
+              console.error(
+                "error getting Sender Domain from library" + err
+              );
+            });
+        }
+        
+        public createFolder(req:any,res:any)    
+        {
+          this.genericMethods
+          .createFolder( 
+            paramData.oauthToken,
+           response.soap_instance_url,
+           response.member_id,
+           this.parentFolderId
+            )
+          .then((response:any)=>
+          {
+            console.log("Data Extension Created...Check MC App");
+            res.status(200).send(response)
+          }
+          )
+         
+
+          .catch((err:any)=>
+          {
+            console.error("Error in creating folder",err)
+          })
+        }           
+             
+
+               public getActiveJourney(req:any,res:any)
+               {
+                this.genericMethods
+                .getActiveJourney(
+                  paramData.oauthToken,
+                  process.env.BASE_URL
+                )
+                .then((response:any)=>
+                {
+                  console.log("Active Journeys:>>>:",JSON.stringify(response));
+                  res.status(200).send(response)
+                })
+                .catch((err:any)=>
+                {
+                  console.error(err)
+                })
+               }
+               
+               
+               public getJourneyDetails(req:any,res:any)
+               {
+                this.genericMethods
+                .getJourneyDetails(
+                  paramData.oauthToken,
+                  process.env.BASE_URL
+                )
+                .then((response:any)=>
+                {
+                  console.log("Journey Details:>>>:",JSON.stringify(response));
+                  res.status(200).send(response)
+                })
+                .catch((err:any)=>
+                {
+                  console.error(err)
+                })
+               }
+              
+              public dataFolderCheck(req:any,res:any)
+              {
+                this.genericMethods
+                .dataFolderCheck(
+                  paramData.oauthToken,
+                  response.soap_instance_url,
+                  response.member_id
+                )
+                .then((response:any)=>
+                {
+                  console.log("Response in dataFolderCheck >>>",response)
+                  console.log("Folder id in use:",response.FolderID)
+                   this.FolderID = response.FolderID
+                   console.log(this.FolderID) 
+                   console.log("FOlderID got!!")
+                   res.status(200).send(response)
+ 
+ 
+                   const jsonArr=[
+                     {
+                       name:"LibraryName",
+                       type:"text",
+                       length:100,
+                       isReq:true,
+                       isKey:true
+                     },
+                     {
+                       name:"LibraryModules",
+                       type:"decimal",
+                       precision:20,
+                       scale:0,
+                       isReq:true,
+                       isKey:false
+                     }, 
+                     {
+                       name:"LibraryScale",
+                       type:"number",
+                       length:20,
+                       isReq:true,
+                       isKey:false
+                     },
+                     {
+                       name:"Email",
+                       type:"Email Address",
+                       isReq:true,
+                       isKey:false
+                     }
+                   ]
+                 })
+                 .catch((err)=>
+                 {
+                   console.error(err)
+                 })
+              }
+               
+                
             
+
+          public createDataExtension(req:any,res:any)
+          {
+            this.genericMethods
+            .createDataExtension
+            (
+              response.member_id,
+             response.soap_instance_url,
+             paramData.oauthToken,
+             this.FolderID,
+             process.env.BASE_URL,
+             jsonArr
+            )
+            .then((response:any)=>
+            {
+              console.log("<><><Response in creating Data xtension><><>",response)
+              res.status(200).send(response)
+              
+            })
+            .catch((err:any)=>
+            {
+              console.log("Erroe in creatong data extension in folder",err)
+            })
+          }
+                  
+              
+
+              public retrieveDataExtensionRows(req:any,res:any)
+              {
+                this.genericMethods
+                .retrievingDataExtensionRows( paramData.oauthToken,
+                  response.soap_instance_url,
+                  response.member_id,
+                  this.parentFolderId)
+                  
+                .then((response:any)=>
+                {
+                  console.log("<<<<success>>>>");
+                  
+                  console.log("Journey Details:>>>:",JSON.stringify(response));
+                  res.status(200).send(response)
+                })
+
+                .catch((err:any)=>
+                {
+                  console.error(err)
+                })
+              }
+              
+            public insertRow(req:any,res:any)
+            {
               this.genericMethods
               .insertRowHelper(paramData.oauthToken,this.rest_instance_url,this._deExternalKey,this.datas)
                 
               .then((response:any)=>
               {
                 console.log("<<<<success>>>>");
-                
                 console.log("insert data:>>>:",JSON.stringify(response));
+                res.status(200).send(response)
               })
               .catch((err:any)=>
               {
                 console.error(err)
               })
-              .catch((err:any)=>
-              {
-                console.error(err)
-              })
-               })
-               .catch((err:any)=>
-               {
-                 console.log(err)
-               })
-                .catch((err: any) => {
-                  console.error(
-                    "error getting Sender Domain from library" + err
-                  );
-                });
-              console.log(
-                "Refresh token Method from library",
-                response.refreshToken
-              );
-            })
-            .catch((err: any) => {
-              console.error("error getting refresh token from library" + err);
-            });
+           
+            }      
+            
         }
-      })
-      .catch((err: any) => {
-        console.error("error getting access token from library" + err);
-      });
-      return 
-    
-  }
-  
-}
