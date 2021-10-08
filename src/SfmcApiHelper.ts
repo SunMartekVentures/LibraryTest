@@ -187,8 +187,10 @@ export default class SfmcApiHelper
             });
         }
         
-        public createFolder(req:any,res:any)    
+        public createFolder(req:any,res:any)   
+
         {
+          console.log("Member ID in create Folder:",req.body.member_id)
           this.genericMethods
           .createFolder( 
             req.body.oauthToken,
