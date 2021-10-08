@@ -37,7 +37,7 @@
     onclick="retrivejourneysbyid()"> retriveactivejourneysid</button>
     <br><br>
     <button type="button" id="retrievingDataExtensionFolderID" class="btn btn-primary"
-    onclick="retrievingDataExtensionFolderID()">retrievingDataExtensionFolderID</button>
+    onclick="dataFolderCheck()">retrievingDataExtensionFolderID</button>
     <br><br>
     <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
     onclick="createSparkpostIntegrationFolder()">createSparkpostIntegrationFolder</button>
@@ -287,19 +287,14 @@
             console.log(error);
           });
       }
-      function createFolder(
-  thisdata,
-  refreshToken,
-  soapInstance,
-  memberid,
-  ParentFolderID
-) {
-  axios({
+      function createFolder()
+       {
+       axios({
     method: "POST",
     url: "/createfolder",
     data: {
       refreshToken: refreshToken,
-      tssd: thisdata.state.tssd,
+     // tssd: thisdata.state.tssd,
       memberid: memberid,
       soapInstance: soapInstance,
       ParentFolderID: ParentFolderID,
@@ -307,21 +302,9 @@
   })
     .then(function (response) {
       console.log(
-        "createSparkpostIntegrationFolder:" + JSON.stringify(response.data)
+        "createDataExtensioFolder:" + JSON.stringify(response.data)
       );
-      if (response.data.statusText) {
-        thisdata.setState({ refreshtoken: response.data.refreshToken });
-        thisdata.setState({ FolderID: response.data.FolderID });
-        domainConfigurationDECheck(
-          thisdata,
-          response.data.refreshToken,
-          response.data.soap_instance_url,
-          response.data.member_id,
-          response.data.FolderID
-        );
-      } else {
-        console.log("Error creating data extension folder");
-      }
+      
     })
     .catch(function (error) {
       console.log(error);
