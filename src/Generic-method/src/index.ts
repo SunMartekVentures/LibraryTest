@@ -15,7 +15,7 @@ export default class mcGenericMethods {
     code: any,
     redirect_uri: any
   ) {
-    return new Promise<any>(async (resolve, reject) => {
+    
     // Importing the Axios module to make API requests
     let result: any;
 
@@ -49,7 +49,7 @@ export default class mcGenericMethods {
         // If the GET request is successful, this block is executed
         result = response; // The response of the API call is passed on to the next block
         console.log("respo in lib oauth:",response);
-       
+        resolve
       })
       .catch((err: any) => {
         result = "Error getting access token >>> ";
@@ -57,7 +57,6 @@ export default class mcGenericMethods {
       });
     return result; // The contest data is returned
   }
-}
 
   //Helper method to get refresh token
   public async getRefreshToken(
