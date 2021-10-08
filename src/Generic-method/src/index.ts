@@ -82,6 +82,7 @@ export default class mcGenericMethods {
       await axios
         .post(sfmcAuthServiceApiUrl, postBody1, { headers: headers })
         .then((response: any) => {
+          console.log("Response to get soap url:",response)
           const customResponse = {
             tssd: tssd,
             refreshToken: response.data.refresh_token,
