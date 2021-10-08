@@ -47,19 +47,16 @@ export default class mcGenericMethods {
       .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
       .then((response: any) => {
         // If the GET request is successful, this block is executed
-       // The response of the API call is passed on to the next block
-       const accRes={
-         data:response
-       }
-       console.log("respo in lib oauth:",response);
-        resolve(accRes)
+        result = response; // The response of the API call is passed on to the next block
+        console.log("respo in lib oauth:",response);
+       
       })
       .catch((err: any) => {
         result = "Error getting access token >>> ";
         result += err; // Error handler
       });
     return result; // The contest data is returned
-  })
+  }
 }
 
   //Helper method to get refresh token

@@ -7,6 +7,7 @@ import Utils from './Utils';
 import xml2js = require("xml2js");
 import MC_Generic_Methods from "./Generic-method/src/";
 import { access } from 'fs';
+import { stringify } from 'querystring';
 
 export default class SfmcApiHelper
 {
@@ -100,7 +101,8 @@ export default class SfmcApiHelper
     postBody: any,
     res: any,
     tssd: string
-  ): Promise<any> {
+  )
+   {
     this.genericMethods
       .getOAuthAccessToken(
         postBody.client_id,
@@ -109,61 +111,43 @@ export default class SfmcApiHelper
         postBody.code,
         postBody.redirect_uri
       )
-      .then((response: any) => {
+      .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
-        this.refreshToken = response.data.refresh_token;
-        this.oauthAccessToken = response.data.oauthAccessToken
+        this.refreshToken = res.data.refresh_token;
+        this.oauthAccessToken = res.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
-        this.getRefreshTokenHelper(this.refreshToken,tssd,postBody.client_id,postBody.client_secret)
-      })
-      .catch((err: any) => {
-        console.error("error getting access token from library" + err);
-      });
-    
-      return // self.getRefreshTokenHelper(this.refreshToken,tssd,postBody.client_id,postBody.client_secret)
-    }
-  
-       // res.status(200).send(res)
+        
+        if (res.data.refresh_token) {
+          console.log(
+            "Refresh token",
+            this.refreshToken,
+            "Refresh token from response",
+            res.data.refresh_token
+          );
+        }
 
-       public getRefreshTokenHelper(
-         refreshToken:string,
-         tssd:string,
-         clientId:string,
-         clientSecret:string
-       ): Promise<any> {
-        return new Promise<any>(async (resolve, reject) => {
-       
           this.genericMethods
             .getRefreshToken(
               this.refreshToken,
               process.env.BASE_URL,
-              process.env.CLIENTID,
-              process.env.CLIENTSECRET
+              postBody.client_id,
+              postBody.client_secret
             )
+            .then((response:any)=>
+            {
 
-            .then((response: any) => {
-              console.log("Respo in refresh token generic method:",response)
-               const paramData = {
-                senderProfileID: "76441b26-df1a-ec11-a30a-48df373429c9",
-                oauthToken: response.oauthToken,
-                soapInstance: this.soap_instance_url,
-                data:response.data
-              };
-              resolve(paramData)
-
-              //res.status(200).send(response)
             })
-            .catch((err: any) => {
-              console.error("error getting refresh token from library" + err);
-            });
-          
-        });
-      }
-             // response.status(200).send(paramData)
-              //res.status(200).send(paramData)
+            .catch((err)=>
+            {
 
-              public appUserInfo(req: any, res: any) {
+            })    
+      .catch((err: any) => {
+        console.error("error getting access token from library" + err);
+      });
+    })
+  }    
+     public appUserInfo(req: any, res: any) {
                 let self = this;
                 console.log("req.body.tssd:" + req.body.tssd);
                 console.log("req.body.trefreshToken:" + req.body.refreshToken);
