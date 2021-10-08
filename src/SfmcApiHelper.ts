@@ -140,9 +140,7 @@ export default class SfmcApiHelper
             .catch((err)=>
             {
               console.log(err)
-            })   
-          
-    
+            })    
   })
     .catch((err)=>
     {
