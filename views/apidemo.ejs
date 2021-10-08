@@ -81,7 +81,7 @@
          axios({
            method: "POST",
            url: "/appuserInfo",
-           data: { refreshToken: apptoken, tssd:tssd },
+           data: { oauthToken:oauthToken},
  
          })
            .then(function (response) {
