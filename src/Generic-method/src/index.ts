@@ -233,6 +233,8 @@ export default class mcGenericMethods {
             ? //Utils.prettyPrintJson
             JSON.stringify(error.response.data)
             : "<None>";
+
+          reject(error)
        // Utils.logError(errorMsg);
 
         // resolve
