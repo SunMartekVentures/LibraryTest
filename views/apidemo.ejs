@@ -53,6 +53,7 @@
     const tssd = "mcj6cy1x9m-t5h5tz0bfsyqj38ky";
     console.log("tssd=",tssd);
     let apptoken ="";
+    let oauthToken=""
 
       function accessTokenGeneration(req,res) {
         axios({
@@ -66,22 +67,19 @@
           .then(function (response) {
             console.log("response>>>>",response);
 
-            const appUse =
-            {
-              oauthToken : response.data.oauthToken
-            }
+            this.oauthToken=response.data.oauthToken
           })
           .catch(function (error) {
             console.log(error);
           });
       }
 
-      function AppUserInfo(appUse)
+      function AppUserInfo()
        {
          axios({
            method: "POST",
            url: "/appuserInfo",
-           data: { oauthToken:appUse.oauthToken},
+           data: { oauthToken : this.oauthToken},
  
          })
            .then(function (response) {
