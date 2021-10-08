@@ -146,9 +146,7 @@ export default class SfmcApiHelper
             })   
             res.status(200).send(res.data) 
     })
-    .catch((err: any) => {
-      console.error("error getting access token from library" + err);
-    });
+   
     return
   }    
      public appUserInfo(req: any, res: any) {
