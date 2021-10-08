@@ -111,7 +111,7 @@ export default class SfmcAppDemoRoutes
           .then((result) => {
             // req.session.oauthAccessToken = result.oauthAccessToken;
             //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-            res.status(result.status).send(result.statusText);
+            res.status(200).send(result);
             req.setTimeout(0, () => {});
           })
           .catch((err) => {
