@@ -102,8 +102,8 @@ export default class SfmcApiHelper
     postBody: any,
     result: express.Response,
     tssd: string
-  ): Promise<any> {
-
+  ) {
+    return new Promise<any>(async (resolve, reject) => {
     this.genericMethods
       .getOAuthAccessToken(
         postBody.client_id,
@@ -118,16 +118,7 @@ export default class SfmcApiHelper
         this.oauthAccessToken = res.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
-        result.status(200).send(res) 
-        
-        // if (res.data.refresh_token) {
-        //   console.log(
-        //     "Refresh token",
-        //     this.refreshToken,
-        //     "Refresh token from response",
-        //     res.data.refresh_token
-        //   );
-        // }
+        resolve(res)
         {
           this.genericMethods
             .getRefreshToken(
@@ -152,8 +143,7 @@ export default class SfmcApiHelper
     {
       console.error(err)      
     })
-   
-    return
+  })  
   }    
      public appUserInfo(req: any, res: any) {
                 let self = this;
