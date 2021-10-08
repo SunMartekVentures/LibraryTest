@@ -111,6 +111,7 @@ export default class SfmcApiHelper
         postBody.code,
         postBody.redirect_uri
       )
+      
       .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
@@ -141,7 +142,7 @@ export default class SfmcApiHelper
             })
             .catch((err)=>
             {
-
+              console.error(err)
             })    
 
       .catch((err: any) => {
