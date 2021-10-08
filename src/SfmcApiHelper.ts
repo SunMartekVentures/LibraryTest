@@ -8,6 +8,7 @@ import xml2js = require("xml2js");
 import MC_Generic_Methods from "./Generic-method/src/";
 import { access } from 'fs';
 import { stringify } from 'querystring';
+import { resolve } from 'dns';
 
 export default class SfmcApiHelper
 {
@@ -99,7 +100,8 @@ export default class SfmcApiHelper
   public getOAuthTokenHelper(
     headers: any,
     postBody: any,
-    res: any,
+    result: express.Response,
+    req:express.Request,
     tssd: string
   ): Promise<any> {
 
@@ -111,7 +113,6 @@ export default class SfmcApiHelper
         postBody.code,
         postBody.redirect_uri
       )
-      
       .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
         this.refreshToken = res.data.refresh_token;
@@ -135,19 +136,22 @@ export default class SfmcApiHelper
               postBody.client_id,
               postBody.client_secret
             )
+           
             .then((response:any)=>
             {
               console.log("Response to send:",response);
-              res.status(200).send(response)
+             
+               result.status(200).send(response)
             })
             .catch((err)=>
             {
-              console.error(err)
+              console.log(err)
             })    
 
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
       });
+    
     })
     return
   }    
