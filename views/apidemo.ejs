@@ -69,7 +69,7 @@
           .then(function (response) {
             console.log("response>>>>",response);
             var log = response;
-            document.getElementById("demo").value=log
+            document.getElementById("demo").value=JSON.stringify(log)
             this.oauthToken=response.data.oauthToken
           })
           .catch(function (error) {
@@ -88,7 +88,7 @@
            .then(function (response) {
              console.log("response in userInfo>>>>",response);
              var log = response;
-            document.getElementById("demo").value=log
+             document.getElementById("demo").value=JSON.stringify(log)
            })
            .catch(function(err)
            {
@@ -106,7 +106,7 @@
           .then(function (response) {
            console.log("Active Journeys:",response)
            var log = response;
-           document.getElementById("demo").value=log
+           document.getElementById("demo").value=JSON.stringify(log)
           })
           .catch(function (error) {
             console.error(error)
@@ -125,7 +125,7 @@
   .then(function (response) {
   console.log("Retrieve Journey By ID:",response)
   var log = response;
-  document.getElementById("demo").value=log
+  document.getElementById("demo").value=JSON.stringify(log)
   })
   .catch(function (error) {
     console.log(error)
