@@ -102,6 +102,7 @@ export default class SfmcApiHelper
     res: any,
     tssd: string
   ): Promise<any> {
+
     this.genericMethods
       .getOAuthAccessToken(
         postBody.client_id,
@@ -136,6 +137,7 @@ export default class SfmcApiHelper
             .then((response:any)=>
             {
               console.log("Response to send:",response);
+              res.status(200).send(response)
             })
             .catch((err)=>
             {
