@@ -83,6 +83,7 @@ export default class mcGenericMethods {
         .post(sfmcAuthServiceApiUrl, postBody1, { headers: headers })
         .then((response: any) => {
           const customResponse = {
+            tssd: tssd,
             refreshToken: response.data.refresh_token,
             oauthToken: response.data.access_token,
           };
@@ -211,7 +212,7 @@ export default class mcGenericMethods {
           soap_instance_url: response.data.rest.soap_instance_url,
           rest_instance_url: response.data.rest.rest_instance_url,
           data:response.data
-          // refreshToken: refreshTokenbody,
+         
         };
         console.log("Response in lib app user info>>",JSON.stringify(getUserInfoResponse))
         resolve(getUserInfoResponse);

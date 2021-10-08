@@ -7,25 +7,39 @@
       integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
       crossorigin="anonymous"
     ></script>
-    <title>OutPut Page </title>
+  
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
+    <title>Library Methods </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="accessTokenGeneration()">ACCESS TOKEN</button>
-    <!-- <p id="demo" style="color:green;"></p>
-    <p id="demo1" style="color:red;"></p> -->
-    <!-- <input id="myInput" type="text" value="no username" />
-    <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="Journey Builder()">Journey</button> -->
-    <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
-    onclick="AppUserInfo()">AppUserInfo</button> -->
-    <!-- <body>
-      <h3>Enter Dataextension Name</h3>
-      <input type="text" id="txt"/>
-      <input type="submit" id="btSubmit"  onclick="creatingDomainConfigurationDE()" disabled />
-      <p id="demo2" style="color:green;"></p>
-      <p id="demo4" style="color:rgb(13, 0, 128);"></p>
-    <p id="demo3" style="color:red;"></p>
-  </body> -->
+    onclick="accessTokenGeneration()"> Get Access Token</button>
+   
+    <!-- <button type="button" id="senderDomain" class="btn btn-primary"
+    onclick="senderDomain()">senderdomain</button> -->
+    <br><br>
+    <button type="button" id="AppUserInfo" class="btn btn-primary"
+    onclick="AppUserInfo()">AppUserInfo</button>
+    <br><br>
+    <button type="button" id="retrivejourneys" class="btn btn-primary"
+    onclick=" retrivejourneys()"> retrivejourneys</button>
+    <br><br>
+    <button type="button" id="retrivejourneysbyid" class="btn btn-primary"
+    onclick="retrivejourneysbyid()"> retriveactivejourneysid</button>
+    <br><br>
+    <button type="button" id="retrievingDataExtensionFolderID" class="btn btn-primary"
+    onclick="retrievingDataExtensionFolderID()">retrievingDataExtensionFolderID</button>
+    <br><br>
+    <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
+    onclick="createSparkpostIntegrationFolder()">createSparkpostIntegrationFolder</button>
+<!--         
+    <button type="button" id="createdataextension" class="btn btn-primary"
+    onclick="createdataextension()">createdataextension</button> -->
+    <br><br>
+    <button type="button" id="insertrow" class="btn btn-primary"
+    onclick="insertRow()">insertRow</button>
+    <br><br>
+    <button type="button" id="retriverows" class="btn btn-primary"
+    onclick="retriverows()">retriverows</button>
+
     <br><br>
     
 </head>
@@ -36,10 +50,11 @@
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
     // const tssd = urlParams.get('tssd');
-    const tssd ="mcj6cy1x9m-t5h5tz0bfsyqj38ky";
+    const tssd = "mcj6cy1x9m-t5h5tz0bfsyqj38ky";
     console.log("tssd=",tssd);
+    let apptoken ="";
+
       function accessTokenGeneration(req,res) {
-        
         axios({
           method: "POST",
           url: "/appdemoauthtoken",
@@ -50,44 +65,263 @@
         })
           .then(function (response) {
             console.log("response>>>>",response);
-            console.log("response.data.refresh_token",response.data.refreshToken);
+
+            const appUse =
+            {
+              oauthToken : response.data.oauthToken
+            }
           })
           .catch(function (error) {
             console.log(error);
           });
       }
 
-
-
-       // creating Sparkpost Integration Data folder
-       /*function createSparkpostIntegrationFolder(response) {
-         console.log("sparkpost integretion",response);
+      function AppUserInfo()
+       {
+        console.log("response.data.oauthToken", apptoken);
          axios({
            method: "POST",
-           url: "/createsparkpostintegrationfolder",
-           data: {
-               accessToken:response.oauthAccessToken
-           }
+           url: "/appuserinfo",
+           data: { refreshToken: apptoken, tssd:tssd },
+ 
          })
            .then(function (response) {
-             console.log(
-               "createSparkpostIntegrationFolder:" +
-                 JSON.stringify(response.data)
-             );
-             // if (response.data.statusText) {
-             //   thisdata.setState({ refreshtoken: response.data.refreshToken });
-             //   thisdata.setState({ FolderID: response.data.FolderID });
-            
-             //   // creatingDomainConfigurationDE(req,res)
-             // } else {
-             //   console.log("Error creating data extension folder");
-             // }
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
-       }
+             console.log("response in userInfo>>>>",response);
+             var test = response.data.username;
+               document.getElementById("myInput").value = test;
+           })      
+        }
 
+
+      function createSparkpostIntegrationFolder(
+        thisdata,
+        refreshToken,
+        soapInstance,
+        memberid,
+        ParentFolderID
+      ) {
+        axios({
+          method: "POST",
+          url: "/createsparkpostintegrationfolder",
+          data: {
+            refreshToken: refreshToken,
+            tssd: thisdata.state.tssd,
+            memberid: memberid,
+            soapInstance: soapInstance,
+            ParentFolderID: ParentFolderID,
+          },
+        })
+          .then(function (response) {
+            console.log(
+              "createSparkpostIntegrationFolder:" +
+                JSON.stringify(response.data)
+            );
+            if (response.data.statusText) {
+              thisdata.setState({ refreshtoken: response.data.refreshToken });
+              thisdata.setState({ FolderID: response.data.FolderID });
+              domainConfigurationDECheck(
+                thisdata,
+                response.data.refreshToken,
+                response.data.soap_instance_url,
+                response.data.member_id,
+                response.data.FolderID
+              );
+            } else {
+              console.log("Error creating data extension folder");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      function insertRow(rowData, thisdata) {
+        console.log("memberid:" + thisdata.state.member_id);
+        console.log("refreshToken:" + thisdata.state.refreshtoken);
+        console.log("restInstance:" + thisdata.state.restInstance);
+        console.log("soapInstance:" + thisdata.state.soapInstance);
+        console.log(
+          "De external KEY " + thisdata.state.DEexternalKeyDomainConfiguration
+        );
+        const userInfobody = {
+          tssd: thisdata.state.tssd,
+          memberid: thisdata.state.member_id,
+          restInstance: thisdata.state.restInstance,
+          soapInstance: thisdata.state.soapInstance,
+          DEexternalKeyDomainConfiguration:
+            thisdata.state.DEexternalKeyDomainConfiguration,
+        };
+        const data = {
+          domainConfigurationData: rowData,
+          userInfobody: userInfobody,
+          refreshToken: thisdata.state.refreshtoken,
+        };
+        axios({
+          method: "POST",
+          url: "/insertrow",
+          data: data,
+          headers: { "Content-Type": "application/json" },
+        })
+          .then(function (response) {
+            console.log(
+              "loadDataForDomainConfiguration:" + JSON.stringify(response.data)
+            );
+            thisdata.setState({ refreshtoken: response.data.refreshToken });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      function retrievingDataExtensionFolderID(
+        thisdata,
+        refreshToken,
+        soapInstance,
+        memberid
+      ) {
+        axios({
+          method: "POST",
+          url: "/retrievingdataextensionfolderid",
+          data: {
+            refreshToken: refreshToken,
+            tssd: thisdata.state.tssd,
+            memberid: memberid,
+            soapInstance: soapInstance,
+          },
+        })
+          .then(function (response) {
+            if (response.data.statusText) {
+              console.log(
+                "retrievingdataextensionfolderid:" + JSON.stringify(response.data)
+              );
+              thisdata.setState({ refreshtoken: response.data.refreshToken });
+              createSparkpostIntegrationFolder(
+                thisdata,
+                response.data.refreshToken,
+                response.data.soap_instance_url,
+                response.data.member_id,
+                response.data.ParentFolderID
+              );
+            } else {
+              console.log("Error getting Data extension's folder ID");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+            
+      function retrivejourneys(){
+        const params = {
+          refreshToken: newrefreshtoken,
+          tssd: tssd,
+          memberid: memberid,
+          soapInstance: soapInstance,
+          restInstance: restInstance,
+        };
+        axios({
+          method: "GET",
+          url: "/getactivejourneys",
+          params: params,
+        })
+          .then(function (response) {
+            /**
+             * Response handling code
+             */
+          })
+          .catch(function (error) {
+            /**
+             * Error Handling code
+             */
+          });
+        
+      }
+      function dataFolderCheck(
+        thisdata,
+        refreshToken,
+        memberid,
+        restInstance,
+        soapInstance
+      ) {
+        axios({
+          method: "POST",
+          url: "/datafoldercheck",
+          data: {
+            refreshToken: refreshToken,
+            tssd: thisdata.state.tssd,
+            memberid: memberid,
+            restInstance: restInstance,
+            soapInstance: soapInstance,
+          },
+        })
+          .then(function (response) {
+            console.log("datafolder:" + JSON.stringify(response.data));
+            if (response.data.statusText) {
+              console.log("memberid:" + thisdata.member_id);
+              console.log("refreshToken:" + thisdata.refreshtoken);
+              console.log("restInstance:" + thisdata.restInstance);
+              console.log("soapInstance:" + thisdata.soapInstance);
+
+              thisdata.setState({ refreshtoken: response.data.refreshToken });
+              thisdata.setState({ FolderID: response.data.FolderID });
+              domainConfigurationDECheck(
+                thisdata,
+                response.data.refreshToken,
+                response.data.soap_instance_url,
+                response.data.member_id,
+                response.data.FolderID
+              );
+            } else {
+              retrievingDataExtensionFolderID(
+                thisdata,
+                response.data.refreshToken,
+                response.data.soap_instance_url,
+                response.data.member_id
+              );
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      function createFolder(
+  thisdata,
+  refreshToken,
+  soapInstance,
+  memberid,
+  ParentFolderID
+) {
+  axios({
+    method: "POST",
+    url: "/createfolder",
+    data: {
+      refreshToken: refreshToken,
+      tssd: thisdata.state.tssd,
+      memberid: memberid,
+      soapInstance: soapInstance,
+      ParentFolderID: ParentFolderID,
+    },
+  })
+    .then(function (response) {
+      console.log(
+        "createSparkpostIntegrationFolder:" + JSON.stringify(response.data)
+      );
+      if (response.data.statusText) {
+        thisdata.setState({ refreshtoken: response.data.refreshToken });
+        thisdata.setState({ FolderID: response.data.FolderID });
+        domainConfigurationDECheck(
+          thisdata,
+          response.data.refreshToken,
+          response.data.soap_instance_url,
+          response.data.member_id,
+          response.data.FolderID
+        );
+      } else {
+        console.log("Error creating data extension folder");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+} 
      
    function creatingDomainConfigurationDE(req,res)
  
@@ -128,45 +362,99 @@
           });
       }
       
-     function AppUserInfo( apptoken ) {
-       console.log("response.data.oauthToken", apptoken);
-        axios({
-          method: "POST",
-          url: "/appuserinfo",
-          data: { refreshToken: apptoken, tssd:tssd },
+    
+ function retrivejourneysbyid()
+      {
+       axios({
+       method: "POST",
+       url: "/getJourneysById",
+       data: {
+      journeyId: response.data.journeys.items[i].id,
+      name: response.data.journeys.items[i].name,
+      status: response.data.journeys.items[i].status,
+      version: response.data.journeys.items[i].version,
+      refreshToken: journeyrefreshtoken,
+      tssd: tssd,
+      memberid: memberid,
+      soapInstance: soapInstance,
+      restInstance: restInstance,
+  },
+})
+  .then(function (response) {
+    /**
+     * Response Handler of Get Journeys by id
+     */
+  })
+  .catch(function (error) {
+    /**
+     * Error Handler of Get Journeys by id
+     */
+  });
+ }
+function domainConfigurationDECheck(
+  thisdata,
+  refreshToken,
+  soapInstance,
+  memberid,
+  FolderID
+) {
+  axios({
+    method: "POST",
+    url: "/dataextensioncheck",
+    data: {
+      refreshToken: refreshToken,
+      tssd: thisdata.state.tssd,
+      memberid: memberid,
+      soapInstance: soapInstance,
+      FolderID: FolderID,
+    },
+  })
+    .then(function (response) {
+      console.log("domainConfigurationDECheck:" + JSON.stringify(response));
+      if (response.data) {
+        thisdata.setState({ refreshtoken: response.data.refreshToken });
+        thisdata.setState({
+          DEexternalKeyDomainConfiguration:
+            response.data.DEexternalKeyDomainConfiguration,
+        });
+      } else {
+        console.log("Error creating data extension folder");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 
-        })
-          .then(function (response) {
-            console.log("response>>>>",response);
-            var test = response.data.username;
-              document.getElementById("myInput").value = test;
-          })
-          //   console.log("appuserinfo:" + JSON.stringify(response));
-
-          //   thisdata.setState({ namex: response.data });
-          //   thisdata.setState({ refreshtoken: response.data.refreshToken });
-          //   thisdata.setState({ member_id: response.data.member_id });
-          //   thisdata.setState({
-          //     restInstance: response.data.rest_instance_url,
-          //   });
-          //   thisdata.setState({
-          //     soapInstance: response.data.soap_instance_url,
-          //   });
-
-         //   dataFolderCheck(
-          //     thisdata,
-          //     response.data.refreshToken,
-          //     response.data.member_id,
-          //     response.data.rest_instance_url,
-          //     response.data.soap_instance_url
-          //   );
-          // })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }*/
-  </script>
-
+function retriverows()
+{
+  const domainvalue = {
+    refreshToken: this.state.refreshtoken,
+    tssd: this.state.tssd,
+    memberid: this.state.member_id,
+    restInstance: this.state.restInstance,
+    soapInstance: this.state.soapInstance,
+    FolderID: this.state.FolderID,
+  };
+  axios({
+    method: "POST",
+    url: "/retrievingDataExtensionRows",
+    data: domainvalue,
+  })
+    .then(function (response) {
+      /**
+       * Response manupulation operations code
+       */
+    })
+    .catch(function (error) {
+      /**
+       * Error handling code.
+       */
+    });
+  
+}      
+        
+</script>
 </body>
 </html>
    

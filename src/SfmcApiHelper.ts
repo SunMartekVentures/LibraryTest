@@ -151,14 +151,11 @@ export default class SfmcApiHelper
   })  
   }    
      public appUserInfo(req: any, res: any) {
-                let self = this;
-                console.log("req.body.tssd:" + req.body.tssd);
-                console.log("req.body.trefreshToken:" + req.body.refreshToken);
-                let access_token: string;
+      return new Promise<any>(async (resolve, reject) => {
                 this.genericMethods
                 .userInfo(
                   process.env.BASE_URL,
-                  this.oauthAccessToken
+                  req.body.oauthToken
                 )
                 .then((response:any)=>
                 {
@@ -169,9 +166,8 @@ export default class SfmcApiHelper
               {
                 console.log(err)
               })
-              
-                  
-              }
+             })  
+          }
 
         public senderdomain(req:any,res:any)
         {

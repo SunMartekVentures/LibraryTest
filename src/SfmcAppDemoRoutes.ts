@@ -111,7 +111,7 @@ export default class SfmcAppDemoRoutes
           .then((result) => {
             // req.session.oauthAccessToken = result.oauthAccessToken;
             //req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-            res.status(200).send(result);
+            res.status(result.status).send(result.statusText);
             req.setTimeout(0, () => {});
           })
           .catch((err) => {
@@ -130,26 +130,50 @@ export default class SfmcAppDemoRoutes
       self._apiHelper.appUserInfo(req, res);
     }
   
+    // public insertRowForDC(req: express.Request, res: express.Response) {
+    //   let self = this;
+    //   self._apiHelper.insertRowForDC(req, res);
+    // }
+  
      
-//     public creatingDomainConfigurationDE(
-//         req: express.Request,
-//         res: express.Response,
+    // public creatingDomainConfigurationDE(
+    //     req: express.Request,
+    //     res: express.Response,
         
-//       ) {
-//         let self = this;
-//        self._apiHelper.creatingDomainConfigurationDE(req, res)
-//        .then((response:any)=>{
+    //   ) {
+    //     let self = this;
+    //    self._apiHelper.creatingDomainConfigurationDE(req, res)
+    //    .then((response:any)=>{
 
-//         console.log("Response for Creating DE :::"+ JSON.stringify(response));
-//         res.status(200).send(response.statusText);
+    //     console.log("Response for Creating DE :::"+ JSON.stringify(response));
+    //     res.status(200).send(response.statusText);
 
-//        })
-//        .catch((error: any) => {
-//          console.log("error in creating domainconfiguration")
+    //    })
+    //    .catch((error: any) => {
+    //      console.log("error in creating domainconfiguration")
          
       
-//       })
-// }
-
+    //   })
+    // }
+    //   public getActiveJourneys(req: express.Request, res: express.Response) {
+    //     let self = this;
+    //     self._apiHelper.getActiveJourneys(req, res);
+    //   }
+    //   //Used to call the helper class for fetching journies by ID
+    //   public getJourneysById(req: express.Request, res: express.Response) {
+    //     let self = this;
+    //     self._apiHelper.getJourneysById(req, res);
+    //   }
+    //   public dataFolderCheck(req: express.Request, res: express.Response) {
+    //     let self = this;
+    //     self._apiHelper.dataFolderCheck(req, res);
+    //   }
+    //   public retrievingDataExtensionRows(
+    //     req: express.Request,
+    //     res: express.Response
+    //   ) {
+    //     let self = this;
+    //     self._apiHelper.retrievingDataExtensionRows(req, res);
+    //   }
 
 }

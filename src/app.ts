@@ -14,7 +14,6 @@ import SfmcAppDemoRoutes from './SfmcAppDemoRoutes';
 import Utils from './Utils';
 
 const PORT = process.env.PORT || 5000
-
 // Create & configure Express server
 const app = express();
 
@@ -86,9 +85,9 @@ app.post('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); 
 });
 
-// app.post("/appuserinfo", function (req, res) {
-//   appDemoRoutes.appUserInfo(req, res);
-// });
+app.post("/appuserinfo", function (req, res) {
+  appDemoRoutes.appUserInfo(req, res);
+});
 
 
 
@@ -100,7 +99,35 @@ app.post('/appdemoauthtoken', function(req, res) {
 //     appDemoRoutes.creatingDomainConfigurationDE(req, res);
 //   });
   
+//   app.post("/insertrowfordc", function (req, res) {
+//     appDemoRoutes.insertRowForDC(req, res);
+//   });
 
+//   app.get("/getactivejourneys", function (req, res) {
+//     appDemoRoutes.getActiveJourneys(req, res);
+//   });
+  
+//   //get Journeys By ID
+//   app.post("/getJourneysById", function (req, res) {
+//     appDemoRoutes.getJourneysById(req, res);
+//   });
+  
+//   app.get("/retrievingdataextensionfolderid", function (req, res) {
+//     appDemoRoutes.getActiveJourneys(req, res);
+//   });
+  
+//   app.post("/retrievingDataExtensionRows", function (req, res) {
+//     appDemoRoutes.retrievingDataExtensionRows(req, res);
+//   });
+  
+//   app.post("/datafoldercheck", function (req, res) {
+//     appDemoRoutes.dataFolderCheck(req, res);
+//   });
+  
+//   app.post("/insertrowfordc", function (req, res) {
+//     appDemoRoutes.insertRowForDC(req, res);
+//   });
+  
 // // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
 // app.post('/login', function(req, res) {
 //   appDemoRoutes.login(req, res); });
