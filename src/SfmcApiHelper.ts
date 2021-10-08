@@ -115,13 +115,13 @@ export default class SfmcApiHelper
         this.oauthAccessToken = response.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
-       
+        this.getRefreshTokenHelper(this.refreshToken,tssd,postBody.client_id,postBody.client_secret)
       })
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
       });
     
-      return self.getRefreshTokenHelper(this.refreshToken,tssd,postBody.client_id,postBody.client_secret)
+      return // self.getRefreshTokenHelper(this.refreshToken,tssd,postBody.client_id,postBody.client_secret)
     }
   
        // res.status(200).send(res)
