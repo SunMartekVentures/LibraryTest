@@ -150,6 +150,7 @@ export default class SfmcApiHelper
   }    
      public appuserInfo(req: any, res: any) {
       return new Promise<any>(async (resolve, reject) => {
+        console.log("Req oauthToken:",req.body.oauthToken)
                 this.genericMethods
                 .userInfo(
                   process.env.BASE_URL,
