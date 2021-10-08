@@ -123,6 +123,10 @@ app.post("/appuserInfo", function (req, res) {
   app.post("/datafoldercheck", function (req, res) {
     appDemoRoutes.dataFolderCheck(req, res);
   });
+
+  app.post("/createfolder", function (req, res) {
+    appDemoRoutes.createDataExtension(req, res);
+  });
   
 //   app.post("/insertrowfordc", function (req, res) {
 //     appDemoRoutes.insertRowForDC(req, res);

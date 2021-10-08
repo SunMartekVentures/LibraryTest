@@ -889,6 +889,7 @@ export default class mcGenericMethods {
                           member_id: member_id,
                           DEexternalKeyDomainConfiguration:
                             DEexternalKeyDomainConfiguration,
+                          data:dataDE
                         };
                         resolve(sendresponse);
     

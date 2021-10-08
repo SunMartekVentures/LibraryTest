@@ -41,9 +41,9 @@
     <br><br>
     <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
     onclick="createSparkpostIntegrationFolder()">createSparkpostIntegrationFolder</button>
-<!--         
+     <br><br>   
     <button type="button" id="createdataextension" class="btn btn-primary"
-    onclick="createdataextension()">createdataextension</button> -->
+    onclick="createDataExtension()">createdataextension</button>
     <br><br>
     <button type="button" id="insertrow" class="btn btn-primary"
     onclick="insertRow()">insertRow</button>
@@ -70,6 +70,8 @@
     let oauthToken="";
     let soap_instance_url="";
     let member_id="";
+    let FolderID="";
+    
 
       function accessTokenGeneration(req,res) {
         axios({
@@ -280,6 +282,8 @@
         })
           .then(function (response) {
             console.log("datafolder:" + JSON.stringify(response.data));
+            this.member_id=response.data.member_id;
+            this.FolderID=response.data.FolderID;
             var log = response;
             document.getElementById("demo").value=JSON.stringify(log)
           })
@@ -287,17 +291,17 @@
             console.log(error);
           });
       }
-      function createFolder()
+      function createDataExtension()
        {
        axios({
     method: "POST",
     url: "/createfolder",
     data: {
-      refreshToken: refreshToken,
-     // tssd: thisdata.state.tssd,
-      memberid: memberid,
-      soapInstance: soapInstance,
-      ParentFolderID: ParentFolderID,
+      oauthToken:this.oauthToken,
+      memberid:this.memberid,
+      soap_instance_url:this.soap_instance_url,
+      FolderID:this.FolderID,
+      
     },
   })
     .then(function (response) {
@@ -321,9 +325,10 @@
           method: "POST",
           url: "/creatingDomainConfigurationDE",
           data: {
-           dataextensionname : dataextensionname,
-            soap_instance_url: "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/",
-           
+            oauthToken:this.oauthToken,
+            memberid:this.memberid,
+            soap_instance_url:this.soap_instance_url,
+            FolderID:this.FolderID,
           },
          
         })
@@ -331,18 +336,8 @@
             console.log(
               "creatingDomainConfigurationDE:" + JSON.stringify(response)
             );
-            document.getElementById("demo2").innerHTML = "dataextension created";
-            document.getElementById("demo4").innerHTML = JSON.stringify(response);
-            // if (response.data) {
-        
-            //   thisdata.setState({
-            //     DEexternalKeyDomainConfiguration:
-           //       response.data.DEexternalKeyDomainConfiguration,
-            //   });
+           
             
-            // } else {
-            //   console.log("Error creating data extension folder");
-            // }
           })
           .catch(function (error) {
            document.getElementById("demo3").innerHTML = "dataextension not created";

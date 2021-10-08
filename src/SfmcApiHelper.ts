@@ -26,6 +26,7 @@ export default class SfmcApiHelper
   private parentFolderId= "12785";
   private FolderID = "";
   private paramData="";
+  private jsonArr=new Array;
   
   
   private rest_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/";
@@ -266,7 +267,7 @@ export default class SfmcApiHelper
                    res.status(200).send(response)
  
  
-                   const jsonArr=[
+                   this.jsonArr=[
                      {
                        name:"LibraryName",
                        type:"text",
@@ -306,29 +307,29 @@ export default class SfmcApiHelper
                 
             
 
-        //   public createDataExtension(req:any,res:any)
-        //   {
-        //     this.genericMethods
-        //     .createDataExtension
-        //     (
-        //       response.member_id,
-        //      response.soap_instance_url,
-        //      paramData.oauthToken,
-        //      this.FolderID,
-        //      process.env.BASE_URL,
-        //      jsonArr
-        //     )
-        //     .then((response:any)=>
-        //     {
-        //       console.log("<><><Response in creating Data xtension><><>",response)
-        //       res.status(200).send(response)
+          public createDataExtension(req:any,res:any)
+          {
+            this.genericMethods
+            .createDataExtension
+            (
+              req.body.member_id,
+              req.body.soap_instance_url,
+              req.body.oauthToken,
+              req.body.FolderID,
+              process.env.BASE_URL,
+              this.jsonArr
+            )
+            .then((response:any)=>
+            {
+              console.log("<><><Response in creating Data xtension><><>",response)
+              res.status(200).send(response)
               
-        //     })
-        //     .catch((err:any)=>
-        //     {
-        //       console.log("Erroe in creatong data extension in folder",err)
-        //     })
-        //   }
+            })
+            .catch((err:any)=>
+            {
+              console.log("Erroe in creatong data extension in folder",err)
+            })
+          }
                   
               
 
