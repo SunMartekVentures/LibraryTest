@@ -101,7 +101,6 @@ export default class SfmcApiHelper
     headers: any,
     postBody: any,
     result: express.Response,
-    req:express.Request,
     tssd: string
   ): Promise<any> {
 
