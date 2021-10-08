@@ -7,7 +7,6 @@ import Utils from './Utils';
 import xml2js = require("xml2js");
 import MC_Generic_Methods from "./Generic-method/src/";
 import { access } from 'fs';
-import { resolve } from 'dns';
 
 export default class SfmcApiHelper
 {
@@ -113,11 +112,7 @@ export default class SfmcApiHelper
         console.log("tokken tokken>>",this.refreshToken);
         
         console.log("AccessToken Method  library", res);
-        res.status(200).send(res)
-      })
-      .catch((err: any) => {
-        console.error("error getting access token from library" + err);
-      });
+       // res.status(200).send(res)
 
 
         if (res.data.refresh_token) {
@@ -144,11 +139,6 @@ export default class SfmcApiHelper
                 soapInstance: this.soap_instance_url,
                 data:response.data
               };
-              res.status(200).send(response)
-            })
-            .catch((err: any) => {
-              console.error("error getting refresh token from library" + err);
-            });
              // response.status(200).send(paramData)
               //res.status(200).send(paramData)
               this.genericMethods
@@ -312,9 +302,15 @@ export default class SfmcApiHelper
                 "Refresh token Method from library",
                 response.refreshToken
               );
-          
+            })
+            .catch((err: any) => {
+              console.error("error getting refresh token from library" + err);
+            });
         }
-     
+      })
+      .catch((err: any) => {
+        console.error("error getting access token from library" + err);
+      });
       return 
     // return new Promise<any>((resolve, reject) => {
     //   console.log("author" + JSON.stringify(postBody.code));
