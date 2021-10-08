@@ -97,7 +97,7 @@
         axios({
           method: "GET",
           url: "/getactivejourneys",
-          data:{oauthToken : this.oauthToken},
+          params:{oauthToken : this.oauthToken},
         })
           .then(function (response) {
            console.log("Active Journeys:",response)
