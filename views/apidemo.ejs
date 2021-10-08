@@ -84,9 +84,29 @@
          })
            .then(function (response) {
              console.log("response in userInfo>>>>",response);
-            1
+            
+           })
+           .catch(function(err)
+           {
+             console.log(err)
            })      
         }
+                
+      function retrivejourneys(){
+       
+        axios({
+          method: "GET",
+          url: "/getactivejourneys",
+          data:{oauthToken : this.oauthToken},
+        })
+          .then(function (response) {
+           console.log("Active Journeys:",response)
+          })
+          .catch(function (error) {
+            console.error(error)
+          });
+        
+      }
 
 
       function createSparkpostIntegrationFolder(
@@ -204,24 +224,7 @@
             console.log(error);
           });
       }
-            
-      function retrivejourneys(){
-       
-        axios({
-          method: "GET",
-          url: "/getactivejourneys",
-          data:{oauthToken:this.oauthToken},
-        })
-          .then(function (response) {
-           console.log("Active Journeys:",response)
-          })
-          .catch(function (error) {
-            /**
-             * Error Handling code
-             */
-          });
-        
-      }
+    
       function dataFolderCheck(
         thisdata,
         refreshToken,
