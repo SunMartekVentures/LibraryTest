@@ -7,11 +7,15 @@
       integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
       crossorigin="anonymous"
     ></script>
-  
+    <title>OutPut Page </title>
     <!-- <script src="/src/SfmcApiHelper.ts"></script> -->
-    <title>Library Methods </title>
     <button type="button" id="btnGetOauthToken" class="btn btn-primary"
-    onclick="accessTokenGeneration()"> Get Access Token</button>
+    onclick="accessTokenGeneration()">ACCESS TOKEN</button>
+    <!-- <p id="demo" style="color:green;"></p>
+    <p id="demo1" style="color:red;"></p> -->
+    <!-- <input id="myInput" type="text" value="no username" />
+    <button type="button" id="btnGetOauthToken" class="btn btn-primary"
+    onclick="Journey Builder()">Journey</button> -->
     <!-- <button type="button" id="AppUserInfo" class="btn btn-primary"
     onclick="AppUserInfo()">AppUserInfo</button> -->
     <!-- <body>
@@ -24,7 +28,6 @@
   </body> -->
     <br><br>
     
-    
 </head>
 <body>
   <script>
@@ -33,11 +36,10 @@
     const authorization_code = urlParams.get('code');
     console.log("authorization_code",authorization_code);
     // const tssd = urlParams.get('tssd');
-    const tssd = "mcj6cy1x9m-t5h5tz0bfsyqj38ky";
+    const tssd ="mcj6cy1x9m-t5h5tz0bfsyqj38ky";
     console.log("tssd=",tssd);
-    let apptoken ="";
-
       function accessTokenGeneration(req,res) {
+        
         axios({
           method: "POST",
           url: "/appdemoauthtoken",
@@ -55,7 +57,7 @@
                 JSON.stringify(response.data.refreshToken)
 
             );
-           apptoken = response.data.refreshToken;
+            let apptoken = response.data.refreshToken;
            //  AppUserInfo( apptoken)
           })
           .catch(function (error) {
@@ -132,9 +134,9 @@
            document.getElementById("demo3").innerHTML = "dataextension not created";
             console.log(error);
           });
-      }*/
+      }
       
-     function AppUserInfo() {
+     function AppUserInfo( apptoken ) {
        console.log("response.data.oauthToken", apptoken);
         axios({
           method: "POST",
@@ -147,18 +149,18 @@
             var test = response.data.username;
               document.getElementById("myInput").value = test;
           })
-             console.log("appuserinfo:" + JSON.stringify(response));
+          //   console.log("appuserinfo:" + JSON.stringify(response));
 
-             thisdata.setState({ namex: response.data });
-             thisdata.setState({ refreshtoken: response.data.refreshToken });
-             thisdata.setState({ member_id: response.data.member_id });
-             thisdata.setState({
-               restInstance: response.data.rest_instance_url,
-             });
-             thisdata.setState({
-               soapInstance: response.data.soap_instance_url,
-             });
-/*
+          //   thisdata.setState({ namex: response.data });
+          //   thisdata.setState({ refreshtoken: response.data.refreshToken });
+          //   thisdata.setState({ member_id: response.data.member_id });
+          //   thisdata.setState({
+          //     restInstance: response.data.rest_instance_url,
+          //   });
+          //   thisdata.setState({
+          //     soapInstance: response.data.soap_instance_url,
+          //   });
+
          //   dataFolderCheck(
           //     thisdata,
           //     response.data.refreshToken,
@@ -170,8 +172,7 @@
           .catch(function (error) {
             console.log(error);
           });
-      */
-        }
+      }*/
   </script>
 
 </body>
