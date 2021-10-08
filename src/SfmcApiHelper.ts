@@ -211,10 +211,10 @@ export default class SfmcApiHelper
 
                public getActiveJourneys(req:any,res:any)
                {
-                 console.log("Token in Active Journey:",req.body.oauthToken)
+                 console.log("Token in Active Journey:",req.query.oauthToken)
                 this.genericMethods
                 .getActiveJourney(
-                  req.body.oauthToken,
+                  req.query.oauthToken,
                   process.env.BASE_URL
                 )
                 .then((response:any)=>
