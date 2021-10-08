@@ -101,8 +101,7 @@ export default class SfmcApiHelper
     postBody: any,
     res: any,
     tssd: string
-  )
-   {
+  ): Promise<any> {
     this.genericMethods
       .getOAuthAccessToken(
         postBody.client_id,
@@ -146,6 +145,7 @@ export default class SfmcApiHelper
         console.error("error getting access token from library" + err);
       });
     })
+    return
   }    
      public appUserInfo(req: any, res: any) {
                 let self = this;
