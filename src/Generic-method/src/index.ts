@@ -64,6 +64,7 @@ export default class mcGenericMethods {
     clientSecret: any
   ): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
+      console.log("TSSD:",tssd,"refreshtoken:",refreshToken,"clientid:",clientId,"clientSecret:",clientSecret)
       let sfmcAuthServiceApiUrl =
         "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
       let headers = {
