@@ -113,6 +113,7 @@ export default class SfmcApiHelper
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
         res.status(200).send(response)
+
       })
       .catch((err: any) => {
         console.error("error getting access token from library" + err);
@@ -120,21 +121,14 @@ export default class SfmcApiHelper
     }
        // res.status(200).send(res)
 
-
-        if (res.data.refresh_token) {
-          console.log(
-            "Refresh token",
-            this.refreshToken,
-            "Refresh token from response",
-            res.data.refresh_token
-          );
-
+       public getRefreshTokenHelper(req:any,res:any)
+       {
           this.genericMethods
             .getRefreshToken(
               this.refreshToken,
               process.env.BASE_URL,
-              postBody.client_id,
-              postBody.client_secret
+              process.env.client_id,
+              process.env.client_secret
             )
 
             .then((response: any) => {
@@ -150,6 +144,9 @@ export default class SfmcApiHelper
               console.error("error getting refresh token from library" + err);
             });
           }
+       
+
+        
 
 
              // response.status(200).send(paramData)
