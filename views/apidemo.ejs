@@ -67,7 +67,9 @@
     const tssd = "mcj6cy1x9m-t5h5tz0bfsyqj38ky";
     console.log("tssd=",tssd);
     let apptoken ="";
-    let oauthToken=""
+    let oauthToken="";
+    let soap_instance_url="";
+    let member_id="";
 
       function accessTokenGeneration(req,res) {
         axios({
@@ -83,6 +85,7 @@
             var log = response;
             document.getElementById("demo").value=JSON.stringify(log)
             this.oauthToken=response.data.oauthToken
+            this.soap_instance_url=response.data.soap_instance_url
           })
           .catch(function (error) {
             console.log(error);
@@ -99,6 +102,7 @@
          })
            .then(function (response) {
              console.log("response in userInfo>>>>",response);
+             this.member_id=response.data.member_id
              var log = response;
              document.getElementById("demo").value=JSON.stringify(log)
            })
@@ -262,49 +266,22 @@
           });
       }
     
-      function dataFolderCheck(
-        thisdata,
-        refreshToken,
-        memberid,
-        restInstance,
-        soapInstance
-      ) {
+      function dataFolderCheck() {
         axios({
           method: "POST",
           url: "/datafoldercheck",
           data: {
-            refreshToken: refreshToken,
-            tssd: thisdata.state.tssd,
-            memberid: memberid,
-            restInstance: restInstance,
-            soapInstance: soapInstance,
+           // refreshToken: refreshToken,
+            //tssd: thisdata.state.tssd,
+            oauthToken:this.oauthToken,
+            soap_instance_url: this.soap_instance_url,
+            member_id : this.member_id
           },
         })
           .then(function (response) {
             console.log("datafolder:" + JSON.stringify(response.data));
-            if (response.data.statusText) {
-              console.log("memberid:" + thisdata.member_id);
-              console.log("refreshToken:" + thisdata.refreshtoken);
-              console.log("restInstance:" + thisdata.restInstance);
-              console.log("soapInstance:" + thisdata.soapInstance);
-
-              thisdata.setState({ refreshtoken: response.data.refreshToken });
-              thisdata.setState({ FolderID: response.data.FolderID });
-              domainConfigurationDECheck(
-                thisdata,
-                response.data.refreshToken,
-                response.data.soap_instance_url,
-                response.data.member_id,
-                response.data.FolderID
-              );
-            } else {
-              retrievingDataExtensionFolderID(
-                thisdata,
-                response.data.refreshToken,
-                response.data.soap_instance_url,
-                response.data.member_id
-              );
-            }
+            var log = response;
+            document.getElementById("demo").value=JSON.stringify(log)
           })
           .catch(function (error) {
             console.log(error);

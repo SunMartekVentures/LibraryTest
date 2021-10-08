@@ -132,6 +132,7 @@ export default class SfmcApiHelper
               console.log("Response to send:",response);
               const front=
               {
+                soap_instance_url:response.soap_instance_url,
                 refreshToken:response.refreshToken,
                 oauthToken:response.oauthToken
               }
@@ -247,60 +248,60 @@ export default class SfmcApiHelper
                 })
                }
               
-        //       public dataFolderCheck(req:any,res:any)
-        //       {
-        //         this.genericMethods
-        //         .dataFolderCheck(
-        //           paramData.oauthToken,
-        //           response.soap_instance_url,
-        //           response.member_id
-        //         )
-        //         .then((response:any)=>
-        //         {
-        //           console.log("Response in dataFolderCheck >>>",response)
-        //           console.log("Folder id in use:",response.FolderID)
-        //            this.FolderID = response.FolderID
-        //            console.log(this.FolderID) 
-        //            console.log("FOlderID got!!")
-        //            res.status(200).send(response)
+              public dataFolderCheck(req:any,res:any)
+              {
+                this.genericMethods
+                .dataFolderCheck(
+                  req.body.oauthToken,
+                  req.body.soap_instance_url,
+                  req.body.member_id
+                )
+                .then((response:any)=>
+                {
+                  console.log("Response in dataFolderCheck >>>",response)
+                  console.log("Folder id in use:",response.FolderID)
+                   this.FolderID = response.FolderID
+                   console.log(this.FolderID) 
+                   console.log("FOlderID got!!")
+                   res.status(200).send(response)
  
  
-        //            const jsonArr=[
-        //              {
-        //                name:"LibraryName",
-        //                type:"text",
-        //                length:100,
-        //                isReq:true,
-        //                isKey:true
-        //              },
-        //              {
-        //                name:"LibraryModules",
-        //                type:"decimal",
-        //                precision:20,
-        //                scale:0,
-        //                isReq:true,
-        //                isKey:false
-        //              }, 
-        //              {
-        //                name:"LibraryScale",
-        //                type:"number",
-        //                length:20,
-        //                isReq:true,
-        //                isKey:false
-        //              },
-        //              {
-        //                name:"Email",
-        //                type:"Email Address",
-        //                isReq:true,
-        //                isKey:false
-        //              }
-        //            ]
-        //          })
-        //          .catch((err)=>
-        //          {
-        //            console.error(err)
-        //          })
-        //       }
+                   const jsonArr=[
+                     {
+                       name:"LibraryName",
+                       type:"text",
+                       length:100,
+                       isReq:true,
+                       isKey:true
+                     },
+                     {
+                       name:"LibraryModules",
+                       type:"decimal",
+                       precision:20,
+                       scale:0,
+                       isReq:true,
+                       isKey:false
+                     }, 
+                     {
+                       name:"LibraryScale",
+                       type:"number",
+                       length:20,
+                       isReq:true,
+                       isKey:false
+                     },
+                     {
+                       name:"Email",
+                       type:"Email Address",
+                       isReq:true,
+                       isKey:false
+                     }
+                   ]
+                 })
+                 .catch((err)=>
+                 {
+                   console.error(err)
+                 })
+              }
                
                 
             

@@ -164,10 +164,10 @@ export default class SfmcAppDemoRoutes
         let self = this;
         self._apiHelper.getJourneysById(req, res);
       }
-    //   public dataFolderCheck(req: express.Request, res: express.Response) {
-    //     let self = this;
-    //     self._apiHelper.dataFolderCheck(req, res);
-    //   }
+      public dataFolderCheck(req: express.Request, res: express.Response) {
+        let self = this;
+        self._apiHelper.dataFolderCheck(req, res);
+      }
     //   public retrievingDataExtensionRows(
     //     req: express.Request,
     //     res: express.Response
