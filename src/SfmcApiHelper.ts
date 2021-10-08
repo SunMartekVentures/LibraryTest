@@ -211,6 +211,7 @@ export default class SfmcApiHelper
 
                public getActiveJourneys(req:any,res:any)
                {
+                 console.log("Token in Active Journey:",req.body.oauthToken)
                 this.genericMethods
                 .getActiveJourney(
                   req.body.oauthToken,
