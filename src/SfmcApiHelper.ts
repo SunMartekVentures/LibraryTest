@@ -118,6 +118,8 @@ export default class SfmcApiHelper
         this.oauthAccessToken = res.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
+        result.status(200).send(res) 
+        
         if (res.data.refresh_token) {
           console.log(
             "Refresh token",
@@ -137,15 +139,16 @@ export default class SfmcApiHelper
             .then((response:any)=>
             {
               console.log("Response to send:",response);
-               let resultPass=response;
-
-               result.status(200).send(resultPass)
             })
             .catch((err)=>
             {
               console.log(err)
             })   
-            result.status(200).send(res.data) 
+          
+    })
+    .catch((err)=>
+    {
+      console.error(err)      
     })
    
     return

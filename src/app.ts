@@ -86,9 +86,9 @@ app.post('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); 
 });
 
-app.post("/appuserinfo", function (req, res) {
-  appDemoRoutes.appUserInfo(req, res);
-});
+// app.post("/appuserinfo", function (req, res) {
+//   appDemoRoutes.appUserInfo(req, res);
+// });
 
 
 
