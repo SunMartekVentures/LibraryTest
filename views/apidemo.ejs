@@ -206,13 +206,7 @@
       }
             
       function retrivejourneys(){
-        const params = {
-          refreshToken: newrefreshtoken,
-          tssd: tssd,
-          memberid: memberid,
-          soapInstance: soapInstance,
-          restInstance: restInstance,
-        };
+       
         axios({
           method: "GET",
           url: "/getactivejourneys",
