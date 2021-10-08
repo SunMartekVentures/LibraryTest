@@ -40,7 +40,7 @@
     onclick="dataFolderCheck()">retrievingDataExtensionFolderID</button>
     <br><br>
     <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
-    onclick="createSparkpostIntegrationFolder()">createSparkpostIntegrationFolder</button>
+    onclick="createFolder()">createFolder</button>
      <br><br>   
     <button type="button" id="createdataextension" class="btn btn-primary"
     onclick="createDataExtension()">createdataextension</button>
@@ -149,45 +149,27 @@
     console.log(error)
   });
  }
-
- 
-
-      function createSparkpostIntegrationFolder(
-        thisdata,
-        refreshToken,
-        soapInstance,
-        memberid,
-        ParentFolderID
-      ) {
+      function createFolder()
+       {
         axios({
           method: "POST",
-          url: "/createsparkpostintegrationfolder",
+          url: "/createfolder",
           data: {
-            refreshToken: refreshToken,
-            tssd: thisdata.state.tssd,
-            memberid: memberid,
-            soapInstance: soapInstance,
-            ParentFolderID: ParentFolderID,
+            oauthToken:this.oauthToken,
+            //tssd: thisdata.state.tssd,
+            member_id: this.member_id,
+            soap_instance_url:this.soap_instance_url,
+           // ParentFolderID: ParentFolderID,
           },
         })
           .then(function (response) {
+            console.log("Created DataExtension Folder")
             console.log(
-              "createSparkpostIntegrationFolder:" +
+              "createFolder:" +
                 JSON.stringify(response.data)
             );
-            if (response.data.statusText) {
-              thisdata.setState({ refreshtoken: response.data.refreshToken });
-              thisdata.setState({ FolderID: response.data.FolderID });
-              domainConfigurationDECheck(
-                thisdata,
-                response.data.refreshToken,
-                response.data.soap_instance_url,
-                response.data.member_id,
-                response.data.FolderID
-              );
-            } else {
-              console.log("Error creating data extension folder");
-            }
+            var log = response;
+           document.getElementById("demo").value=JSON.stringify(log)
           })
           .catch(function (error) {
             console.log(error);

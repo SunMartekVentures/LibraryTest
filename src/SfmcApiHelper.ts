@@ -187,28 +187,28 @@ export default class SfmcApiHelper
             });
         }
         
-        // public createFolder(req:any,res:any)    
-        // {
-        //   this.genericMethods
-        //   .createFolder( 
-        //     this.paramData.oauthToken,
-        //    response.soap_instance_url,
-        //    response.member_id,
-        //    this.parentFolderId
-        //     )
-        //   .then((response:any)=>
-        //   {
-        //     console.log("Data Extension Created...Check MC App");
-        //     res.status(200).send(response)
-        //   }
-        //   )
+        public createFolder(req:any,res:any)    
+        {
+          this.genericMethods
+          .createFolder( 
+            req.body.oauthToken,
+           req.body.soap_instance_url,
+           req.body.member_id,
+           this.parentFolderId
+            )
+          .then((response:any)=>
+          {
+            console.log("Data Extension Created...Check MC App");
+            res.status(200).send(response)
+          }
+          )
          
 
-        //   .catch((err:any)=>
-        //   {
-        //     console.error("Error in creating folder",err)
-        //   })
-        // }           
+          .catch((err:any)=>
+          {
+            console.error("Error in creating folder",err)
+          })
+        }           
              
 
                public getActiveJourneys(req:any,res:any)

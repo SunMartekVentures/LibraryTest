@@ -172,6 +172,10 @@ export default class SfmcAppDemoRoutes
         let self = this;
         self._apiHelper.createDataExtension(req, res);
       }
+      public createfolder(req: express.Request, res: express.Response) {
+        let self = this;
+        self._apiHelper.createFolder(req, res);
+      }
     //   public retrievingDataExtensionRows(
     //     req: express.Request,
     //     res: express.Response

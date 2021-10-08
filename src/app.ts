@@ -91,9 +91,9 @@ app.post("/appuserInfo", function (req, res) {
 
 
 
-//   app.post("/createsparkpostintegrationfolder", function (req, res) {
-//     appDemoRoutes.createSparkpostIntegrationFolder(req, res);
-//   });
+  app.post("/createfolder", function (req, res) {
+    appDemoRoutes.createfolder(req, res);
+  });
 
 //   app.post("/creatingDomainConfigurationDE", function (req, res) {
 //     appDemoRoutes.creatingDomainConfigurationDE(req, res);
