@@ -84,8 +84,7 @@
          })
            .then(function (response) {
              console.log("response in userInfo>>>>",response);
-             var test = response.data.username;
-               document.getElementById("myInput").value = test;
+            1
            })      
         }
 
@@ -217,12 +216,10 @@
         axios({
           method: "GET",
           url: "/getactivejourneys",
-          params: params,
+          data:{oauthToken:this.oauthToken},
         })
           .then(function (response) {
-            /**
-             * Response handling code
-             */
+           console.log("Active Journeys:",response)
           })
           .catch(function (error) {
             /**

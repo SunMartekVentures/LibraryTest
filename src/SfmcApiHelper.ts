@@ -209,23 +209,23 @@ export default class SfmcApiHelper
         // }           
              
 
-        //        public getActiveJourney(req:any,res:any)
-        //        {
-        //         this.genericMethods
-        //         .getActiveJourney(
-        //           paramData.oauthToken,
-        //           process.env.BASE_URL
-        //         )
-        //         .then((response:any)=>
-        //         {
-        //           console.log("Active Journeys:>>>:",JSON.stringify(response));
-        //           res.status(200).send(response)
-        //         })
-        //         .catch((err:any)=>
-        //         {
-        //           console.error(err)
-        //         })
-        //        }
+               public getActiveJourneys(req:any,res:any)
+               {
+                this.genericMethods
+                .getActiveJourney(
+                  req.body.oauthToken,
+                  process.env.BASE_URL
+                )
+                .then((response:any)=>
+                {
+                  console.log("Active Journeys:>>>:",JSON.stringify(response));
+                  res.status(200).send(response)
+                })
+                .catch((err:any)=>
+                {
+                  console.error(err)
+                })
+               }
                
                
         //        public getJourneyDetails(req:any,res:any)

@@ -155,10 +155,10 @@ export default class SfmcAppDemoRoutes
       
     //   })
     // }
-    //   public getActiveJourneys(req: express.Request, res: express.Response) {
-    //     let self = this;
-    //     self._apiHelper.getActiveJourneys(req, res);
-    //   }
+      public getActiveJourneys(req: express.Request, res: express.Response) {
+        let self = this;
+        self._apiHelper.getActiveJourneys(req, res);
+      }
     //   //Used to call the helper class for fetching journies by ID
     //   public getJourneysById(req: express.Request, res: express.Response) {
     //     let self = this;

@@ -103,9 +103,9 @@ app.post("/appuserInfo", function (req, res) {
 //     appDemoRoutes.insertRowForDC(req, res);
 //   });
 
-//   app.get("/getactivejourneys", function (req, res) {
-//     appDemoRoutes.getActiveJourneys(req, res);
-//   });
+  app.get("/getactivejourneys", function (req, res) {
+    appDemoRoutes.getActiveJourneys(req, res);
+  });
   
 //   //get Journeys By ID
 //   app.post("/getJourneysById", function (req, res) {
