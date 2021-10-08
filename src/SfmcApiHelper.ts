@@ -118,8 +118,7 @@ export default class SfmcApiHelper
         this.oauthAccessToken = res.data.oauthAccessToken
         console.log("tokken tokken>>",this.refreshToken); 
         console.log("AccessToken Method  library", res);
-        resolve(res)
-        {
+        
           this.genericMethods
             .getRefreshToken(
               this.refreshToken,
@@ -131,13 +130,19 @@ export default class SfmcApiHelper
             .then((response:any)=>
             {
               console.log("Response to send:",response);
+              const front=
+              {
+                refreshToken:response.refreshToken,
+                oauthToken:response.oauthToken
+              }
+              resolve(front)
             })
             .catch((err)=>
             {
               console.log(err)
             })   
           
-    }
+    
   })
     .catch((err)=>
     {

@@ -50,15 +50,7 @@
         })
           .then(function (response) {
             console.log("response>>>>",response);
-            console.log("response.data.refresh_token",response.data.refresh_token);
-
-            console.log(
-                "a:" +
-                JSON.stringify(response.data.refreshToken)
-
-            );
-            let apptoken = response.data.refreshToken;
-           //  AppUserInfo( apptoken)
+            console.log("response.data.refresh_token",response.data.refreshToken);
           })
           .catch(function (error) {
             console.log(error);
