@@ -40,6 +40,8 @@
     <button type="button" id="retriverows" class="btn btn-primary"
     onclick="retriverows()">retriverows</button>
 
+    <textarea id="demo" cols="100" rows="20"  size="10000"name="json data"></textarea>
+
     <br><br>
     
 </head>
@@ -66,7 +68,8 @@
         })
           .then(function (response) {
             console.log("response>>>>",response);
-
+            var log = response;
+            document.getElementById("demo").value=log
             this.oauthToken=response.data.oauthToken
           })
           .catch(function (error) {
@@ -84,7 +87,8 @@
          })
            .then(function (response) {
              console.log("response in userInfo>>>>",response);
-            
+             var log = response;
+            document.getElementById("demo").value=log
            })
            .catch(function(err)
            {
@@ -101,6 +105,8 @@
         })
           .then(function (response) {
            console.log("Active Journeys:",response)
+           var log = response;
+           document.getElementById("demo").value=log
           })
           .catch(function (error) {
             console.error(error)
@@ -118,6 +124,8 @@
 })
   .then(function (response) {
   console.log("Retrieve Journey By ID:",response)
+  var log = response;
+  document.getElementById("demo").value=log
   })
   .catch(function (error) {
     console.log(error)
