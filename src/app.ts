@@ -119,7 +119,7 @@ app.post("/appuserInfo", function (req, res) {
   });
 
   app.post("/createfolder", function (req, res) {
-    appDemoRoutes.createDataExtension(req, res);
+    appDemoRoutes.createfolder(req, res);
   });
   
 //   app.post("/insertrowfordc", function (req, res) {
