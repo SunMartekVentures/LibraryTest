@@ -89,15 +89,9 @@ app.post("/appuserInfo", function (req, res) {
   appDemoRoutes.appuserInfo(req, res);
 });
 
-
-
-  app.post("/createfolder", function (req, res) {
-    appDemoRoutes.createfolder(req, res);
+  app.post("/createDataExtension", function (req, res) {
+    appDemoRoutes.createDataExtension(req, res);
   });
-
-//   app.post("/creatingDomainConfigurationDE", function (req, res) {
-//     appDemoRoutes.creatingDomainConfigurationDE(req, res);
-//   });
   
 //   app.post("/insertrowfordc", function (req, res) {
 //     appDemoRoutes.insertRowForDC(req, res);
