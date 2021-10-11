@@ -718,6 +718,8 @@ export default class mcGenericMethods {
         });
     });
       }
+
+
       public async retrievingDataExtensionRows(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string) 
       {
              console.log("retrievingDataExtensionRows:" + token);
@@ -853,6 +855,45 @@ export default class mcGenericMethods {
              });
            };
 
+              /**
+               * 
+               * @param member_id 
+               * @param soap_instance_url 
+               * @param token 
+               * @param FolderID 
+               * @param tssd 
+               * @param jsonArr 
+               * <-createDataExtension JSON->
+
+               FieldRequired for text:
+                name:string,
+                type:string,
+                length:number,
+                isReq:boolean,
+                isKey:boolean
+
+               FieldRequired for Decimal:
+                name:string,
+                type:string,
+                precision:number,
+                scale:number,
+                isReq:boolean,
+                isKey:boolean
+
+                FieldRequired for EmailAddress:
+                name:string,
+                type:string,
+                isReq:boolean,
+                isKey:boolean
+
+                FieldRequired for Number:
+                name:string,
+                type:string,
+                length:number,
+                isReq:boolean,
+                isKey:boolean
+               * @returns 
+               */
       public async createDataExtension   
       ( 
         member_id: string,

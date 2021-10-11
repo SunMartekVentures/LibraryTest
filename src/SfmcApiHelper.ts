@@ -328,7 +328,7 @@ export default class SfmcApiHelper
                  })
               }
                
-                
+               
           public createDataExtension(req:any,res:any)
           {
             this.genericMethods
