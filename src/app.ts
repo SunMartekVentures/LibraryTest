@@ -106,9 +106,9 @@ app.post("/appuserInfo", function (req, res) {
     appDemoRoutes.getJourneysById(req, res);
   });
   
-//   app.get("/retrievingdataextensionfolderid", function (req, res) {
-//     appDemoRoutes.getActiveJourneys(req, res);
-//   });
+  app.get("/retrievingdataextensionfolderid", function (req, res) {
+    appDemoRoutes.retrievingDataExtensionFolderID(req, res);
+  });
   
 //   app.post("/retrievingDataExtensionRows", function (req, res) {
 //     appDemoRoutes.retrievingDataExtensionRows(req, res);

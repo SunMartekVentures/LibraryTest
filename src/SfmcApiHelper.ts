@@ -184,6 +184,29 @@ export default class SfmcApiHelper
               );
             });
         }
+
+        public retrievingDataExtensionFolderID(
+          req: express.Request,
+          res: express.Response
+        ) 
+        {
+          this.genericMethods
+          .retrievingDataExtensionFolderId
+          (
+            req.body.soap_instance_url,
+            req.body.oauthToken,
+            req.body.member_id
+          )
+          .then((response:any)=>
+          {
+            console.log("DataExtensionFolderID:",response),
+            res.status(200).send(response)
+          })
+          .catch((err:any)=>
+          {
+            console.error(err)
+          })
+        } 
         
         public createFolder(req:any,res:any)   
 
@@ -191,7 +214,7 @@ export default class SfmcApiHelper
           console.log("Member ID in create Folder:",req.body.member_id)
           this.genericMethods
           .createFolder( 
-            req.body.oauthToken,
+           req.body.oauthToken,
            req.body.soap_instance_url,
            req.body.member_id,
            this.parentFolderId
@@ -248,6 +271,9 @@ export default class SfmcApiHelper
                   console.error(err)
                 })
                }
+
+                
+
               
               public dataFolderCheck(req:any,res:any)
               {

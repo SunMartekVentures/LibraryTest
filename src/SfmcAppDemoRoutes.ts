@@ -133,13 +133,10 @@ export default class SfmcAppDemoRoutes
     // public insertRowForDC(req: express.Request, res: express.Response) {
     //   let self = this;
     //   self._apiHelper.insertRowForDC(req, res);
-    // }
-  
-     
+    // }  
     // public creatingDomainConfigurationDE(
     //     req: express.Request,
-    //     res: express.Response,
-        
+    //     res: express.Response,     
     //   ) {
     //     let self = this;
     //    self._apiHelper.creatingDomainConfigurationDE(req, res)
@@ -150,9 +147,7 @@ export default class SfmcAppDemoRoutes
 
     //    })
     //    .catch((error: any) => {
-    //      console.log("error in creating domainconfiguration")
-         
-      
+    //      console.log("error in creating domainconfiguration")  
     //   })
     // }
       public getActiveJourneys(req: express.Request, res: express.Response) {
@@ -164,17 +159,28 @@ export default class SfmcAppDemoRoutes
         let self = this;
         self._apiHelper.getJourneysById(req, res);
       }
+
       public dataFolderCheck(req: express.Request, res: express.Response) {
         let self = this;
         self._apiHelper.dataFolderCheck(req, res);
       }
+
       public createDataExtension(req: express.Request, res: express.Response) {
         let self = this;
         self._apiHelper.createDataExtension(req, res);
       }
+
       public createfolder(req: express.Request, res: express.Response) {
         let self = this;
         self._apiHelper.createFolder(req, res);
+      }
+
+      public retrievingDataExtensionFolderID(
+        req: express.Request,
+        res: express.Response
+      ) {
+        let self = this;
+        self._apiHelper.retrievingDataExtensionFolderID(req, res);
       }
     //   public retrievingDataExtensionRows(
     //     req: express.Request,

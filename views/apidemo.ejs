@@ -40,7 +40,7 @@
     onclick="dataFolderCheck()">retrievingDataExtensionFolderID</button>
     <br><br>
     <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
-    onclick="createFolder()">createFolder</button>
+    onclick="retrievingDataExtensionFolderID()">checkandcreateFolder</button>
      <br><br>   
     <button type="button" id="createdataextension" class="btn btn-primary"
     onclick="createDataExtension()">createdataextension</button>
@@ -131,6 +131,8 @@
           });
         
       }
+
+
       function retrivejourneysbyid()
       {
        axios({
@@ -149,32 +151,53 @@
     console.log(error)
   });
  }
-      function createFolder()
-       {
-        axios({
-          method: "POST",
-          url: "/createfolder",
-          data: {
-            oauthToken:this.oauthToken,
-            //tssd: thisdata.state.tssd,
-            member_id: this.member_id,
-            soap_instance_url:this.soap_instance_url,
-           // ParentFolderID: ParentFolderID,
-          },
-        })
-          .then(function (response) {
-            console.log("Created DataExtension Folder")
-            console.log(
-              "createFolder:" +
-                JSON.stringify(response.data)
-            );
-            var log = response;
-           document.getElementById("demo").value=JSON.stringify(log)
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+ 
+ 
+ function retrievingDataExtensionFolderID()
+  {
+  axios({
+    method: "POST",
+    url: "/retrievingdataextensionfolderid",
+    data: {
+      tssd: process.env.BASE_URL,
+      member_id: this.member_id,
+      soap_instance_url: this.soap_instance_url,
+      oauthToken:this.oauthToken
+    },
+  })
+    .then(function (response) {
+        console.log( "retrievingdataextensionfolderid:" + JSON.stringify(response.data));
+        createFolder(); 
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+// creating Sparkpost Integration Data folder
+function createFolder()
+ {
+  axios({
+    method: "POST",
+    url: "/createfolder",
+    data: {
+      oauthToken :this.oauthToken,
+      member_id: this.member_id,
+      soap_instance_url: this.soap_instance_url,
+      ParentFolderID: ParentFolderID,
+    },
+  })
+    .then(function (response) {
+      console.log(
+        "createFolder:" +
+          JSON.stringify(response.data)
+      );
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
       function insertRow(rowData, thisdata) {
         console.log("memberid:" + thisdata.state.member_id);
         console.log("refreshToken:" + thisdata.state.refreshtoken);
