@@ -106,7 +106,7 @@ app.post("/appuserInfo", function (req, res) {
     appDemoRoutes.getJourneysById(req, res);
   });
   
-  app.get("/retrievingdataextensionfolderid", function (req, res) {
+  app.post("/retrievingdataextensionfolderid", function (req, res) {
     appDemoRoutes.retrievingDataExtensionFolderID(req, res);
   });
   
