@@ -217,7 +217,7 @@ export default class SfmcApiHelper
            req.body.oauthToken,
            req.body.soap_instance_url,
            req.body.member_id,
-           this.parentFolderId
+           req.body.ParentFolderID
             )
           .then((response:any)=>
           {
@@ -225,8 +225,6 @@ export default class SfmcApiHelper
             res.status(200).send(response)
           }
           )
-         
-
           .catch((err:any)=>
           {
             console.error("Error in creating folder",err)
