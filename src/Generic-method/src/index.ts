@@ -478,6 +478,7 @@ export default class mcGenericMethods {
             member_id
           )
           .then((result) => {
+            console.log("Response to check ParentFolderId:",result)
             const sendresponse = {
              // refreshToken: refreshTokenbody,
               statusText: result.statusText,

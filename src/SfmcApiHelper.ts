@@ -26,9 +26,7 @@ export default class SfmcApiHelper
   private parentFolderId= "12785";
   private FolderID = "";
   private paramData="";
-  private jsonArr=new Array;
-  
-  
+  private jsonArr=new Array; 
   private rest_instance_url = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/";
   private datas =[ {
     "keys":{
@@ -307,8 +305,6 @@ export default class SfmcApiHelper
               }
                
                 
-            
-
           public createDataExtension(req:any,res:any)
           {
             this.genericMethods
