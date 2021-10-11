@@ -471,8 +471,6 @@ export default class mcGenericMethods {
         ) {
           
           let soapMessage = "";
-         
-      
               let headers = {
                 "Content-Type": "text/xml",
                 SOAPAction: "Retrieve",
@@ -512,7 +510,7 @@ export default class mcGenericMethods {
                   method: "post",
                   url: "" + soap_instance_url + "Service.asmx" + "",
                   data: soapMessage,
-                  headers: { "Content-Type": "text/xml" },
+                  headers: headers,
                 })
                   .then((response: any) => {
                     var extractedData = "";
