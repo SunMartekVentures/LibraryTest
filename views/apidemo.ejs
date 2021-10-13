@@ -45,6 +45,10 @@
     <button type="button" id="createdataextension" class="btn btn-primary"
     onclick="createDataExtension()">createdataextension</button>
     <br><br>
+    <button type="button" id="createDEwithRetention" class="btn btn-primary"
+    onclick="createDEwithRetention()">createDEwithRetention</button>
+    <br><br>
+
     <!-- <button type="button" id="insertrow" class="btn btn-primary"
     onclick="insertRow()">insertRow</button>
     <br><br>
@@ -300,6 +304,8 @@ function createFolder()
             console.log(error);
           });
       }
+
+
       function createDataExtension()
        {
        axios({
@@ -317,6 +323,32 @@ function createFolder()
       console.log(
         "createDataExtensioFolder:" + JSON.stringify(response.data)
         
+      );
+      var log = response;
+            document.getElementById("demo").value=JSON.stringify(log)
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+} 
+
+function createDEwithRetention()
+  {
+       axios({
+    method: "POST",
+    url: "/createDEwithRetention",
+    data: {
+      oauthToken:this.oauthToken,
+      memberid:this.memberid,
+      soap_instance_url:this.soap_instance_url,
+      FolderID:this.FolderID,
+      
+    },
+  })
+    .then(function (response) {
+      console.log(
+        "createDEwithRetention:" + JSON.stringify(response.data) 
       );
       var log = response;
             document.getElementById("demo").value=JSON.stringify(log)

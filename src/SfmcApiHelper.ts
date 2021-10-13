@@ -353,6 +353,26 @@ export default class SfmcApiHelper
             })
           }
                   
+          public createDEwithRetention(req:any,res:any)
+          {
+            this.genericMethods
+            .createDEwithRetention
+            (
+              req.body.soap_instance_url,
+              req.body.oauthToken,
+              req.body.FolderID      
+            )
+            .then((response:any)=>
+            {
+              console.log("<><><Response in creating Data xtension><><>",response)
+              res.status(200).send(response)
+              
+            })
+            .catch((err:any)=>
+            {
+              console.log("Erroe in creatong data extension in folder",err)
+            })
+          }
               
 
         //       public retrieveDataExtensionRows(req:any,res:any)

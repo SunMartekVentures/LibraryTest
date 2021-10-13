@@ -170,6 +170,11 @@ export default class SfmcAppDemoRoutes
         self._apiHelper.createDataExtension(req, res);
       }
 
+      public createDEwithRetention(req: express.Request, res: express.Response) {
+        let self = this;
+        self._apiHelper.createDEwithRetention(req, res);
+      }
+
       public createfolder(req: express.Request, res: express.Response) {
         let self = this;
         self._apiHelper.createFolder(req, res);
