@@ -1154,7 +1154,7 @@ export default class mcGenericMethods {
 			let headers = {
                 'Content-Type': 'text/xml'
             };
-
+            console.log("FolderId:",FolderID,"Soap_Ins_Url:",soap_instance_url,"Token:",token)
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
 				method: 'post',
@@ -1163,6 +1163,7 @@ export default class mcGenericMethods {
 				headers: headers							
 				})            
 				.then((response: any) => {
+          
 				resolve("Org Setup Data extension has been created Successfully");		
 				
 				})
