@@ -1091,6 +1091,9 @@ export default class mcGenericMethods {
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'        <Options>'
++'          <SaveOptions/>'
++'          </Options>'
 +'            <Objects xsi:type="DataExtension">'
 +'                <CategoryID>25136</CategoryID>'
 +'                <CustomerKey>Org_Setup</CustomerKey>'
@@ -1156,7 +1159,7 @@ export default class mcGenericMethods {
             };
             console.log("FolderId:",FolderID,"Soap_Ins_Url:",soap_instance_url,"Token:",token)
             console.log("Data to send for retention :>>>",OrgMsg,"Headers:",headers)
-            
+
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
