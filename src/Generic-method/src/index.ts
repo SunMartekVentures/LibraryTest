@@ -1006,7 +1006,7 @@ export default class mcGenericMethods {
           .then((response: any) => {
             console.log("Data in retention:>>>",response);
             
-          resolve("Org Setup Data extension has been created Successfully");		
+          resolve("Sendable Data Extension created successfully");		
           
           })
         .catch((error: any) => {
@@ -1146,7 +1146,7 @@ export default class mcGenericMethods {
                         sendresponse = {
                          // refreshToken: refreshTokenbody,
                           statusText:
-                            "Domain Configuration Data extension has been created Successfully",
+                            " Data extension has been created Successfully",
                           soap_instance_url: soap_instance_url,
                           member_id: member_id,
                           DEexternalKeyDomainConfiguration:
@@ -1282,7 +1282,7 @@ export default class mcGenericMethods {
 				.then((response: any) => {
           console.log("Data in retention:>>>",response);
           
-				resolve("Org Setup Data extension has been created Successfully");		
+				resolve("Sendable Data Extension created successfully ");		
 				
 				})
 			.catch((error: any) => {
