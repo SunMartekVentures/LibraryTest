@@ -41,7 +41,8 @@
     <br><br>
     <button type="button" id="createSparkpostIntegrationFolder" class="btn btn-primary"
     onclick="retrievingDataExtensionFolderID()">checkandcreateFolder</button>
-     <br><br>   
+     <br><br>
+     <input type="text" id="isSend" ></input> &emsp;&emsp; 
     <button type="button" id="createdataextension" class="btn btn-primary"
     onclick="createDataExtension()">createdataextension</button>
     <br><br>
@@ -76,7 +77,7 @@
     let member_id="";
     let FolderID="";
     let ParentFolderID="";
-    
+    let rest_instance_url="";
 
       function accessTokenGeneration(req,res) {
         axios({
@@ -92,7 +93,8 @@
             var log = response;
             document.getElementById("demo").value=JSON.stringify(log)
             this.oauthToken=response.data.oauthToken
-            this.soap_instance_url=response.data.soap_instance_url
+            this.soap_instance_url=response.data.soap_instance_url,
+            this.rest_instance_url=response.data.rest_instance_url
           })
           .catch(function (error) {
             console.log(error);
@@ -308,6 +310,8 @@ function createFolder()
 
       function createDataExtension()
        {
+         let isSend=document.getElementById("isSend").value
+         console.log("isSend:",isSend)
        axios({
     method: "POST",
     url: "/createDataExtension",
