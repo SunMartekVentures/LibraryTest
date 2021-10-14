@@ -339,7 +339,8 @@ export default class SfmcApiHelper
               req.body.oauthToken,
               req.body.FolderID,
               process.env.BASE_URL,
-              this.jsonArr
+              this.jsonArr,
+              req.body.isSend
             )
             .then((response:any)=>
             {
