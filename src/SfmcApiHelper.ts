@@ -349,13 +349,13 @@ export default class SfmcApiHelper
             })
             .catch((err:any)=>
             {
-              console.log("Erroe in creatong data extension in folder",err)
+              console.log("Error in creating data extension in folder",err)
             })
           }
                   
           public createDEwithRetention(req:any,res:any)
           {
-            this.genericMethods
+            this.genericMethods  
             .createDEwithRetention
             (
               req.body.soap_instance_url,
@@ -364,7 +364,7 @@ export default class SfmcApiHelper
             )
             .then((response:any)=>
             {
-              console.log("<><><Response in creating Data xtension><><>",response)
+              console.log("<><><Response in creating Data xtension with DataRetention><><>",response)
               res.status(200).send(response)
               
             })
