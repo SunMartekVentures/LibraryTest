@@ -1186,115 +1186,115 @@ export default class mcGenericMethods {
           }
           };
 
-      public async createDEwithRetention
-      (
-        soap_instance_url: string,
-        token:string,
-        FolderID: string
-      )
-      {
-        let OrgMsg = '<?xml version="1.0" encoding="UTF-8"?>'
-+'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
-+'    <s:Header>'
-+'        <a:Action s:mustUnderstand="1">Create</a:Action>'
-+'        <a:To s:mustUnderstand="1">'+soap_instance_url+'Service.asmx'+'</a:To>'
-+'        <fueloauth xmlns="http://exacttarget.com">'+token+'</fueloauth>'
-+'    </s:Header>'
-+'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
-+'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
-+'        <Options>'
-+'          <SaveOptions/>'
-+'          </Options>'
-+'            <Objects xsi:type="DataExtension">'
-+'                <CategoryID>25136</CategoryID>'
-+'                <CustomerKey>OrgSetup01</CustomerKey>'
-+'                <Name>Org Setup-01</Name>'
-+'                <IsSendable>true</IsSendable>'
-+'                <IsTestable>false</IsTestable>'
-+'            <DataRetentionPeriodLength>48</DataRetentionPeriodLength>'
-+'            <DataRetentionPeriod>Days</DataRetentionPeriod>'
-+'            <RowBasedRetention>false</RowBasedRetention>'
-+'            <ResetRetentionPeriodOnImport>true</ResetRetentionPeriodOnImport>'
-+'            <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>'
-+'                <SendableDataExtensionField>'
-+'                    <CustomerKey>Customer Unique ID</CustomerKey>'
-+'                    <Name>Customer Unique ID</Name>'
-+'                    <FieldType>Text</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value></Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'                    <Field>'
-+'                        <CustomerKey>Customer Unique ID</CustomerKey>'
-+'                        <Name>Customer Unique ID</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <MaxLength>100</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <CustomerKey>Hearsay Org ID</CustomerKey>'
-+'                        <Name>Hearsay Org ID</Name>'
-+'                       <FieldType>Text</FieldType>'
-+'                        <MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                        <IsPrimaryKey>false</IsPrimaryKey>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <CustomerKey>Hearsay User Reference ID</CustomerKey>'
-+'                        <Name>Hearsay User Reference ID</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                        <IsPrimaryKey>false</IsPrimaryKey>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <CustomerKey>Created or Modified Date</CustomerKey>'
-+'                        <Name>Created or Modified Date</Name>'
-+'                        <FieldType>Date</FieldType>'
-+'						<DefaultValue>getdate()</DefaultValue>'
-+'                       <IsRequired>true</IsRequired>'
-+'                        <IsPrimaryKey>false</IsPrimaryKey>'
-+'                    </Field>'
-+'                </Fields>'
-+'            </Objects>'
-+'        </CreateRequest>'
-+'    </s:Body>'
-+'</s:Envelope>'
-		return new Promise<any>((resolve, reject) =>
-		{
-			let headers = {
-                'Content-Type': 'text/xml'
-            };
-            console.log("FolderId:",FolderID,"Soap_Ins_Url:",soap_instance_url,"Token:",token)
-            console.log("Data to send for retention :>>>",OrgMsg,"Headers:",headers)
+//       public async createDEwithRetention
+//       (
+//         soap_instance_url: string,
+//         token:string,
+//         FolderID: string
+//       )
+//       {
+//         let OrgMsg = '<?xml version="1.0" encoding="UTF-8"?>'
+// +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
+// +'    <s:Header>'
+// +'        <a:Action s:mustUnderstand="1">Create</a:Action>'
+// +'        <a:To s:mustUnderstand="1">'+soap_instance_url+'Service.asmx'+'</a:To>'
+// +'        <fueloauth xmlns="http://exacttarget.com">'+token+'</fueloauth>'
+// +'    </s:Header>'
+// +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
+// +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
+// +'        <Options>'
+// +'          <SaveOptions/>'
+// +'          </Options>'
+// +'            <Objects xsi:type="DataExtension">'
+// +'                <CategoryID>25136</CategoryID>'
+// +'                <CustomerKey>OrgSetup01</CustomerKey>'
+// +'                <Name>Org Setup-01</Name>'
+// +'                <IsSendable>true</IsSendable>'
+// +'                <IsTestable>false</IsTestable>'
+// +'            <DataRetentionPeriodLength>48</DataRetentionPeriodLength>'
+// +'            <DataRetentionPeriod>Days</DataRetentionPeriod>'
+// +'            <RowBasedRetention>false</RowBasedRetention>'
+// +'            <ResetRetentionPeriodOnImport>true</ResetRetentionPeriodOnImport>'
+// +'            <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>'
+// +'                <SendableDataExtensionField>'
+// +'                    <CustomerKey>Customer Unique ID</CustomerKey>'
+// +'                    <Name>Customer Unique ID</Name>'
+// +'                    <FieldType>Text</FieldType>'
+// +'                </SendableDataExtensionField>'
+// +'                <SendableSubscriberField>'
+// +'                    <Name>Subscriber Key</Name>'
+// +'                    <Value></Value>'
+// +'                </SendableSubscriberField>'
+// +'                <Fields>'
+// +'                    <Field>'
+// +'                        <CustomerKey>Customer Unique ID</CustomerKey>'
+// +'                        <Name>Customer Unique ID</Name>'
+// +'                        <FieldType>Text</FieldType>'
+// +'                        <MaxLength>100</MaxLength>'
+// +'                        <IsRequired>true</IsRequired>'
+// +'                        <IsPrimaryKey>true</IsPrimaryKey>'
+// +'                    </Field>'
+// +'                    <Field>'
+// +'                        <CustomerKey>Hearsay Org ID</CustomerKey>'
+// +'                        <Name>Hearsay Org ID</Name>'
+// +'                       <FieldType>Text</FieldType>'
+// +'                        <MaxLength>50</MaxLength>'
+// +'                        <IsRequired>true</IsRequired>'
+// +'                        <IsPrimaryKey>false</IsPrimaryKey>'
+// +'                    </Field>'
+// +'                    <Field>'
+// +'                        <CustomerKey>Hearsay User Reference ID</CustomerKey>'
+// +'                        <Name>Hearsay User Reference ID</Name>'
+// +'                        <FieldType>Text</FieldType>'
+// +'                        <MaxLength>50</MaxLength>'
+// +'                        <IsRequired>true</IsRequired>'
+// +'                        <IsPrimaryKey>false</IsPrimaryKey>'
+// +'                    </Field>'
+// +'                    <Field>'
+// +'                        <CustomerKey>Created or Modified Date</CustomerKey>'
+// +'                        <Name>Created or Modified Date</Name>'
+// +'                        <FieldType>Date</FieldType>'
+// +'						<DefaultValue>getdate()</DefaultValue>'
+// +'                       <IsRequired>true</IsRequired>'
+// +'                        <IsPrimaryKey>false</IsPrimaryKey>'
+// +'                    </Field>'
+// +'                </Fields>'
+// +'            </Objects>'
+// +'        </CreateRequest>'
+// +'    </s:Body>'
+// +'</s:Envelope>'
+// 		return new Promise<any>((resolve, reject) =>
+// 		{
+// 			let headers = {
+//                 'Content-Type': 'text/xml'
+//             };
+//             console.log("FolderId:",FolderID,"Soap_Ins_Url:",soap_instance_url,"Token:",token)
+//             console.log("Data to send for retention :>>>",OrgMsg,"Headers:",headers)
 
 
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios({
-				method: 'post',
-				url: ''+soap_instance_url+'Service.asmx'+'',
-				data: OrgMsg,
-				headers: headers							
-				})            
-				.then((response: any) => {
-          console.log("Data in retention:>>>",response);
+//             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+//             axios({
+// 				method: 'post',
+// 				url: ''+soap_instance_url+'Service.asmx'+'',
+// 				data: OrgMsg,
+// 				headers: headers							
+// 				})            
+// 				.then((response: any) => {
+//           console.log("Data in retention:>>>",response);
           
-				resolve("Sendable Data Extension created successfully ");		
+// 				resolve("Sendable Data Extension created successfully ");		
 				
-				})
-			.catch((error: any) => {
-						// error
-						let errorMsg = "Error creating the Org Setup Data extension......";
-						errorMsg += "\nMessage: " + error.message;
-						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-						errorMsg += "\nResponse data: " + error.response.data ? JSON.stringify(error.response.data) : "<None>";
-						reject(errorMsg);
-					});
-        });
-      }
+// 				})
+// 			.catch((error: any) => {
+// 						// error
+// 						let errorMsg = "Error creating the Org Setup Data extension......";
+// 						errorMsg += "\nMessage: " + error.message;
+// 						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+// 						errorMsg += "\nResponse data: " + error.response.data ? JSON.stringify(error.response.data) : "<None>";
+// 						reject(errorMsg);
+// 					});
+//         });
+//       }
       }
 
      
