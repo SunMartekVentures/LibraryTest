@@ -248,10 +248,7 @@ export default class mcGenericMethods {
   public async createFolder(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string)
   {
     console.log("OauthToken in creating folder :",token)
-    console.log("createSparkpostIntegrationFolder:" + member_id);
-    console.log("createSparkpostIntegrationFolder:" + soap_instance_url); 
-    console.log("createSparkpostIntegrationFolder:" + ParentFolderID);
-
+    
         let createFolderData =
           '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
           "<soapenv:Header>" +
@@ -322,18 +319,18 @@ export default class mcGenericMethods {
                     };
                   }
                 ) => {
-                  let SparkpostIntegrationsID =
+                  let FolderID =
                     result["soap:Envelope"]["soap:Body"][0][
                     "CreateResponse"
                     ][0]["Results"][0]["NewID"][0];
-                  if (SparkpostIntegrationsID != undefined) {
-                    //  this.FolderID = SparkpostIntegrationsID;
+                  if (FolderID != undefined) {
+                    //  this.FolderID = FolderID;
                     sendresponse = {
                      // refreshToken: refreshTokenbody,
                       statusText: true,
                       soap_instance_url: soap_instance_url,
                       member_id:member_id,
-                      FolderID: SparkpostIntegrationsID,
+                      FolderID: FolderID,
                     };
                     resolve(sendresponse)
                     //res.status(200).send(sendresponse);
@@ -343,7 +340,7 @@ export default class mcGenericMethods {
                       statusText: false,
                       soap_instance_url: soap_instance_url,
                       member_id: member_id,
-                      FolderID: SparkpostIntegrationsID,
+                      FolderID: FolderID,
                     };
                     resolve(sendresponse);
                   }
@@ -353,7 +350,7 @@ export default class mcGenericMethods {
             .catch((error: any) => {
               // error
               let errorMsg =
-                "Error creating the Sparkpost Integrations folder......";
+                "Error creating the folder......";
               errorMsg += "\nMessage: " + error.message;
               errorMsg +=
                 "\nStatus: " + error.response
@@ -612,7 +609,7 @@ export default class mcGenericMethods {
       // });
     
 
-  //Helper method for checking Sparkpost Integration Data extension
+  //Helper method for checking Data extension
   public getCategoryIDHelper(
     token:string,
     soap_instance_url:string,
