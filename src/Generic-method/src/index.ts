@@ -13,12 +13,11 @@ export default class mcGenericMethods {
     clientSecret: any,
     grantType: string,
     code: any,
-    redirect_uri: any
-  ) {
-    
+    redirect_uri: any,
+    tssd:any
+  ) {    
     // Importing the Axios module to make API requests
     let result: any;
-
     let postBody;
     let headers = {
       "Content-Type": "application/json",
@@ -41,15 +40,12 @@ export default class mcGenericMethods {
     }
 
     let sfmcAuthServiceApiUrl =
-      "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
+      "https://"+tssd+".auth.marketingcloudapis.com/v2/token";
 
     await axios // Making a GET request using axios and requesting information from the API
       .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
-      .then((response: any) => {
-        
+      .then((response: any) => {        
         result = response; // The response of the API call is passed on to the next block
-        console.log("respo in lib oauth:",response);
-        
       })
       .catch((err: any) => {
         result = "Error getting access token >>> ";
@@ -65,31 +61,27 @@ export default class mcGenericMethods {
     clientId: any,
     clientSecret: any
   ): Promise<any> {
-    return new Promise<any>(async (resolve, reject) => {
-      console.log("TSSD:",tssd,"refreshtoken:",refreshToken,"clientid:",clientId,"clientSecret:",clientSecret)
+    return new Promise<any>(async (resolve, reject) => {     
       let sfmcAuthServiceApiUrl =
         "https://" + tssd + ".auth.marketingcloudapis.com/v2/token";
       let headers = {
         "Content-Type": "application/json",
-      };
-      console.log("sfmcAuthServiceApiUrl:" + sfmcAuthServiceApiUrl);
-      let postBody1 = {
+      };      
+      let postBody = {
         grant_type: "refresh_token",
         client_id: clientId,
         client_secret: clientSecret,
         refresh_token: refreshToken,
       };
       await axios
-        .post(sfmcAuthServiceApiUrl, postBody1, { headers: headers })
-        .then((response: any) => {
-          console.log("Response to get soap url:",response)
+        .post(sfmcAuthServiceApiUrl, postBody, { headers: headers })
+        .then((response: any) => {          
           const customResponse = {
             tssd: tssd,
             soap_instance_url : response.data.soap_instance_url,
             refreshToken: response.data.refresh_token,
             oauthToken: response.data.access_token,
-          };
-          console.log()
+          };          
           return resolve(customResponse);
         })
         .catch((error: any) => {
@@ -109,7 +101,6 @@ export default class mcGenericMethods {
   //To get senderdomainname
   public async getSenderDomain(mcVals: any) {
     let FiltersoapMessage: string;
-
     if (mcVals.senderProfileID != undefined && mcVals.senderProfileID != "") {
       FiltersoapMessage =
         '<?xml version="1.0" encoding="UTF-8"?>' +
@@ -148,13 +139,12 @@ export default class mcGenericMethods {
         method: "post",
         url: "" + mcVals.soapInstance + "Service.asmx" + "",
         headers: {
-          "Content-Type": "text/xml",
+          "Content-Type": "text/xml"
         },
         data: FiltersoapMessage,
       };
       await axios(configs)
         .then(function (response: any) {
-          console.log("Response in senderdomain lib:",response)
           let senderProfileResponse = response.data;
           var senderDomainData = "";
           var parser = new xml2js.Parser();
@@ -173,8 +163,7 @@ export default class mcGenericMethods {
                 let sendresponse = {
                   domainName: domainName  
                 };
-                resolve(sendresponse);
-                
+                resolve(sendresponse);                
               }
             }
           );
@@ -196,16 +185,13 @@ export default class mcGenericMethods {
   public async userInfo(tssd:string,token:string):Promise<any>
 {
   return new Promise<any>(async (resolve, reject) => {
-    console.log("UserInfo's tssd:",tssd," ","token:",token)
   let userInfoUrl =
   "https://" + tssd + ".auth.marketingcloudapis.com/v2/userinfo";
-
-    let headers = {
+  let headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     };
-    console.log("headers",headers);
-    
+      
     axios
       .get(userInfoUrl, { headers: headers })
       .then((response: any) => {
@@ -213,10 +199,8 @@ export default class mcGenericMethods {
           member_id: response.data.organization.member_id,
           soap_instance_url: response.data.rest.soap_instance_url,
           rest_instance_url: response.data.rest.rest_instance_url,
-          data:response.data
-         
-        };
-        console.log("Response in lib app user info>>",JSON.stringify(getUserInfoResponse))
+          data:response.data         
+        };       
         resolve(getUserInfoResponse);
         //Set the member_id into the session
         //console.log("Setting active sfmc mid into session:" + getUserInfoResponse.member_id);
@@ -247,7 +231,6 @@ export default class mcGenericMethods {
 }
   public async createFolder(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string)
   {
-    console.log("OauthToken in creating folder :",token)
     
         let createFolderData =
           '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
@@ -292,9 +275,6 @@ export default class mcGenericMethods {
             "Content-Type": "text/xml",
             SOAPAction: "Create",
           };
-          console.log("Headers in Creating Folder",JSON.stringify(headers));
-          console.log("Create folder data:",createFolderData);
-          console.log("Soap in creating:",soap_instance_url)
 
           // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
           axios({
@@ -305,9 +285,6 @@ export default class mcGenericMethods {
           })
             .then((response: any) => {
               let sendresponse = {};
-              console.log("Response after axios");
-              console.log("Response in creating folder",response.data)
-              
               var parser = new xml2js.Parser();
               parser.parseString(
                 response.data,
@@ -414,9 +391,7 @@ export default class mcGenericMethods {
 
 
      public async getJourneyDetails(token:string,tssd:string)
-     {
-       console.log("Token in GetJourneyDetails:",token);
-       console.log("tssd:",tssd)
+     {      
           return new Promise<any>((resolve, reject) => {
             let headers = {
               "Content-Type": "application/json",
@@ -585,7 +560,6 @@ export default class mcGenericMethods {
             member_id
           )
           .then((result) => {
-            console.log("Response to check ParentFolderId:",result)
             const sendresponse = {
              // refreshToken: refreshTokenbody,
               statusText: result.statusText,
@@ -593,7 +567,6 @@ export default class mcGenericMethods {
               member_id: member_id,
               FolderID: result.FolderID,
             };
-            console.log("sendresponse:" + JSON.stringify(sendresponse));
             resolve(sendresponse)
             
           });
@@ -661,8 +634,7 @@ export default class mcGenericMethods {
         data: soapMessage,
         headers: headers,
       })
-        .then((response: any) => {
-          console.log("Response data in foldercheck:>>:>>",response)
+        .then((response: any) => {         
           var extractedData = "";
           var parser = new xml2js.Parser();
           parser.parseString(
@@ -679,7 +651,6 @@ export default class mcGenericMethods {
                 result["soap:Envelope"]["soap:Body"][0][
                 "RetrieveResponseMsg"
                 ][0]["Results"];
-                console.log("Folder id in check>>",FolderID)
               if (FolderID != undefined) {
                 //    this.FolderID = FolderID[0]["ID"][0];
                 
@@ -719,10 +690,6 @@ export default class mcGenericMethods {
 
       public async retrievingDataExtensionRows(token:string,soap_instance_url:string,member_id:string,ParentFolderID:string) 
       {
-             console.log("retrievingDataExtensionRows:" + token);
-             console.log("retrievingDataExtensionRows:" + soap_instance_url);
-             console.log("retrievingDataExtensionRows:" + member_id);
-             console.log("retrievingDataExtensionRows:" +ParentFolderID);
              //console.log('domainConfigurationDECheck:'+req.body.ParentFolderID);
              let refreshTokenbody = "";
              let soapMessage = "";
@@ -763,8 +730,7 @@ export default class mcGenericMethods {
                      data: soapMessage,
                    };
                    axios(configs)
-                     .then(function (response: any) {
-                       console.log("::::::::: " + response.data);
+                     .then(function (response: any) {                      
                        let rawdata = response.data;
                        var rawData = "";
                        var parser = new xml2js.Parser();
@@ -778,9 +744,6 @@ export default class mcGenericMethods {
                          refreshToken: refreshTokenbody,
                          rawData: rawData,
                        };
-                       console.log(
-                         "raw data and send response " + JSON.stringify(rawData) + "\n" + sendresponse
-                       );
                        resolve(sendresponse);
                      })
                      .catch(function (error: any) {
@@ -807,26 +770,22 @@ export default class mcGenericMethods {
              jsonData: any
            ): Promise<any> {
              let self = this;
-             console.log(" oauthAccessToken:", oauthAccessToken,"rest_instance_url:",rest_instance_url,"DEexternalKeyDomainConfiguration:",DEexternalKeyDomainConfiguration,"jsonData",jsonData);
              let _sfmcDataExtensionApiUrl =
                rest_instance_url +
                "/hub/v1/dataevents/key:" +
                DEexternalKeyDomainConfiguration +
                "/rowset";
-             let ReqBody = jsonData;
-             console.log("reqBody insert ::: " +ReqBody);
+             let ReqBody = jsonData;             
              let post_data = jsonData;
              return new Promise<any>((resolve, reject) => {
                let headers = {
                  "Content-Type": "application/json",
                  Authorization: "Bearer " + oauthAccessToken,
                };
-               console.log("started");
                axios
                  .post(_sfmcDataExtensionApiUrl, post_data, { headers: headers })
                  .then((response: any) => {
                    // success
-                   console.log("ended");
                    resolve({
                      status: response.status,
                      statusText:
@@ -901,16 +860,16 @@ export default class mcGenericMethods {
         jsonArr:any,
         text:string
       ) {
-        console.log
-        (
-        "Param values>>> Mid:",member_id,
-        "soap-url:",soap_instance_url,
-        "token:",token,
-        "folderid:",FolderID,
-        "tssd:",tssd,
-        "JsonArr:",jsonArr,
-        "isSend Text:",text
-        );
+        // console.log
+        // (
+        // "Param values>>> Mid:",member_id,
+        // "soap-url:",soap_instance_url,
+        // "token:",token,
+        // "folderid:",FolderID,
+        // "tssd:",tssd,
+        // "JsonArr:",jsonArr,
+        // "isSend Text:",text
+        // );
         
         if(text=="true")
         {
@@ -989,10 +948,6 @@ export default class mcGenericMethods {
         let headers = {
                   'Content-Type': 'text/xml'
               };
-              console.log("FolderId:",FolderID,"Soap_Ins_Url:",soap_instance_url,"Token:",token)
-              console.log("Data to send for retention :>>>",OrgMsg,"Headers:",headers)
-  
-  
               // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
               axios({
           method: 'post',
@@ -1001,10 +956,7 @@ export default class mcGenericMethods {
           headers: headers							
           })            
           .then((response: any) => {
-            console.log("Data in retention:>>>",response);
-            
-          resolve("Sendable Data Extension created successfully");		
-          
+          resolve("Sendable Data Extension created successfully");		          
           })
         .catch((error: any) => {
               // error
@@ -1021,7 +973,6 @@ export default class mcGenericMethods {
         else if(text=="false")
         {
             let bodySoapData  = '';
-            console.log("BodySoapData:",bodySoapData)
             let DCmsg =
               '<?xml version="1.0" encoding="UTF-8"?>' +
               '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">' +
@@ -1102,14 +1053,11 @@ export default class mcGenericMethods {
               "    </s:Body>" +
               "</s:Envelope>";
 
-              console.log("Data Extension Format:",DCmsg,bodySoapData,footer)
-              let dataDE = DCmsg + bodySoapData + footer;
-              
+              let dataDE = DCmsg + bodySoapData + footer;              
               return new Promise<any>((resolve, reject) => {
               let headers = {
                 "Content-Type": "text/xml",
               };
-              console.log("DC Msg:>>>",DCmsg);
               axios({
                 method: "post",
                 url: "" + soap_instance_url + "Service.asmx" + "",

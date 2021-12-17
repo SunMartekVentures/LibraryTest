@@ -91,6 +91,7 @@ export default class SfmcApiHelper
       client_secret: clientSecret,
       code: req.body.authorization_code,
       redirect_uri: process.env.REDIRECT_URL,
+      tssd:process.env.BASE_URL
     };
 
     return self.getOAuthTokenHelper(headers, postBody, res, tssd);
@@ -109,7 +110,8 @@ export default class SfmcApiHelper
         postBody.client_secret,
         postBody.grant_type,
         postBody.code,
-        postBody.redirect_uri
+        postBody.redirect_uri,
+        postBody.tssd
       )
       .then((res: any) => {
         console.log("AccessToken Method from library", res.data.refresh_token);
